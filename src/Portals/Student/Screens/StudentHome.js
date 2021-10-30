@@ -8,6 +8,7 @@ import {
   StyleSheet,
   ScrollView,
   ImageBackground,
+  Dimensions,
 } from "react-native";
 import { Divider } from "react-native-elements";
 import BottomNav from "../Components/UniversalComponents/BottomNav";
@@ -18,48 +19,7 @@ export default function StudentHome() {
     <SafeAreaView style={styles.container}>
       <TopComponent />
       <ScrollView>
-        <ImageBackground
-          style={{
-            flex: 1,
-            width: "100%",
-            height: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-            opacity: 0.7,
-          }}
-          source={require("../../../../assets/UniversalAssets/TestingImage.png")}
-        >
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-          <Text>Hello World</Text>
-        </ImageBackground>
+        <Text>Hello World</Text>
       </ScrollView>
       <Divider width={1} />
       <BottomNav />
@@ -71,5 +31,6 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : "0",
     backgroundColor: "#fff",
+    flex: 1,
   },
 });

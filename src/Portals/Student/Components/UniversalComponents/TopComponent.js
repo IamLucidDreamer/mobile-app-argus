@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { Divider } from "react-native-elements/dist/divider/Divider";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 const items = [
   {
@@ -43,17 +44,14 @@ export default function TopComponent() {
           marginVertical: 25,
           flexDirection: "row",
           justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
         <TouchableOpacity>
-          <Image
-            style={{
-              width: 60,
-              height: 60,
-              resizeMode: "contain",
-              borderRadius: 25,
-            }}
-            source={require("./../../../../../assets/UniversalAssets/TestingImage.png")}
+          <FontAwesome5
+            name={"arrow-left"}
+            size={25}
+            style={{ marginLeft: 10, marginRight: 25 }}
           />
         </TouchableOpacity>
         <Text
