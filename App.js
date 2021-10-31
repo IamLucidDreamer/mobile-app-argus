@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import LandingScreen from "./src/LandingScreen";
 import Enroll from "./src/Portals/Student/Screens/Enroll";
 import ForgotPasswordEmail from "./src/Portals/Student/Screens/ForgotPasswordEmail";
 import ForgotPasswordOTP from "./src/Portals/Student/Screens/ForgotPasswordOTP";
@@ -18,7 +19,7 @@ import UploadedDocuments from "./src/Portals/Student/Screens/UploadedDocuments";
 export default function App() {
   return (
     <>
-      <UploadedDocuments />
+      <LandingScreen />
     </>
   );
 }
