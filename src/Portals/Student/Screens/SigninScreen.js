@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,17 +9,16 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-} from "react-native";
-import Buttons from "../Components/UniversalComponents/Buttons";
+} from 'react-native';
+import Buttons from '../Components/UniversalComponents/Buttons';
 
-const SigninScreen = () => {
+const SigninScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Image
         style={{ width: 150, height: 150, marginTop: 50, marginBottom: 30 }}
-        source={require("../../../../assets/UniversalAssets/Logo.png")}
+        source={require('../../../../assets/UniversalAssets/Logo.png')}
       />
-
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
@@ -39,17 +38,17 @@ const SigninScreen = () => {
           onChangeText={(password) => setPassword(password)}
         />
       </View>
-      <Buttons title={"Sign Up"} />
+      <Buttons navigation={navigation} title={'Sign Up'} />
       <Text style={styles.forgottext}>OR</Text>
-      <Buttons title={"Google"} />
-      <Buttons title={"Facebook"} />
-      <View style={{ flexDirection: "row", marginVertical: 7 }}>
+      <Buttons title={'Google'} />
+      <Buttons title={'Facebook'} />
+      <View style={{ flexDirection: 'row', marginVertical: 7 }}>
         <Text style={styles.forgottext}>Existing user?</Text>
         <TouchableOpacity>
           <Text
             style={{
-              color: "#BA0913",
-              fontWeight: "bold",
+              color: '#BA0913',
+              fontWeight: 'bold',
               paddingHorizontal: 4,
             }}
           >
@@ -60,11 +59,12 @@ const SigninScreen = () => {
       </View>
       <View
         style={{
-          flexDirection: "row",
+          marginTop: 'auto',
+          flexDirection: 'row',
           marginVertical: 8,
-          flexWrap: "wrap",
-          width: "90%",
-          justifyContent: "center",
+          flexWrap: 'wrap',
+          width: '90%',
+          justifyContent: 'center',
         }}
       >
         <Text style={styles.forgottext}>
@@ -73,8 +73,8 @@ const SigninScreen = () => {
         <TouchableOpacity>
           <Text
             style={{
-              color: "#BA0913",
-              fontWeight: "bold",
+              color: '#BA0913',
+              fontWeight: 'bold',
               paddingHorizontal: 4,
             }}
           >
@@ -85,8 +85,8 @@ const SigninScreen = () => {
         <TouchableOpacity>
           <Text
             style={{
-              color: "#BA0913",
-              fontWeight: "bold",
+              color: '#BA0913',
+              fontWeight: 'bold',
               paddingHorizontal: 4,
             }}
           >
@@ -103,32 +103,32 @@ export default SigninScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    backgroundColor: "#F4F5F9",
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    alignItems: 'center',
+    backgroundColor: '#F4F5F9',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   inputView: {
     borderBottomWidth: 1,
-    borderColor: "#8890A6",
-    width: "90%",
+    borderColor: '#8890A6',
+    width: '90%',
     height: 55,
     marginBottom: 30,
-    alignItems: "flex-start",
+    alignItems: 'flex-start',
   },
   TextInput: {
-    width: "100%",
+    width: '100%',
     flex: 1,
     padding: 10,
     marginLeft: 10,
-    color: "#8890A6",
+    color: '#8890A6',
     fontSize: 20,
   },
   forgotview: {
-    width: "90%",
-    alignItems: "flex-end",
+    width: '90%',
+    alignItems: 'flex-end',
   },
   forgottext: {
-    color: "#68696D",
-    textAlign: "center",
+    color: '#68696D',
+    textAlign: 'center',
   },
 });
