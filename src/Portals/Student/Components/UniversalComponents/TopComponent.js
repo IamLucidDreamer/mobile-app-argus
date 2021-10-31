@@ -41,7 +41,7 @@ export default function TopComponent() {
       <View
         style={{
           marginHorizontal: 10,
-          marginVertical: 25,
+          marginVertical: 10,
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",

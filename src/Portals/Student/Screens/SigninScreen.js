@@ -60,6 +60,7 @@ const SigninScreen = () => {
       </View>
       <View
         style={{
+          marginTop: "auto",
           flexDirection: "row",
           marginVertical: 8,
           flexWrap: "wrap",

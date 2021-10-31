@@ -12,62 +12,49 @@ import {
 } from "react-native";
 import Buttons from "../Components/UniversalComponents/Buttons";
 
-const LoginScreen = () => {
+const NewPassword = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Image
         style={{ width: 150, height: 150, marginTop: 50, marginBottom: 30 }}
         source={require("../../../../assets/UniversalAssets/Logo.png")}
       />
+      <Text
+        style={{
+          color: "#68696D",
+          fontSize: 30,
+          marginTop: 10,
+          marginBottom: 20,
+          fontWeight: "bold",
+        }}
+      >
+        Recover Password
+      </Text>
 
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
-          placeholder="Email"
-          keyboardType="email-address"
-          placeholderTextColor="#8890A6"
-          onChangeText={(email) => setEmail(email)}
-        />
-      </View>
-
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Password"
-          placeholderTextColor="#8890A6"
+          placeholder="New Password"
           secureTextEntry={true}
+          placeholderTextColor="#8890A6"
           onChangeText={(password) => setPassword(password)}
         />
       </View>
-      <View style={styles.forgotview}>
-        <TouchableOpacity>
-          <Text style={styles.forgottext}>Forgot Password?</Text>
-        </TouchableOpacity>
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.TextInput}
+          placeholder="Confirm Password"
+          secureTextEntry={true}
+          placeholderTextColor="#8890A6"
+          onChangeText={(password) => setPassword(password)}
+        />
       </View>
-      <Buttons title={"Log In"} />
-      <Text style={styles.forgottext}>OR</Text>
-      <Buttons title={"Google"} />
-      <Buttons title={"Facebook"} />
-      <View style={{ flexDirection: "row", marginVertical: 5 }}>
-        <Text style={styles.forgottext}>New user?</Text>
-        <TouchableOpacity>
-          <Text
-            style={{
-              color: "#BA0913",
-              fontWeight: "bold",
-              marginHorizontal: 4,
-            }}
-          >
-            Sign Up
-          </Text>
-        </TouchableOpacity>
-        <Text style={styles.forgottext}>here.</Text>
-      </View>
+      <Buttons title={"Submit"} />
     </SafeAreaView>
   );
 };
 
-export default LoginScreen;
+export default NewPassword;
 
 const styles = StyleSheet.create({
   container: {
@@ -91,13 +78,5 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: "#8890A6",
     fontSize: 20,
-  },
-  forgotview: {
-    width: "90%",
-    alignItems: "flex-end",
-  },
-  forgottext: {
-    color: "#68696D",
-    textAlign: "center",
   },
 });
