@@ -14,20 +14,27 @@ import {
 import { Divider } from 'react-native-elements';
 import BottomNav from '../Components/UniversalComponents/BottomNav';
 import TopComponent from '../Components/UniversalComponents/TopComponent';
+import DashBoard from './DashBoard';
 import Enroll from './Enroll';
+import Messages from './Messages';
+import MyPurchases from './MyPurchases';
+import MyTranscripts from './MyTranscripts';
+import Notification from './Notification';
 import SigninScreen from './SigninScreen';
+import UploadDoc from './UploadDocument';
+import UploadedDocuments from './UploadedDocuments';
 
 export default function StudentHome() {
   const windowWidth = Dimensions.get('window').width / 2;
   const [active, setActive] = useState({
     text: 'DashBoard',
-    component: SigninScreen,
+    component: DashBoard,
   });
 
   const items = [
     {
       text: 'DashBoard',
-      component: SigninScreen,
+      component: DashBoard,
     },
     {
       text: 'Enroll',
@@ -35,31 +42,27 @@ export default function StudentHome() {
     },
     {
       text: 'My Purchases',
-      component: SigninScreen,
+      component: MyPurchases,
     },
     {
       text: 'Transcripts',
-      component: Enroll,
+      component: MyTranscripts,
     },
     {
       text: 'Messages',
-      component: SigninScreen,
+      component: Messages,
     },
     {
       text: 'Notifications',
-      component: Enroll,
+      component: Notification,
     },
     {
       text: 'New Upload',
-      component: SigninScreen,
+      component: UploadDoc,
     },
     {
       text: 'Uploaded',
-      component: Enroll,
-    },
-    {
-      text: 'Calender',
-      component: SigninScreen,
+      component: UploadedDocuments,
     },
   ];
 

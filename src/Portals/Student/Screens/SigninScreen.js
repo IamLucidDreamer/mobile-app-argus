@@ -14,9 +14,9 @@ import Buttons from '../Components/UniversalComponents/Buttons';
 
 const SigninScreen = ({ navigation }) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Image
-        style={{ width: 150, height: 150, marginTop: 50, marginBottom: 30 }}
+        style={{ width: 150, height: 150, marginBottom: 10 }}
         source={require('../../../../assets/UniversalAssets/Logo.png')}
       />
       <View style={styles.inputView}>
@@ -38,13 +38,17 @@ const SigninScreen = ({ navigation }) => {
           onChangeText={(password) => setPassword(password)}
         />
       </View>
-      <Buttons navigation={navigation} title={'Sign Up'} />
+      <Buttons
+        navigation={navigation}
+        route={'StudentHome'}
+        title={'Sign Up'}
+      />
       <Text style={styles.forgottext}>OR</Text>
       <Buttons title={'Google'} />
       <Buttons title={'Facebook'} />
       <View style={{ flexDirection: 'row', marginVertical: 7 }}>
         <Text style={styles.forgottext}>Existing user?</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Loginin')}>
           <Text
             style={{
               color: '#BA0913',
@@ -94,7 +98,7 @@ const SigninScreen = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -105,7 +109,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#F4F5F9',
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   inputView: {
     borderBottomWidth: 1,

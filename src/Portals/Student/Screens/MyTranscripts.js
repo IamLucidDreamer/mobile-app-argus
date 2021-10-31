@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   Text,
-  SafeAreaView,
   StyleSheet,
   Platform,
   StatusBar,
@@ -14,9 +13,9 @@ import { Divider } from 'react-native-elements/dist/divider/Divider';
 import BottomNav from '../Components/UniversalComponents/BottomNav';
 import TopComponent from '../Components/UniversalComponents/TopComponent';
 
-export default function Enroll() {
+export default function MyTranscripts() {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView>
         <View
           style={{
@@ -69,7 +68,9 @@ export default function Enroll() {
               marginVertical: 10,
             }}
           >
-            <Text style={{ color: 'white', fontSize: 20 }}>Register Now</Text>
+            <Text style={{ color: 'white', fontSize: 20 }}>
+              Download Certificate
+            </Text>
           </TouchableOpacity>
         </View>
         <View
@@ -123,7 +124,9 @@ export default function Enroll() {
               marginVertical: 10,
             }}
           >
-            <Text style={{ color: 'white', fontSize: 20 }}>Register Now</Text>
+            <Text style={{ color: 'white', fontSize: 20 }}>
+              Download Certificate
+            </Text>
           </TouchableOpacity>
         </View>
         <View
@@ -177,7 +180,9 @@ export default function Enroll() {
               marginVertical: 10,
             }}
           >
-            <Text style={{ color: 'white', fontSize: 20 }}>Register Now</Text>
+            <Text style={{ color: 'white', fontSize: 20 }}>
+              Download Certificate
+            </Text>
           </TouchableOpacity>
         </View>
         <View
@@ -231,12 +236,14 @@ export default function Enroll() {
               marginVertical: 10,
             }}
           >
-            <Text style={{ color: 'white', fontSize: 20 }}>Register Now</Text>
+            <Text style={{ color: 'white', fontSize: 20 }}>
+              Download Certificate
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
       <Divider width={1} />
-    </SafeAreaView>
+    </View>
   );
 }
 

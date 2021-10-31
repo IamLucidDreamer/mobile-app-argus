@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-export default function TopComponent({ navigation }) {
+export default function LoginTopBar({ navigation }) {
   return (
     <View>
       <View
@@ -19,7 +19,7 @@ export default function TopComponent({ navigation }) {
           <FontAwesome5
             name={'arrow-left'}
             size={25}
-            style={{ marginLeft: 10, marginRight: 25 }}
+            style={{ marginLeft: 15, marginRight: 25 }}
           />
         </TouchableOpacity>
         <Text
@@ -32,17 +32,14 @@ export default function TopComponent({ navigation }) {
         >
           ARGUS<Text style={{ color: '#707070' }}>SECURITY</Text>
         </Text>
-        <TouchableOpacity>
-          <Image
-            style={{
-              width: 60,
-              height: 60,
-              resizeMode: 'contain',
-              borderRadius: 25,
-            }}
-            source={require('./../../../../../assets/UniversalAssets/TestingImage.png')}
-          />
-        </TouchableOpacity>
+        <View
+          style={{
+            width: 60,
+            height: 40,
+            resizeMode: 'contain',
+            borderRadius: 25,
+          }}
+        ></View>
       </View>
     </View>
   );
