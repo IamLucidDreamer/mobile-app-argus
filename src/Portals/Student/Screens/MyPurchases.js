@@ -14,7 +14,7 @@ import { Divider } from "react-native-elements/dist/divider/Divider";
 import BottomNav from "../Components/UniversalComponents/BottomNav";
 import TopComponent from "../Components/UniversalComponents/TopComponent";
 
-export default function Enroll() {
+export default function MyPurchases() {
   return (
     <SafeAreaView style={styles.container}>
       <TopComponent />
@@ -70,7 +70,9 @@ export default function Enroll() {
               marginVertical: 10,
             }}
           >
-            <Text style={{ color: "white", fontSize: 20 }}>Register Now</Text>
+            <Text style={{ color: "white", fontSize: 20 }}>
+              Download Receipt
+            </Text>
           </TouchableOpacity>
         </View>
         <View
@@ -124,7 +126,9 @@ export default function Enroll() {
               marginVertical: 10,
             }}
           >
-            <Text style={{ color: "white", fontSize: 20 }}>Register Now</Text>
+            <Text style={{ color: "white", fontSize: 20 }}>
+              Download Receipt
+            </Text>
           </TouchableOpacity>
         </View>
         <View
@@ -178,7 +182,9 @@ export default function Enroll() {
               marginVertical: 10,
             }}
           >
-            <Text style={{ color: "white", fontSize: 20 }}>Register Now</Text>
+            <Text style={{ color: "white", fontSize: 20 }}>
+              Download Receipt
+            </Text>
           </TouchableOpacity>
         </View>
         <View
@@ -232,7 +238,9 @@ export default function Enroll() {
               marginVertical: 10,
             }}
           >
-            <Text style={{ color: "white", fontSize: 20 }}>Register Now</Text>
+            <Text style={{ color: "white", fontSize: 20 }}>
+              Download Receipt
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

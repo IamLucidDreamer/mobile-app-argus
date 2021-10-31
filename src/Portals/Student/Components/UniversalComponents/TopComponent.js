@@ -41,7 +41,7 @@ export default function TopComponent() {
       <View
         style={{
           marginHorizontal: 10,
-          marginVertical: 10,
+          marginVertical: 15,
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
@@ -87,7 +87,11 @@ export default function TopComponent() {
               borderBottomColor: active === "Dashboard" ? "#BA0913" : "#ffffff", //Make this to active red otherwise white
             }}
           >
-            <Text style={{ fontSize: 18, color: "#68696D" }}>{item.text}</Text>
+            <Text
+              style={{ fontSize: 18, color: "#68696D", paddingVertical: 3 }}
+            >
+              {item.text}
+            </Text>
           </View>
         ))}
       </ScrollView>
