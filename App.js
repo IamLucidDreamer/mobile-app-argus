@@ -13,11 +13,12 @@ import Notification from "./src/Portals/Student/Screens/Notification";
 import SigninScreen from "./src/Portals/Student/Screens/SigninScreen";
 import StudentHome from "./src/Portals/Student/Screens/StudentHome";
 import UploadDocument from "./src/Portals/Student/Screens/UploadDocument";
+import UploadedDocuments from "./src/Portals/Student/Screens/UploadedDocuments";
 
 export default function App() {
   return (
     <>
-      <Notification />
+      <UploadedDocuments />
     </>
   );
 }
