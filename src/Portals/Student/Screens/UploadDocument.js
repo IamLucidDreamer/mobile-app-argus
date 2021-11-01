@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
@@ -9,11 +9,11 @@ import {
   ImageBackground,
   TouchableOpacity,
   TextInput,
-} from 'react-native';
-import { Divider } from 'react-native-elements';
-import BottomNav from '../Components/UniversalComponents/BottomNav';
-import TopComponent from '../Components/UniversalComponents/TopComponent';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+} from "react-native";
+import { Divider } from "react-native-elements";
+import BottomNav from "../Components/UniversalComponents/BottomNav";
+import TopComponent from "../Components/UniversalComponents/TopComponent";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 export default function UploadDoc() {
   return (
@@ -22,19 +22,19 @@ export default function UploadDoc() {
         <ImageBackground
           style={{
             flex: 1,
-            width: '100%',
-            height: '100%',
-            justifyContent: 'center',
-            alignItems: 'center',
+            width: "100%",
+            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
           }}
-          source={require('../../../../assets/UniversalAssets/TestingImage.png')}
+          source={require("../../../../assets/UniversalAssets/TestingImage.png")}
         >
           <Text
             style={{
-              alignSelf: 'flex-start',
-              color: '#2A2B2F',
+              alignSelf: "flex-start",
+              color: "#2A2B2F",
               fontSize: 20,
-              fontWeight: 'bold',
+              fontWeight: "bold",
               marginHorizontal: 25,
               marginVertical: 20,
             }}
@@ -43,11 +43,11 @@ export default function UploadDoc() {
           </Text>
           <View
             style={{
-              backgroundColor: '#fff',
-              width: '90%',
+              backgroundColor: "#fff",
+              width: "90%",
               borderRadius: 20,
               padding: 20,
-              shadowColor: '#000',
+              shadowColor: "#000",
               shadowOffset: { width: 0, height: 1 },
               shadowOpacity: 0.8,
               shadowRadius: 2,
@@ -58,7 +58,7 @@ export default function UploadDoc() {
               style={{
                 height: 40,
                 fontSize: 20,
-                borderBottomColor: '#8890A6',
+                borderBottomColor: "#8890A6",
                 borderBottomWidth: 3,
                 marginBottom: 40,
               }}
@@ -67,42 +67,42 @@ export default function UploadDoc() {
             />
             <Text
               style={{
-                alignSelf: 'flex-start',
-                color: '#68696D',
+                alignSelf: "flex-start",
+                color: "#68696D",
                 fontSize: 15,
-                fontWeight: 'bold',
+                fontWeight: "bold",
                 marginBottom: 20,
               }}
             >
               Select the Source
             </Text>
             <View
-              style={{ flexDirection: 'row', justifyContent: 'space-around' }}
+              style={{ flexDirection: "row", justifyContent: "space-around" }}
             >
               <TouchableOpacity>
                 <FontAwesome5
-                  name={'camera'}
+                  name={"camera"}
                   size={35}
                   style={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#fff',
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#fff",
                     padding: 20,
-                    backgroundColor: '#BA0913',
+                    backgroundColor: "#BA0913",
                     borderRadius: 50,
                   }}
                 />
               </TouchableOpacity>
               <TouchableOpacity>
                 <FontAwesome5
-                  name={'folder-open'}
+                  name={"folder-open"}
                   size={35}
                   style={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#fff',
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#fff",
                     padding: 20,
-                    backgroundColor: '#BA0913',
+                    backgroundColor: "#BA0913",
                     borderRadius: 50,
                   }}
                 />
@@ -118,6 +118,6 @@ export default function UploadDoc() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
 });
