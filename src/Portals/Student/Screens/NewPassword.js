@@ -17,7 +17,7 @@ const NewPassword = () => {
     <SafeAreaView style={styles.container}>
       <Image
         style={{ width: 150, height: 150, marginTop: 50, marginBottom: 30 }}
-        source={require("../../../../assets/UniversalAssets/Logo.png")}
+        source={require("../../../../assets/UniversalAssets/Logo512.png")}
       />
       <Text
         style={{

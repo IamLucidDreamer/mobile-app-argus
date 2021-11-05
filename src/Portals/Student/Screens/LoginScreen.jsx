@@ -17,7 +17,7 @@ const LoginScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Image
         style={{ width: 150, height: 150, marginTop: 0, marginBottom: 30 }}
-        source={require('../../../../assets/UniversalAssets/Logo.png')}
+        source={require('../../../../assets/UniversalAssets/Logo512.png')}
       />
 
       <View style={styles.inputView}>

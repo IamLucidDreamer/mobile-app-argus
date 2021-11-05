@@ -19,7 +19,12 @@ export default function LandingScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <Image
         style={{ marginTop: 60, marginBottom: 40, width: 220, height: 220 }}
-        source={require('../assets/UniversalAssets/Logo.png')}
+        source={require('../assets/UniversalAssets/Logo512.png')}
+      />
+      <Buttons
+        navigation={navigation}
+        route={'Loginin'}
+        title={'Client Portal'}
       />
       <Buttons
         navigation={navigation}
@@ -30,11 +35,6 @@ export default function LandingScreen({ navigation }) {
         navigation={navigation}
         route={'Loginin'}
         title={'Employee Portal'}
-      />
-      <Buttons
-        navigation={navigation}
-        route={'Loginin'}
-        title={'Client Portal'}
       />
     </SafeAreaView>
   );

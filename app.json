@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "mobile-app-argus-latest",
-    "slug": "mobile-app-argus-latest",
+    "name": "Argus Security",
+    "slug": "argus",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/UniversalAssets/Logo256.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/UniversalAssets/Logo1024.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
