@@ -4,7 +4,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export default function LoginTopBar({ navigation }) {
   return (
-    <View>
+    <View style={{backgroundColor: "#F4F5F9",}}>
       <View
         style={{
           marginHorizontal: 10,

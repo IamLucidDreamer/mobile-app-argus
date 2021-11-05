@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/UniversalAssets/Logo1024.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#F4F5F9"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,8 +21,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/UniversalAssets/Logo256.png",
+        "backgroundColor": "#F4F5F9"
       },
       "package": "com.mattscepter.mobileapparguslatest"
     },

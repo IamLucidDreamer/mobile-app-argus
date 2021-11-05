@@ -18,9 +18,11 @@ export default function LandingScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Image
-        style={{ marginTop: 60, marginBottom: 40, width: 220, height: 220 }}
+        style={{ width: 240, height: 240 , flex:1}}
+        resizeMode={"contain"}
         source={require('../assets/UniversalAssets/Logo512.png')}
       />
+      <View style={{flex:1, alignItems:'center', width:"100%"}}>
       <Buttons
         navigation={navigation}
         route={'Loginin'}
@@ -36,6 +38,7 @@ export default function LandingScreen({ navigation }) {
         route={'Loginin'}
         title={'Employee Portal'}
       />
+      </View>
     </SafeAreaView>
   );
 }

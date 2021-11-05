@@ -9,14 +9,16 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import Buttons from '../Components/UniversalComponents/Buttons';
 
 const LoginScreen = ({ navigation }) => {
   return (
+    <ScrollView>
     <View style={styles.container}>
       <Image
-        style={{ width: 150, height: 150, marginTop: 0, marginBottom: 30 }}
+        style={{ width: 150, height: 150, marginTop: 20, marginBottom: 30 }}
         source={require('../../../../assets/UniversalAssets/Logo512.png')}
       />
 
@@ -64,6 +66,7 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.forgottext}>here.</Text>
       </View>
     </View>
+    </ScrollView>
   );
 };
 
