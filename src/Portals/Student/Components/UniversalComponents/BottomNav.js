@@ -6,9 +6,10 @@ export default function BottomNav() {
   return (
     <View
       style={{
+        backgroundColor: "#fff",
         flexDirection: "row",
-        margin: 10,
-        marginHorizontal: 20,
+        padding: 10,
+        paddingHorizontal: 10,
         justifyContent: "space-between",
       }}
     >

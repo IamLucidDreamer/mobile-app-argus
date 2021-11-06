@@ -38,7 +38,8 @@ export default function Enroll() {
               color: "#2A2B2F",
               fontSize: 17,
               fontWeight: "bold",
-              marginBottom: 15,
+              marginBottom: 30,
+              fontFamily: "Poppins-Light",
             }}
           >
             Basic Security Training Course (online) $99 + HST
