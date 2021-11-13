@@ -6,11 +6,16 @@ export default function BottomNav() {
   return (
     <View
       style={{
-        backgroundColor: "#fff",
+        backgroundColor: "#",
         flexDirection: "row",
         padding: 10,
         paddingHorizontal: 10,
         justifyContent: "space-between",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 2,
       }}
     >
       <View
@@ -37,14 +42,12 @@ export default function BottomNav() {
             shadowOpacity: 0.8,
             shadowRadius: 2,
             elevation: 3,
-            borderWidth: 0.1,
-            borderColor: "#000",
           }}
         >
           <FontAwesome5
             name={"home"}
             size={25}
-            style={{ marginBottom: 3, alignItems: "center", color: "#8890A6" }}
+            style={{ marginBottom: 3, alignItems: "center", color: "#ba0913" }}
           />
         </TouchableOpacity>
       </View>

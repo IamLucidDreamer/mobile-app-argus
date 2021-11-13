@@ -126,7 +126,6 @@ export default function StudentHome() {
           elevation: 3,
         }}
       />
-      <Divider width={1} />
       <BottomNav />
     </View>
   );
