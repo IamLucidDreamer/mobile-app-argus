@@ -84,10 +84,19 @@ export default function DashBoard() {
               elevation: 6,
             }}
           >
-            <Image
-              style={{ width: 60, height: 60, resizeMode: "contain" }}
-              source={require("./../../../../assets/UniversalAssets/Logo256.png")}
-            />
+            <View style={{ justifyContent: "center" }}>
+              <FontAwesome5
+                name="check"
+                size={20}
+                style={{
+                  alignItems: "center",
+                  color: "#fff",
+                  padding: 10,
+                  backgroundColor: "#ba0913",
+                  borderRadius: 30,
+                }}
+              />
+            </View>
             <Text style={{ margin: 10, fontSize: 15 }}>
               The todo list tasks will rest here. The todo list tasks will rest
               here.
@@ -109,10 +118,19 @@ export default function DashBoard() {
               elevation: 6,
             }}
           >
-            <Image
-              style={{ width: 60, height: 60, resizeMode: "contain" }}
-              source={require("./../../../../assets/UniversalAssets/Logo256.png")}
-            />
+            <View style={{ justifyContent: "center" }}>
+              <FontAwesome5
+                name="check"
+                size={20}
+                style={{
+                  alignItems: "center",
+                  color: "#fff",
+                  padding: 10,
+                  backgroundColor: "#EBC700",
+                  borderRadius: 30,
+                }}
+              />
+            </View>
             <Text style={{ margin: 10, fontSize: 15 }}>
               The todo list tasks will rest here. The todo list tasks will rest
               here.
@@ -134,10 +152,19 @@ export default function DashBoard() {
               elevation: 6,
             }}
           >
-            <Image
-              style={{ width: 60, height: 60, resizeMode: "contain" }}
-              source={require("./../../../../assets/UniversalAssets/Logo256.png")}
-            />
+            <View style={{ justifyContent: "center" }}>
+              <FontAwesome5
+                name="check"
+                size={20}
+                style={{
+                  alignItems: "center",
+                  color: "#fff",
+                  padding: 10,
+                  backgroundColor: "#15C277",
+                  borderRadius: 30,
+                }}
+              />
+            </View>
             <Text style={{ margin: 10, fontSize: 15 }}>
               The todo list tasks will rest here. The todo list tasks will rest
               here.
