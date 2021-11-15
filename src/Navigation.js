@@ -12,6 +12,8 @@ import { StyleSheet, Text, View, Platform } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { getToken, getUser } from './redux/actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
+import Camera from './Portals/Student/Screens/Camera';
+import ReactNativeCamera from './Portals/Student/Screens/Camera';
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +55,11 @@ const Navigation = () => {
           name="StudentHome"
           component={StudentHome}
           options={{ header: TopComponent }}
+        />
+        <Stack.Screen
+          name="Camera"
+          component={ReactNativeCamera}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -128,7 +128,7 @@ export default function StudentHome({ navigation }) {
       </View>
 
       <ScrollView style={{ paddingVertical: 20 }}>
-        <active.component />
+        <active.component navigation={navigation} />
       </ScrollView>
       <Divider
         width={0.1}

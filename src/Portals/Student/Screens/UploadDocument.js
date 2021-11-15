@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -15,9 +15,29 @@ import BottomNav from '../Components/UniversalComponents/BottomNav';
 import TopComponent from '../Components/UniversalComponents/TopComponent';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { Picker } from '@react-native-picker/picker';
+import { useSelector } from 'react-redux';
+import { docsName } from '../../../utils/DocsData';
+import * as DocumentPicker from 'expo-document-picker';
 
-export default function UploadDoc() {
+export default function UploadDoc({ navigation }) {
   const [selectedDocName, setSelectedDocName] = useState('');
+  const [uploadDocOpt, setUploadDocOpt] = useState([]);
+  const docs = useSelector((state) => state.student.docs);
+  const [selectedDoc, setSelectedDoc] = useState(null);
+
+  useEffect(() => {
+    let docOpt = [];
+    docsName.forEach((element) => {
+      if (docs.some((d) => d.name === element && d.isApproved === false)) {
+        docOpt.push(element);
+      } else if (!docs.some((d) => d.name === element)) {
+        docOpt.push(element);
+      }
+    });
+    setUploadDocOpt(docOpt);
+  }, []);
+
+  const uploadDoc = () => {};
 
   return (
     <View style={styles.container}>
@@ -64,15 +84,48 @@ export default function UploadDoc() {
                 fontSize: 20,
                 borderBottomColor: '#8890A6',
                 borderBottomWidth: 3,
-                marginBottom: 40,
+                marginBottom: 20,
               }}
               onValueChange={(itemValue, itemIndex) =>
                 setSelectedDocName(itemValue)
               }
             >
-              <Picker.Item label="Java" value="java" />
-              <Picker.Item label="JavaScript" value="js" />
+              {uploadDocOpt.map((d, index) => {
+                return <Picker.Item key={index} label={d} value={d} />;
+              })}
             </Picker>
+            {selectedDoc ? (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  marginBottom: 10,
+                  justifyContent: 'space-between',
+                }}
+              >
+                <Text
+                  style={{
+                    color: '#BA0913',
+                    fontSize: 15,
+                    fontWeight: 'bold',
+                  }}
+                >
+                  {selectedDoc?.name}
+                </Text>
+                <TouchableOpacity onPress={() => setSelectedDoc(null)}>
+                  <FontAwesome5
+                    name={'times'}
+                    size={25}
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'gray',
+                      marginRight: 15,
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
+            ) : null}
             <Text
               style={{
                 alignSelf: 'flex-start',
@@ -101,7 +154,12 @@ export default function UploadDoc() {
                   }}
                 />
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={async () => {
+                  const doc = await DocumentPicker.getDocumentAsync();
+                  setSelectedDoc(doc);
+                }}
+              >
                 <FontAwesome5
                   name={'folder-open'}
                   size={35}
