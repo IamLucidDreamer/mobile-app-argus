@@ -26,6 +26,7 @@ import UploadedDocuments from './UploadedDocuments';
 import { useDispatch } from 'react-redux';
 import { getToken } from '../../../redux/actions/authActions';
 import { useSelector } from 'react-redux';
+import { getDocs } from '../../../redux/actions/studentActions';
 
 export default function StudentHome({ navigation }) {
   const windowWidth = Dimensions.get('window').width / 2;
@@ -33,6 +34,12 @@ export default function StudentHome({ navigation }) {
     text: 'DashBoard',
     component: DashBoard,
   });
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getDocs());
+  }, []);
 
   const items = [
     {
@@ -68,8 +75,6 @@ export default function StudentHome({ navigation }) {
       component: UploadedDocuments,
     },
   ];
-
-  const dispatch = useDispatch();
 
   const user = useSelector((state) => state.auth.user);
 

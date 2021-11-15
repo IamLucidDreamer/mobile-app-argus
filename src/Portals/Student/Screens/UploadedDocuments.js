@@ -11,10 +11,14 @@ import {
   Image,
 } from 'react-native';
 import { Divider } from 'react-native-elements/dist/divider/Divider';
+import { useSelector } from 'react-redux';
+import { docsName } from '../../../utils/DocsData';
 import BottomNav from '../Components/UniversalComponents/BottomNav';
 import TopComponent from '../Components/UniversalComponents/TopComponent';
 
 export default function UploadedDocuments() {
+  const docs = useSelector((state) => state.student.docs);
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -31,336 +35,153 @@ export default function UploadedDocuments() {
         >
           Uploaded Document
         </Text>
-        <View
-          style={{
-            width: '95%',
-            backgroundColor: '#fff',
-            padding: 15,
-            alignSelf: 'center',
-            marginVertical: 10,
-            borderWidth: 2,
-            borderColor: '#15C277',
-            borderRadius: 20,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.8,
-            shadowRadius: 4,
-            elevation: 8,
-          }}
-        >
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 17,
-              lineHeight: 20,
-              marginVertical: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Name of the Document will come here.
-          </Text>
-          <Text
-            style={{
-              color: '#15C277',
-              fontSize: 17,
-              lineHeight: 20,
-              marginBottom: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Approved
-          </Text>
-        </View>
-        <View
-          style={{
-            width: '95%',
-            backgroundColor: '#fff',
-            padding: 15,
-            alignSelf: 'center',
-            marginVertical: 10,
-            borderWidth: 2,
-            borderColor: '#EBC700',
-            borderRadius: 20,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.8,
-            shadowRadius: 4,
-            elevation: 8,
-          }}
-        >
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 17,
-              lineHeight: 20,
-              marginVertical: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Name of the Document will come here.
-          </Text>
-          <Text
-            style={{
-              color: '#EBC700',
-              fontSize: 17,
-              lineHeight: 20,
-              marginBottom: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Pending Review
-          </Text>
-        </View>
-        <View
-          style={{
-            width: '95%',
-            backgroundColor: '#fff',
-            padding: 15,
-            alignSelf: 'center',
-            marginVertical: 10,
-            borderWidth: 2,
-            borderColor: '#BA0913',
-            borderRadius: 20,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.8,
-            shadowRadius: 4,
-            elevation: 8,
-          }}
-        >
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 17,
-              lineHeight: 20,
-              marginTop: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Name of the Document will come here.
-          </Text>
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 17,
-              lineHeight: 20,
-              marginVertical: 15,
-            }}
-          >
-            Note with the reason of rejection will come here.
-          </Text>
-          <Text
-            style={{
-              color: '#BA0913',
-              fontSize: 17,
-              lineHeight: 20,
-              marginBottom: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Rejected
-          </Text>
-        </View>
-        <View
-          style={{
-            width: '95%',
-            backgroundColor: '#fff',
-            padding: 15,
-            alignSelf: 'center',
-            marginVertical: 10,
-            borderWidth: 2,
-            borderColor: '#BA0913',
-            borderRadius: 20,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.8,
-            shadowRadius: 4,
-            elevation: 8,
-          }}
-        >
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 17,
-              lineHeight: 20,
-              marginTop: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Name of the Document will come here.
-          </Text>
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 17,
-              lineHeight: 20,
-              marginVertical: 15,
-            }}
-          >
-            Note with the reason of rejection will come here.
-          </Text>
-          <Text
-            style={{
-              color: '#BA0913',
-              fontSize: 17,
-              lineHeight: 20,
-              marginBottom: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Rejected
-          </Text>
-        </View>
-        <View
-          style={{
-            width: '95%',
-            backgroundColor: '#fff',
-            padding: 15,
-            alignSelf: 'center',
-            marginVertical: 10,
-            borderWidth: 2,
-            borderColor: '#BA0913',
-            borderRadius: 20,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.8,
-            shadowRadius: 4,
-            elevation: 8,
-          }}
-        >
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 17,
-              lineHeight: 20,
-              marginTop: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Name of the Document will come here.
-          </Text>
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 17,
-              lineHeight: 20,
-              marginVertical: 15,
-            }}
-          >
-            Note with the reason of rejection will come here.
-          </Text>
-          <Text
-            style={{
-              color: '#BA0913',
-              fontSize: 17,
-              lineHeight: 20,
-              marginBottom: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Rejected
-          </Text>
-        </View>
-        <View
-          style={{
-            width: '95%',
-            backgroundColor: '#fff',
-            padding: 15,
-            alignSelf: 'center',
-            marginVertical: 10,
-            borderWidth: 2,
-            borderColor: '#BA0913',
-            borderRadius: 20,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.8,
-            shadowRadius: 4,
-            elevation: 8,
-          }}
-        >
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 17,
-              lineHeight: 20,
-              marginTop: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Name of the Document will come here.
-          </Text>
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 17,
-              lineHeight: 20,
-              marginVertical: 15,
-            }}
-          >
-            Note with the reason of rejection will come here.
-          </Text>
-          <Text
-            style={{
-              color: '#BA0913',
-              fontSize: 17,
-              lineHeight: 20,
-              marginBottom: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Rejected
-          </Text>
-        </View>
-        <View
-          style={{
-            width: '95%',
-            backgroundColor: '#fff',
-            padding: 15,
-            alignSelf: 'center',
-            marginVertical: 10,
-            borderWidth: 2,
-            borderColor: '#BA0913',
-            borderRadius: 20,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.8,
-            shadowRadius: 4,
-            elevation: 8,
-          }}
-        >
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 17,
-              lineHeight: 20,
-              marginTop: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Name of the Document will come here.
-          </Text>
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 17,
-              lineHeight: 20,
-              marginVertical: 15,
-            }}
-          >
-            Note with the reason of rejection will come here.
-          </Text>
-          <Text
-            style={{
-              color: '#BA0913',
-              fontSize: 17,
-              lineHeight: 20,
-              marginBottom: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Rejected
-          </Text>
-        </View>
+        {docsName.map((docName, index) => {
+          let doc = docs.filter((d) => d.name === docName)[0];
+          return (
+            <>
+              {doc ? (
+                doc.isApproved === null ? (
+                  <View
+                    key={index}
+                    style={{
+                      width: '95%',
+                      backgroundColor: '#fff',
+                      padding: 15,
+                      alignSelf: 'center',
+                      marginVertical: 10,
+                      borderWidth: 2,
+                      borderColor: '#EBC700',
+                      borderRadius: 20,
+                      shadowColor: '#000',
+                      shadowOffset: { width: 0, height: 1 },
+                      shadowOpacity: 0.8,
+                      shadowRadius: 4,
+                      elevation: 8,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: '#8890A6',
+                        fontSize: 17,
+                        lineHeight: 20,
+                        marginVertical: 15,
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {doc.name}
+                    </Text>
+                    <Text
+                      style={{
+                        color: '#EBC700',
+                        fontSize: 17,
+                        lineHeight: 20,
+                        marginBottom: 15,
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      Pending Review
+                    </Text>
+                  </View>
+                ) : doc.isApproved ? (
+                  <View
+                    key={index}
+                    style={{
+                      width: '95%',
+                      backgroundColor: '#fff',
+                      padding: 15,
+                      alignSelf: 'center',
+                      marginVertical: 10,
+                      borderWidth: 2,
+                      borderColor: '#15C277',
+                      borderRadius: 20,
+                      shadowColor: '#000',
+                      shadowOffset: { width: 0, height: 1 },
+                      shadowOpacity: 0.8,
+                      shadowRadius: 4,
+                      elevation: 8,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: '#8890A6',
+                        fontSize: 17,
+                        lineHeight: 20,
+                        marginVertical: 15,
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {docName}
+                    </Text>
+                    <Text
+                      style={{
+                        color: '#15C277',
+                        fontSize: 17,
+                        lineHeight: 20,
+                        marginBottom: 15,
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      Approved
+                    </Text>
+                  </View>
+                ) : (
+                  <View
+                    key={index}
+                    style={{
+                      width: '95%',
+                      backgroundColor: '#fff',
+                      padding: 15,
+                      alignSelf: 'center',
+                      marginVertical: 10,
+                      borderWidth: 2,
+                      borderColor: '#BA0913',
+                      borderRadius: 20,
+                      shadowColor: '#000',
+                      shadowOffset: { width: 0, height: 1 },
+                      shadowOpacity: 0.8,
+                      shadowRadius: 4,
+                      elevation: 8,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: '#8890A6',
+                        fontSize: 17,
+                        lineHeight: 20,
+                        marginTop: 15,
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {docName}
+                    </Text>
+
+                    <Text
+                      style={{
+                        color: '#8890A6',
+                        fontSize: 17,
+                        lineHeight: 20,
+                        marginVertical: 15,
+                      }}
+                    >
+                      {doc?.note}
+                    </Text>
+                    <Text
+                      style={{
+                        color: '#BA0913',
+                        fontSize: 17,
+                        lineHeight: 20,
+                        marginBottom: 15,
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      Rejected
+                    </Text>
+                  </View>
+                )
+              ) : null}
+            </>
+          );
+        })}
       </ScrollView>
       <Divider width={1} />
     </View>

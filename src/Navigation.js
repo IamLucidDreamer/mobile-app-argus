@@ -24,6 +24,8 @@ const Navigation = () => {
     dispatch(getUser());
   }, [dispatch]);
 
+  console.log(auth);
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="LandingScreen">

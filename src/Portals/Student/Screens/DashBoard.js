@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -17,9 +17,53 @@ import TopComponent from '../Components/UniversalComponents/TopComponent';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Buttons from '../Components/UniversalComponents/Buttons';
 import { useSelector } from 'react-redux';
+import { docsName } from '../../../utils/DocsData';
+import axiosInstance from '../../../utils/axiosInstance';
 
 export default function DashBoard() {
   const user = useSelector((state) => state.auth.user);
+  const token = useSelector((state) => state.auth.token);
+  const docs = useSelector((state) => state.student.docs);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    let arr = [];
+    if (user?.employmentRecord?.length === 0) {
+      arr.push(`Add employment record`);
+    }
+    if (!user?.jobSearch?.looking) {
+      arr.push(`Add job search deatils`);
+    }
+
+    if (!user?.dateOfBirth) {
+      arr.push(`Add personal details`);
+    }
+    if (!user?.hasCriminalRecord) {
+      arr.push(`Add background details`);
+    }
+    if (!user?.street) {
+      arr.push(`Add contact details`);
+    }
+    if (!user?.courses?.length === 0) {
+      arr.push(`Buy a course`);
+    }
+
+    docsName.forEach((element) => {
+      let doc = docs.filter((d) => d.name === element);
+      if (doc.length !== 0) {
+        if (doc[0].isApproved === false) {
+          arr.push(`${element} doc disapproved upload again.`);
+        }
+      } else {
+        if (element !== 'Additional Doc 1' && element !== 'Additional Doc 2')
+          arr.push(`Upload ${element} doc.`);
+      }
+    });
+
+    setTasks(arr);
+  }, [docs, user]);
+
+  console.log(tasks);
 
   return (
     <ScrollView>
@@ -61,6 +105,7 @@ export default function DashBoard() {
             </View>
           ))}
         </ScrollView>
+
         <View>
           <Text
             style={{
@@ -71,81 +116,33 @@ export default function DashBoard() {
           >
             To Do
           </Text>
-          <View
-            style={{
-              width: '85%',
-              flexDirection: 'row',
-              backgroundColor: '#fff',
-              padding: 15,
-              alignSelf: 'center',
-              marginBottom: 15,
-              borderRadius: 20,
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 1 },
-              shadowOpacity: 0.8,
-              shadowRadius: 4,
-              elevation: 6,
-            }}
-          >
-            <Image
-              style={{ width: 60, height: 60, resizeMode: 'contain' }}
-              source={require('./../../../../assets/UniversalAssets/Logo256.png')}
-            />
-            <Text style={{ margin: 10, fontSize: 15 }}>
-              The todo list tasks will rest here. The todo list tasks will rest
-              here.
-            </Text>
-          </View>
-          <View
-            style={{
-              width: '85%',
-              flexDirection: 'row',
-              backgroundColor: '#fff',
-              padding: 15,
-              alignSelf: 'center',
-              marginBottom: 15,
-              borderRadius: 20,
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 1 },
-              shadowOpacity: 0.8,
-              shadowRadius: 4,
-              elevation: 6,
-            }}
-          >
-            <Image
-              style={{ width: 60, height: 60, resizeMode: 'contain' }}
-              source={require('./../../../../assets/UniversalAssets/Logo256.png')}
-            />
-            <Text style={{ margin: 10, fontSize: 15 }}>
-              The todo list tasks will rest here. The todo list tasks will rest
-              here.
-            </Text>
-          </View>
-          <View
-            style={{
-              width: '85%',
-              flexDirection: 'row',
-              backgroundColor: '#fff',
-              padding: 15,
-              alignSelf: 'center',
-              marginBottom: 15,
-              borderRadius: 20,
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 1 },
-              shadowOpacity: 0.8,
-              shadowRadius: 4,
-              elevation: 6,
-            }}
-          >
-            <Image
-              style={{ width: 60, height: 60, resizeMode: 'contain' }}
-              source={require('./../../../../assets/UniversalAssets/Logo256.png')}
-            />
-            <Text style={{ margin: 10, fontSize: 15 }}>
-              The todo list tasks will rest here. The todo list tasks will rest
-              here.
-            </Text>
-          </View>
+          {tasks.map((t, index) => {
+            return (
+              <View
+                key={index}
+                style={{
+                  width: '100%',
+                  flexDirection: 'row',
+                  backgroundColor: '#fff',
+                  padding: 15,
+                  alignSelf: 'center',
+                  marginBottom: 15,
+                  borderRadius: 20,
+                  shadowColor: '#000',
+                  shadowOffset: { width: 0, height: 1 },
+                  shadowOpacity: 0.8,
+                  shadowRadius: 4,
+                  elevation: 6,
+                }}
+              >
+                <Image
+                  style={{ width: 60, height: 60, resizeMode: 'contain' }}
+                  source={require('./../../../../assets/UniversalAssets/Logo256.png')}
+                />
+                <Text style={{ margin: 10, fontSize: 15 }}>{t}</Text>
+              </View>
+            );
+          })}
         </View>
         <Buttons title="Continue Studying" />
       </View>
