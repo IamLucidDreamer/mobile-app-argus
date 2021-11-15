@@ -1,17 +1,24 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { useDispatch } from 'react-redux';
+import {
+  clearStore,
+  setID,
+  setToken,
+} from '../../../../redux/actions/authActions';
 
-export default function BottomNav() {
+export default function BottomNav({ navigation }) {
+  const dispatch = useDispatch();
   return (
     <View
       style={{
-        backgroundColor: "#",
-        flexDirection: "row",
+        backgroundColor: '#',
+        flexDirection: 'row',
         padding: 10,
         paddingHorizontal: 10,
-        justifyContent: "space-between",
-        shadowColor: "#000",
+        justifyContent: 'space-between',
+        shadowColor: '#000',
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.8,
         shadowRadius: 2,
@@ -20,24 +27,30 @@ export default function BottomNav() {
     >
       <View
         style={{
-          width: "35%",
-          flexDirection: "row",
-          justifyContent: "space-between",
+          width: '35%',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
         }}
       >
         <Icon icon="calendar" text="Calender" />
         <Icon icon="id-badge" text="Jobs" />
       </View>
-      <View style={{ width: "20%", marginTop: -45 }}>
+      <View style={{ width: '20%', marginTop: -45 }}>
         <TouchableOpacity
+          onPress={() => {
+            dispatch(clearStore());
+            dispatch(setToken(null));
+            dispatch(setID(null));
+            navigation.navigate('LandingScreen');
+          }}
           style={{
             height: 70,
             width: 70,
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#F4F5F9",
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#F4F5F9',
             borderRadius: 100,
-            shadowColor: "#000",
+            shadowColor: '#000',
             shadowOffset: { width: 0, height: 1 },
             shadowOpacity: 0.8,
             shadowRadius: 2,
@@ -45,17 +58,17 @@ export default function BottomNav() {
           }}
         >
           <FontAwesome5
-            name={"home"}
+            name={'home'}
             size={25}
-            style={{ marginBottom: 3, alignItems: "center", color: "#ba0913" }}
+            style={{ marginBottom: 3, alignItems: 'center', color: '#ba0913' }}
           />
         </TouchableOpacity>
       </View>
       <View
         style={{
-          width: "35%",
-          flexDirection: "row",
-          justifyContent: "space-between",
+          width: '35%',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
         }}
       >
         <Icon icon="heart" text="Buy" />
@@ -66,12 +79,12 @@ export default function BottomNav() {
 }
 
 const Icon = (props) => (
-  <TouchableOpacity style={{ alignItems: "center" }}>
+  <TouchableOpacity style={{ alignItems: 'center' }}>
     <FontAwesome5
       name={props.icon}
       size={25}
-      style={{ marginBottom: 3, alignItems: "center", color: "#8890A6" }}
+      style={{ marginBottom: 3, alignItems: 'center', color: '#8890A6' }}
     />
-    <Text style={{ color: "#8890A6", fontSize: 13 }}>{props.text}</Text>
+    <Text style={{ color: '#8890A6', fontSize: 13 }}>{props.text}</Text>
   </TouchableOpacity>
 );

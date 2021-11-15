@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,61 +11,95 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import axiosInstance from '../../../utils/axiosInstance';
 import Buttons from '../Components/UniversalComponents/Buttons';
+import * as SecureStore from 'expo-secure-store';
+import { useDispatch } from 'react-redux';
+import {
+  getToken,
+  isAuthenticated,
+  setID,
+  setToken,
+  setUser,
+} from '../../../redux/actions/authActions';
 
 const LoginScreen = ({ navigation }) => {
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+  });
+
+  const dispatch = useDispatch();
+
+  const login = () => {
+    axiosInstance
+      .post('/signin', form)
+      .then(async (res) => {
+        SecureStore.setItemAsync('jwt', res.data.token);
+        SecureStore.setItemAsync('id', res.data.user._id);
+        dispatch(setUser(res.data.user));
+        dispatch(setToken(res.data.token));
+        dispatch(setID(res.data.user._id));
+        dispatch(isAuthenticated('true'));
+        navigation.navigate('StudentHome');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <ScrollView>
-    <View style={styles.container}>
-      <Image
-        style={{ width: 150, height: 150, marginTop: 20, marginBottom: 30 }}
-        source={require('../../../../assets/UniversalAssets/Logo512.png')}
-      />
-
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Email"
-          keyboardType="email-address"
-          placeholderTextColor="#8890A6"
-          onChangeText={(email) => setEmail(email)}
+      <View style={styles.container}>
+        <Image
+          style={{ width: 150, height: 150, marginTop: 20, marginBottom: 30 }}
+          source={require('../../../../assets/UniversalAssets/Logo512.png')}
         />
-      </View>
 
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Password"
-          placeholderTextColor="#8890A6"
-          secureTextEntry={true}
-          onChangeText={(password) => setPassword(password)}
-        />
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Email"
+            keyboardType="email-address"
+            placeholderTextColor="#8890A6"
+            onChangeText={(email) => setForm({ ...form, email })}
+          />
+        </View>
+
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Password"
+            placeholderTextColor="#8890A6"
+            secureTextEntry={true}
+            onChangeText={(password) => setForm({ ...form, password })}
+          />
+        </View>
+        <View style={styles.forgotview}>
+          <TouchableOpacity onPress={() => navigation.navigate('ForgotPass')}>
+            <Text style={styles.forgottext}>Forgot Password?</Text>
+          </TouchableOpacity>
+        </View>
+        <Buttons func={login} title={'Log In'} />
+        <Text style={styles.forgottext}>OR</Text>
+        <Buttons title={'Google'} />
+        <Buttons title={'Facebook'} />
+        <View style={{ flexDirection: 'row', marginVertical: 5 }}>
+          <Text style={styles.forgottext}>New user?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
+            <Text
+              style={{
+                color: '#BA0913',
+                fontWeight: 'bold',
+                marginHorizontal: 4,
+              }}
+            >
+              Sign Up
+            </Text>
+          </TouchableOpacity>
+          <Text style={styles.forgottext}>here.</Text>
+        </View>
       </View>
-      <View style={styles.forgotview}>
-        <TouchableOpacity onPress={() => navigation.navigate('ForgotPass')}>
-          <Text style={styles.forgottext}>Forgot Password?</Text>
-        </TouchableOpacity>
-      </View>
-      <Buttons navigation={navigation} route={'StudentHome'} title={'Log In'} />
-      <Text style={styles.forgottext}>OR</Text>
-      <Buttons title={'Google'} />
-      <Buttons title={'Facebook'} />
-      <View style={{ flexDirection: 'row', marginVertical: 5 }}>
-        <Text style={styles.forgottext}>New user?</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
-          <Text
-            style={{
-              color: '#BA0913',
-              fontWeight: 'bold',
-              marginHorizontal: 4,
-            }}
-          >
-            Sign Up
-          </Text>
-        </TouchableOpacity>
-        <Text style={styles.forgottext}>here.</Text>
-      </View>
-    </View>
     </ScrollView>
   );
 };

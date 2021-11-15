@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -11,488 +11,137 @@ import {
   Image,
 } from 'react-native';
 import { Divider } from 'react-native-elements/dist/divider/Divider';
+import { useSelector } from 'react-redux';
+import axiosInstance from '../../../utils/axiosInstance';
 import BottomNav from '../Components/UniversalComponents/BottomNav';
 import TopComponent from '../Components/UniversalComponents/TopComponent';
 
 export default function Messages() {
+  const auth = useSelector((state) => state.auth);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    axiosInstance
+      .get(`/message/get/${auth.id}?page=1&&limit=100000`, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+        },
+      })
+      .then((res) =>
+        setMessages(
+          res.data.data.messages.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+          ),
+        ),
+      );
+  }, []);
+
   return (
     <View style={styles.container}>
       <ScrollView>
-        <View
-          style={{
-            width: '95%',
-            backgroundColor: '#fff',
-            padding: 15,
-            alignSelf: 'center',
-            marginVertical: 20,
-            borderRadius: 20,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.8,
-            shadowRadius: 4,
-            elevation: 8,
-          }}
-        >
-          <View style={{ flexDirection: 'row', marginBottom: 15 }}>
-            <Image
-              style={{
-                width: 60,
-                height: 60,
-                resizeMode: 'contain',
-                borderRadius: 10,
-              }}
-              source={require('../../../../assets/UniversalAssets/TestingImage.png')}
-            />
+        {messages?.map((m, index) => {
+          return (
             <View
-              style={{ marginHorizontal: 15, justifyContent: 'space-evenly' }}
+              key={index}
+              style={{
+                width: '95%',
+                backgroundColor: '#fff',
+                padding: 15,
+                alignSelf: 'center',
+                marginVertical: 20,
+                borderRadius: 20,
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 1 },
+                shadowOpacity: 0.8,
+                shadowRadius: 4,
+                elevation: 8,
+              }}
             >
+              <View style={{ flexDirection: 'row', marginBottom: 15 }}>
+                <Image
+                  style={{
+                    width: 60,
+                    height: 60,
+                    resizeMode: 'contain',
+                    borderRadius: 10,
+                  }}
+                  source={require('../../../../assets/UniversalAssets/TestingImage.png')}
+                />
+                <View
+                  style={{
+                    marginHorizontal: 15,
+                    justifyContent: 'space-evenly',
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: '#8890A6',
+                      fontSize: 15,
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {m?.userName}
+                  </Text>
+                  <Text
+                    style={{
+                      color: '#8890A6',
+                      fontSize: 13,
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    Position in the Company
+                  </Text>
+                </View>
+              </View>
+              <Divider width={1} />
               <Text
                 style={{
                   color: '#8890A6',
                   fontSize: 15,
+                  lineHeight: 20,
+                  marginTop: 15,
                   fontWeight: 'bold',
                 }}
               >
-                Name Here
+                {m?.subject}:
               </Text>
-              <Text
-                style={{
-                  color: '#8890A6',
-                  fontSize: 13,
-                  fontWeight: 'bold',
-                }}
-              >
-                Position in the Company
-              </Text>
-            </View>
-          </View>
-          <Divider width={1} />
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 15,
-              lineHeight: 20,
-              marginTop: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Subject:
-          </Text>
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 15,
-              lineHeight: 20,
-              marginVertical: 15,
-            }}
-          >
-            The Messages will come here. The Messages will come here. The
-            Messages will come here. The Messages will come here. The Messages
-            will come here. The Messages will come here. The Messages will come
-            here.
-          </Text>
-          <View style={{ alignSelf: 'flex-end', flexDirection: 'row' }}>
-            <Text
-              style={{
-                color: '#8890A6',
-                fontSize: 13,
-                fontWeight: 'bold',
-              }}
-            >
-              dd/mm/yyyy
-            </Text>
-            <Text
-              style={{
-                color: '#8890A6',
-                fontSize: 13,
-                fontWeight: 'bold',
-                marginHorizontal: 15,
-              }}
-            >
-              mm:hh
-            </Text>
-          </View>
-        </View>
-        <View
-          style={{
-            width: '95%',
-            backgroundColor: '#fff',
-            padding: 15,
-            alignSelf: 'center',
-            marginVertical: 20,
-            borderRadius: 20,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.8,
-            shadowRadius: 4,
-            elevation: 8,
-          }}
-        >
-          <View style={{ flexDirection: 'row', marginBottom: 15 }}>
-            <Image
-              style={{
-                width: 60,
-                height: 60,
-                resizeMode: 'contain',
-                borderRadius: 10,
-              }}
-              source={require('../../../../assets/UniversalAssets/TestingImage.png')}
-            />
-            <View
-              style={{ marginHorizontal: 15, justifyContent: 'space-evenly' }}
-            >
               <Text
                 style={{
                   color: '#8890A6',
                   fontSize: 15,
-                  fontWeight: 'bold',
+                  lineHeight: 20,
+                  marginVertical: 15,
                 }}
               >
-                Name Here
+                {m?.message}
               </Text>
-              <Text
-                style={{
-                  color: '#8890A6',
-                  fontSize: 13,
-                  fontWeight: 'bold',
-                }}
-              >
-                Position in the Company
-              </Text>
+              <View style={{ alignSelf: 'flex-end', flexDirection: 'row' }}>
+                <Text
+                  style={{
+                    color: '#8890A6',
+                    fontSize: 13,
+                    fontWeight: 'bold',
+                  }}
+                >
+                  {new Date(m.createdAt).toLocaleDateString('en-GB')}
+                </Text>
+                <Text
+                  style={{
+                    color: '#8890A6',
+                    fontSize: 13,
+                    fontWeight: 'bold',
+                    marginHorizontal: 15,
+                  }}
+                >
+                  {new Date(m.createdAt).toLocaleTimeString(`en-US`, {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
+                </Text>
+              </View>
             </View>
-          </View>
-          <Divider width={1} />
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 15,
-              lineHeight: 20,
-              marginTop: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Subject:
-          </Text>
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 15,
-              lineHeight: 20,
-              marginVertical: 15,
-            }}
-          >
-            The Messages will come here. The Messages will come here. The
-            Messages will come here. The Messages will come here. The Messages
-            will come here. The Messages will come here. The Messages will come
-            here.
-          </Text>
-          <View style={{ alignSelf: 'flex-end', flexDirection: 'row' }}>
-            <Text
-              style={{
-                color: '#8890A6',
-                fontSize: 13,
-                fontWeight: 'bold',
-              }}
-            >
-              dd/mm/yyyy
-            </Text>
-            <Text
-              style={{
-                color: '#8890A6',
-                fontSize: 13,
-                fontWeight: 'bold',
-                marginHorizontal: 15,
-              }}
-            >
-              mm:hh
-            </Text>
-          </View>
-        </View>
-        <View
-          style={{
-            width: '95%',
-            backgroundColor: '#fff',
-            padding: 15,
-            alignSelf: 'center',
-            marginVertical: 20,
-            borderRadius: 20,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.8,
-            shadowRadius: 4,
-            elevation: 8,
-          }}
-        >
-          <View style={{ flexDirection: 'row', marginBottom: 15 }}>
-            <Image
-              style={{
-                width: 60,
-                height: 60,
-                resizeMode: 'contain',
-                borderRadius: 10,
-              }}
-              source={require('../../../../assets/UniversalAssets/TestingImage.png')}
-            />
-            <View
-              style={{ marginHorizontal: 15, justifyContent: 'space-evenly' }}
-            >
-              <Text
-                style={{
-                  color: '#8890A6',
-                  fontSize: 15,
-                  fontWeight: 'bold',
-                }}
-              >
-                Name Here
-              </Text>
-              <Text
-                style={{
-                  color: '#8890A6',
-                  fontSize: 13,
-                  fontWeight: 'bold',
-                }}
-              >
-                Position in the Company
-              </Text>
-            </View>
-          </View>
-          <Divider width={1} />
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 15,
-              lineHeight: 20,
-              marginTop: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Subject:
-          </Text>
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 15,
-              lineHeight: 20,
-              marginVertical: 15,
-            }}
-          >
-            The Messages will come here. The Messages will come here. The
-            Messages will come here. The Messages will come here. The Messages
-            will come here. The Messages will come here. The Messages will come
-            here.
-          </Text>
-          <View style={{ alignSelf: 'flex-end', flexDirection: 'row' }}>
-            <Text
-              style={{
-                color: '#8890A6',
-                fontSize: 13,
-                fontWeight: 'bold',
-              }}
-            >
-              dd/mm/yyyy
-            </Text>
-            <Text
-              style={{
-                color: '#8890A6',
-                fontSize: 13,
-                fontWeight: 'bold',
-                marginHorizontal: 15,
-              }}
-            >
-              mm:hh
-            </Text>
-          </View>
-        </View>
-        <View
-          style={{
-            width: '95%',
-            backgroundColor: '#fff',
-            padding: 15,
-            alignSelf: 'center',
-            marginVertical: 20,
-            borderRadius: 20,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.8,
-            shadowRadius: 4,
-            elevation: 8,
-          }}
-        >
-          <View style={{ flexDirection: 'row', marginBottom: 15 }}>
-            <Image
-              style={{
-                width: 60,
-                height: 60,
-                resizeMode: 'contain',
-                borderRadius: 10,
-              }}
-              source={require('../../../../assets/UniversalAssets/TestingImage.png')}
-            />
-            <View
-              style={{ marginHorizontal: 15, justifyContent: 'space-evenly' }}
-            >
-              <Text
-                style={{
-                  color: '#8890A6',
-                  fontSize: 15,
-                  fontWeight: 'bold',
-                }}
-              >
-                Name Here
-              </Text>
-              <Text
-                style={{
-                  color: '#8890A6',
-                  fontSize: 13,
-                  fontWeight: 'bold',
-                }}
-              >
-                Position in the Company
-              </Text>
-            </View>
-          </View>
-          <Divider width={1} />
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 15,
-              lineHeight: 20,
-              marginTop: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Subject:
-          </Text>
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 15,
-              lineHeight: 20,
-              marginVertical: 15,
-            }}
-          >
-            The Messages will come here. The Messages will come here. The
-            Messages will come here. The Messages will come here. The Messages
-            will come here. The Messages will come here. The Messages will come
-            here.
-          </Text>
-          <View style={{ alignSelf: 'flex-end', flexDirection: 'row' }}>
-            <Text
-              style={{
-                color: '#8890A6',
-                fontSize: 13,
-                fontWeight: 'bold',
-              }}
-            >
-              dd/mm/yyyy
-            </Text>
-            <Text
-              style={{
-                color: '#8890A6',
-                fontSize: 13,
-                fontWeight: 'bold',
-                marginHorizontal: 15,
-              }}
-            >
-              mm:hh
-            </Text>
-          </View>
-        </View>
-        <View
-          style={{
-            width: '95%',
-            backgroundColor: '#fff',
-            padding: 15,
-            alignSelf: 'center',
-            marginVertical: 20,
-            borderRadius: 20,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.8,
-            shadowRadius: 4,
-            elevation: 8,
-          }}
-        >
-          <View style={{ flexDirection: 'row', marginBottom: 15 }}>
-            <Image
-              style={{
-                width: 60,
-                height: 60,
-                resizeMode: 'contain',
-                borderRadius: 10,
-              }}
-              source={require('../../../../assets/UniversalAssets/TestingImage.png')}
-            />
-            <View
-              style={{ marginHorizontal: 15, justifyContent: 'space-evenly' }}
-            >
-              <Text
-                style={{
-                  color: '#8890A6',
-                  fontSize: 15,
-                  fontWeight: 'bold',
-                }}
-              >
-                Name Here
-              </Text>
-              <Text
-                style={{
-                  color: '#8890A6',
-                  fontSize: 13,
-                  fontWeight: 'bold',
-                }}
-              >
-                Position in the Company
-              </Text>
-            </View>
-          </View>
-          <Divider width={1} />
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 15,
-              lineHeight: 20,
-              marginTop: 15,
-              fontWeight: 'bold',
-            }}
-          >
-            Subject:
-          </Text>
-          <Text
-            style={{
-              color: '#8890A6',
-              fontSize: 15,
-              lineHeight: 20,
-              marginVertical: 15,
-            }}
-          >
-            The Messages will come here. The Messages will come here. The
-            Messages will come here. The Messages will come here. The Messages
-            will come here. The Messages will come here. The Messages will come
-            here.
-          </Text>
-          <View style={{ alignSelf: 'flex-end', flexDirection: 'row' }}>
-            <Text
-              style={{
-                color: '#8890A6',
-                fontSize: 13,
-                fontWeight: 'bold',
-              }}
-            >
-              dd/mm/yyyy
-            </Text>
-            <Text
-              style={{
-                color: '#8890A6',
-                fontSize: 13,
-                fontWeight: 'bold',
-                marginHorizontal: 15,
-              }}
-            >
-              mm:hh
-            </Text>
-          </View>
-        </View>
+          );
+        })}
       </ScrollView>
       <Divider width={1} />
     </View>

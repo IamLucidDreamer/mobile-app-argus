@@ -4,10 +4,7 @@ import { patchWebProps } from 'react-native-elements/dist/helpers';
 
 const Buttons = (props) => {
   return (
-    <TouchableOpacity
-      onPress={() => props.navigation.navigate(props.route)}
-      style={styles.Btn}
-    >
+    <TouchableOpacity onPress={() => props.func()} style={styles.Btn}>
       <Text style={styles.txt}>{props.title}</Text>
     </TouchableOpacity>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   View,
   Text,
@@ -10,20 +10,23 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
-} from "react-native";
-import { Divider } from "react-native-elements";
-import BottomNav from "../Components/UniversalComponents/BottomNav";
-import TopComponent from "../Components/UniversalComponents/TopComponent";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import Buttons from "../Components/UniversalComponents/Buttons";
+} from 'react-native';
+import { Divider } from 'react-native-elements';
+import BottomNav from '../Components/UniversalComponents/BottomNav';
+import TopComponent from '../Components/UniversalComponents/TopComponent';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Buttons from '../Components/UniversalComponents/Buttons';
+import { useSelector } from 'react-redux';
 
 export default function DashBoard() {
+  const user = useSelector((state) => state.auth.user);
+
   return (
     <ScrollView>
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: 'center' }}>
         <Text style={{ fontSize: 18 }}>Welcome Back,</Text>
-        <Text style={{ fontSize: 29, fontWeight: "bold" }}>
-          Akashdeep Singh Jammu
+        <Text style={{ fontSize: 29, fontWeight: 'bold' }}>
+          {user?.name + ' ' + (user?.lastname ? user?.lastname : null)}
         </Text>
         <ScrollView
           horizontal
@@ -32,10 +35,10 @@ export default function DashBoard() {
         >
           {options.map((options, index) => (
             <View key={index} style={{ marginHorizontal: 17 }}>
-              <TouchableOpacity style={{ alignItems: "center" }}>
+              <TouchableOpacity style={{ alignItems: 'center' }}>
                 <View
                   style={{
-                    shadowColor: "#000",
+                    shadowColor: '#000',
                     shadowOffset: { width: 0, height: 1 },
                     shadowOpacity: 0.8,
                     shadowRadius: 2,
@@ -46,7 +49,7 @@ export default function DashBoard() {
                     style={{
                       width: 60,
                       height: 60,
-                      resizeMode: "contain",
+                      resizeMode: 'contain',
                     }}
                     source={options.img}
                   />
@@ -62,7 +65,7 @@ export default function DashBoard() {
           <Text
             style={{
               fontSize: 16,
-              fontWeight: "bold",
+              fontWeight: 'bold',
               marginBottom: 15,
             }}
           >
@@ -70,14 +73,14 @@ export default function DashBoard() {
           </Text>
           <View
             style={{
-              width: "85%",
-              flexDirection: "row",
-              backgroundColor: "#fff",
+              width: '85%',
+              flexDirection: 'row',
+              backgroundColor: '#fff',
               padding: 15,
-              alignSelf: "center",
+              alignSelf: 'center',
               marginBottom: 15,
               borderRadius: 20,
-              shadowColor: "#000",
+              shadowColor: '#000',
               shadowOffset: { width: 0, height: 1 },
               shadowOpacity: 0.8,
               shadowRadius: 4,
@@ -85,8 +88,8 @@ export default function DashBoard() {
             }}
           >
             <Image
-              style={{ width: 60, height: 60, resizeMode: "contain" }}
-              source={require("./../../../../assets/UniversalAssets/Logo256.png")}
+              style={{ width: 60, height: 60, resizeMode: 'contain' }}
+              source={require('./../../../../assets/UniversalAssets/Logo256.png')}
             />
             <Text style={{ margin: 10, fontSize: 15 }}>
               The todo list tasks will rest here. The todo list tasks will rest
@@ -95,14 +98,14 @@ export default function DashBoard() {
           </View>
           <View
             style={{
-              width: "85%",
-              flexDirection: "row",
-              backgroundColor: "#fff",
+              width: '85%',
+              flexDirection: 'row',
+              backgroundColor: '#fff',
               padding: 15,
-              alignSelf: "center",
+              alignSelf: 'center',
               marginBottom: 15,
               borderRadius: 20,
-              shadowColor: "#000",
+              shadowColor: '#000',
               shadowOffset: { width: 0, height: 1 },
               shadowOpacity: 0.8,
               shadowRadius: 4,
@@ -110,8 +113,8 @@ export default function DashBoard() {
             }}
           >
             <Image
-              style={{ width: 60, height: 60, resizeMode: "contain" }}
-              source={require("./../../../../assets/UniversalAssets/Logo256.png")}
+              style={{ width: 60, height: 60, resizeMode: 'contain' }}
+              source={require('./../../../../assets/UniversalAssets/Logo256.png')}
             />
             <Text style={{ margin: 10, fontSize: 15 }}>
               The todo list tasks will rest here. The todo list tasks will rest
@@ -120,14 +123,14 @@ export default function DashBoard() {
           </View>
           <View
             style={{
-              width: "85%",
-              flexDirection: "row",
-              backgroundColor: "#fff",
+              width: '85%',
+              flexDirection: 'row',
+              backgroundColor: '#fff',
               padding: 15,
-              alignSelf: "center",
+              alignSelf: 'center',
               marginBottom: 15,
               borderRadius: 20,
-              shadowColor: "#000",
+              shadowColor: '#000',
               shadowOffset: { width: 0, height: 1 },
               shadowOpacity: 0.8,
               shadowRadius: 4,
@@ -135,8 +138,8 @@ export default function DashBoard() {
             }}
           >
             <Image
-              style={{ width: 60, height: 60, resizeMode: "contain" }}
-              source={require("./../../../../assets/UniversalAssets/Logo256.png")}
+              style={{ width: 60, height: 60, resizeMode: 'contain' }}
+              source={require('./../../../../assets/UniversalAssets/Logo256.png')}
             />
             <Text style={{ margin: 10, fontSize: 15 }}>
               The todo list tasks will rest here. The todo list tasks will rest
@@ -152,27 +155,27 @@ export default function DashBoard() {
 
 const options = [
   {
-    title: "Hello World",
-    img: require("../../../../assets/UniversalAssets/Logo256.png"),
+    title: 'Hello World',
+    img: require('../../../../assets/UniversalAssets/Logo256.png'),
   },
   {
-    title: "Hello World",
-    img: require("../../../../assets/UniversalAssets/Logo256.png"),
+    title: 'Hello World',
+    img: require('../../../../assets/UniversalAssets/Logo256.png'),
   },
   {
-    title: "Hello World",
-    img: require("../../../../assets/UniversalAssets/Logo256.png"),
+    title: 'Hello World',
+    img: require('../../../../assets/UniversalAssets/Logo256.png'),
   },
   {
-    title: "Hello World",
-    img: require("../../../../assets/UniversalAssets/Logo256.png"),
+    title: 'Hello World',
+    img: require('../../../../assets/UniversalAssets/Logo256.png'),
   },
   {
-    title: "Hello World",
-    img: require("../../../../assets/UniversalAssets/Logo256.png"),
+    title: 'Hello World',
+    img: require('../../../../assets/UniversalAssets/Logo256.png'),
   },
   {
-    title: "Hello World",
-    img: require("../../../../assets/UniversalAssets/Logo256.png"),
+    title: 'Hello World',
+    img: require('../../../../assets/UniversalAssets/Logo256.png'),
   },
 ];
