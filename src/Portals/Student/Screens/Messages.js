@@ -9,6 +9,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import { Divider } from 'react-native-elements/dist/divider/Divider';
 import { useSelector } from 'react-redux';
@@ -19,69 +20,114 @@ import TopComponent from '../Components/UniversalComponents/TopComponent';
 export default function Messages() {
   const auth = useSelector((state) => state.auth);
   const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axiosInstance
-      .get(`/message/get/${auth.id}?page=1&&limit=100000`, {
-        headers: {
-          Authorization: `Bearer ${auth.token}`,
-        },
-      })
-      .then((res) =>
-        setMessages(
-          res.data.data.messages.sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
-          ),
-        ),
-      );
+    if (messages.length === 0) {
+      setLoading(true);
+      axiosInstance
+        .get(`/message/get/${auth.id}?page=1&&limit=100000`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        })
+        .then((res) => {
+          setLoading(false);
+          setMessages(
+            res.data.data.messages.sort(
+              (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+            ),
+          );
+        })
+        .catch((err) => {
+          setLoading(false);
+        });
+    }
   }, []);
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        {messages?.map((m, index) => {
-          return (
-            <View
-              key={index}
-              style={{
-                width: '95%',
-                backgroundColor: '#fff',
-                padding: 15,
-                alignSelf: 'center',
-                marginVertical: 20,
-                borderRadius: 20,
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 1 },
-                shadowOpacity: 0.8,
-                shadowRadius: 4,
-                elevation: 8,
-              }}
-            >
-              <View style={{ flexDirection: 'row', marginBottom: 15 }}>
-                <Image
-                  style={{
-                    width: 60,
-                    height: 60,
-                    resizeMode: 'contain',
-                    borderRadius: 10,
-                  }}
-                  source={require('../../../../assets/UniversalAssets/TestingImage.png')}
-                />
-                <View
-                  style={{
-                    marginHorizontal: 15,
-                    justifyContent: 'space-evenly',
-                  }}
-                >
-                  <Text
+      {loading ? (
+        <ActivityIndicator size="large" color="#BA0913" />
+      ) : (
+        <ScrollView>
+          {messages?.map((m) => {
+            return (
+              <View
+                key={m?._id}
+                style={{
+                  width: '95%',
+                  backgroundColor: '#fff',
+                  padding: 15,
+                  alignSelf: 'center',
+                  marginVertical: 20,
+                  borderRadius: 20,
+                  shadowColor: '#000',
+                  shadowOffset: { width: 0, height: 1 },
+                  shadowOpacity: 0.8,
+                  shadowRadius: 4,
+                  elevation: 8,
+                }}
+              >
+                <View style={{ flexDirection: 'row', marginBottom: 15 }}>
+                  <Image
                     style={{
-                      color: '#8890A6',
-                      fontSize: 15,
-                      fontWeight: 'bold',
+                      width: 60,
+                      height: 60,
+                      resizeMode: 'contain',
+                      borderRadius: 10,
+                    }}
+                    source={require('../../../../assets/UniversalAssets/TestingImage.png')}
+                  />
+                  <View
+                    style={{
+                      marginHorizontal: 15,
+                      justifyContent: 'space-evenly',
                     }}
                   >
-                    {m?.userName}
-                  </Text>
+                    <Text
+                      style={{
+                        color: '#8890A6',
+                        fontSize: 15,
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {m?.userName}
+                    </Text>
+                    <Text
+                      style={{
+                        color: '#8890A6',
+                        fontSize: 13,
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      Position in the Company
+                    </Text>
+                  </View>
+                </View>
+                <Divider width={1} />
+                <Text
+                  style={{
+                    color: '#8890A6',
+                    fontSize: 15,
+                    lineHeight: 20,
+                    marginTop: 15,
+                    fontWeight: 'bold',
+                  }}
+                >
+                  {m?.subject}:
+                </Text>
+                <Text
+                  style={{
+                    color: '#8890A6',
+                    fontSize: 15,
+                    lineHeight: 20,
+                    marginVertical: 15,
+                  }}
+                >
+                  {m?.message}
+                </Text>
+                <View style={{ alignSelf: 'flex-end', flexDirection: 'row' }}>
                   <Text
                     style={{
                       color: '#8890A6',
@@ -89,61 +135,27 @@ export default function Messages() {
                       fontWeight: 'bold',
                     }}
                   >
-                    Position in the Company
+                    {new Date(m.createdAt).toLocaleDateString('en-GB')}
+                  </Text>
+                  <Text
+                    style={{
+                      color: '#8890A6',
+                      fontSize: 13,
+                      fontWeight: 'bold',
+                      marginHorizontal: 15,
+                    }}
+                  >
+                    {new Date(m.createdAt).toLocaleTimeString(`en-US`, {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
                   </Text>
                 </View>
               </View>
-              <Divider width={1} />
-              <Text
-                style={{
-                  color: '#8890A6',
-                  fontSize: 15,
-                  lineHeight: 20,
-                  marginTop: 15,
-                  fontWeight: 'bold',
-                }}
-              >
-                {m?.subject}:
-              </Text>
-              <Text
-                style={{
-                  color: '#8890A6',
-                  fontSize: 15,
-                  lineHeight: 20,
-                  marginVertical: 15,
-                }}
-              >
-                {m?.message}
-              </Text>
-              <View style={{ alignSelf: 'flex-end', flexDirection: 'row' }}>
-                <Text
-                  style={{
-                    color: '#8890A6',
-                    fontSize: 13,
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {new Date(m.createdAt).toLocaleDateString('en-GB')}
-                </Text>
-                <Text
-                  style={{
-                    color: '#8890A6',
-                    fontSize: 13,
-                    fontWeight: 'bold',
-                    marginHorizontal: 15,
-                  }}
-                >
-                  {new Date(m.createdAt).toLocaleTimeString(`en-US`, {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
-                </Text>
-              </View>
-            </View>
-          );
-        })}
-      </ScrollView>
-      <Divider width={1} />
+            );
+          })}
+        </ScrollView>
+      )}
     </View>
   );
 }

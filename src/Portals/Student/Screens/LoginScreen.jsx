@@ -29,6 +29,25 @@ const LoginScreen = ({ navigation }) => {
     password: '',
   });
 
+  // signIn = async () => {
+  //   try {
+  //     await GoogleSignin.hasPlayServices();
+  //     const userInfo = await GoogleSignin.signIn();
+  //     console.log(userInfo);
+  //   } catch (error) {
+  //     // if (error.code === statusCodes?.SIGN_IN_CANCELLED) {
+  //     //   // user cancelled the login flow
+  //     // } else if (error.code === statusCodes?.IN_PROGRESS) {
+  //     //   // operation (e.g. sign in) is in progress already
+  //     // } else if (error.code === statusCodes?.PLAY_SERVICES_NOT_AVAILABLE) {
+  //     //   // play services not available or outdated
+  //     // } else {
+  //     //   // some other error happened
+  //     // }
+  //     console.log(error);
+  //   }
+  // };
+
   const dispatch = useDispatch();
 
   const login = () => {
@@ -43,9 +62,7 @@ const LoginScreen = ({ navigation }) => {
         dispatch(isAuthenticated('true'));
         navigation.navigate('StudentHome');
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   return (
@@ -55,7 +72,6 @@ const LoginScreen = ({ navigation }) => {
           style={{ width: 150, height: 150, marginTop: 20, marginBottom: 30 }}
           source={require('../../../../assets/UniversalAssets/Logo512.png')}
         />
-
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
@@ -65,7 +81,6 @@ const LoginScreen = ({ navigation }) => {
             onChangeText={(email) => setForm({ ...form, email })}
           />
         </View>
-
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
@@ -82,7 +97,12 @@ const LoginScreen = ({ navigation }) => {
         </View>
         <Buttons func={login} title={'Log In'} />
         <Text style={styles.forgottext}>OR</Text>
-        <Buttons title={'Google'} />
+        {/* <GoogleSigninButton
+          style={{ width: 192, height: 48 }}
+          size={GoogleSigninButton.Size.Wide}
+          color={GoogleSigninButton.Color.Dark}
+          onPress={_signIn}
+        /> */}
         <Buttons title={'Facebook'} />
         <View style={{ flexDirection: 'row', marginVertical: 5 }}>
           <Text style={styles.forgottext}>New user?</Text>
