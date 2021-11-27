@@ -18,12 +18,16 @@ import { Picker } from '@react-native-picker/picker';
 import { useSelector } from 'react-redux';
 import { docsName } from '../../../utils/DocsData';
 import * as DocumentPicker from 'expo-document-picker';
+import Buttons from '../Components/UniversalComponents/Buttons';
+import * as SecureStore from 'expo-secure-store';
+import axiosInstance from '../../../utils/axiosInstance';
 
 export default function UploadDoc({ navigation }) {
   const [selectedDocName, setSelectedDocName] = useState('');
   const [uploadDocOpt, setUploadDocOpt] = useState([]);
   const docs = useSelector((state) => state.student.docs);
   const [selectedDoc, setSelectedDoc] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     let docOpt = [];
@@ -37,7 +41,55 @@ export default function UploadDoc({ navigation }) {
     setUploadDocOpt(docOpt);
   }, []);
 
-  const uploadDoc = () => {};
+  const uploadDoc = () => {
+    setLoading(true);
+    SecureStore.getItemAsync('jwt').then((token) => {
+      const formdata = new FormData();
+      formdata.append('name', selectedDocName);
+      formdata.append('image', selectedDoc);
+      axiosInstance
+        .post(
+          `/docs2/create`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        )
+        .then((res) => {
+          console.log(res);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    });
+  };
+
+  const reploadDoc = () => {
+    setLoading(true);
+    SecureStore.getItemAsync('jwt').then((token) => {
+      const formdata = new FormData();
+      formdata.append('name', selectedDocName);
+      formdata.append('image', selectedDoc);
+      axiosInstance
+        .put(`/docs2/reUpload`, formdata, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -90,6 +142,11 @@ export default function UploadDoc({ navigation }) {
                 setSelectedDocName(itemValue)
               }
             >
+              <Picker.Item
+                label="Select document type"
+                value=""
+                enabled={false}
+              />
               {uploadDocOpt.map((d, index) => {
                 return <Picker.Item key={index} label={d} value={d} />;
               })}
@@ -140,7 +197,7 @@ export default function UploadDoc({ navigation }) {
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-around' }}
             >
-              <TouchableOpacity>
+              {/* <TouchableOpacity>
                 <FontAwesome5
                   name={'camera'}
                   size={35}
@@ -153,7 +210,7 @@ export default function UploadDoc({ navigation }) {
                     borderRadius: 50,
                   }}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               <TouchableOpacity
                 onPress={async () => {
                   const doc = await DocumentPicker.getDocumentAsync();
@@ -174,6 +231,29 @@ export default function UploadDoc({ navigation }) {
                 />
               </TouchableOpacity>
             </View>
+            {selectedDoc ? (
+              <View
+                style={{
+                  width: '100%',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  marginTop: 20,
+                }}
+              >
+                <Buttons
+                  func={
+                    docs.some((d) => d.name === selectedDocName)
+                      ? reploadDoc
+                      : uploadDoc
+                  }
+                  title={
+                    docs.some((d) => d.name === selectedDocName)
+                      ? 'ReUpload'
+                      : 'Upload'
+                  }
+                />
+              </View>
+            ) : null}
           </View>
         </ImageBackground>
       </ScrollView>

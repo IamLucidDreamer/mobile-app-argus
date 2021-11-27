@@ -18,6 +18,7 @@ import TopComponent from '../Components/UniversalComponents/TopComponent';
 
 export default function UploadedDocuments() {
   const docs = useSelector((state) => state.student.docs);
+  console.log(docs);
 
   return (
     <View style={styles.container}>
@@ -38,11 +39,10 @@ export default function UploadedDocuments() {
         {docsName.map((docName, index) => {
           let doc = docs.filter((d) => d.name === docName)[0];
           return (
-            <>
+            <View key={index}>
               {doc ? (
                 doc.isApproved === null ? (
                   <View
-                    key={index}
                     style={{
                       width: '95%',
                       backgroundColor: '#fff',
@@ -179,7 +179,7 @@ export default function UploadedDocuments() {
                   </View>
                 )
               ) : null}
-            </>
+            </View>
           );
         })}
       </ScrollView>

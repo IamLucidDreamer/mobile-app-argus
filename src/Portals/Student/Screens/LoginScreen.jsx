@@ -54,6 +54,7 @@ const LoginScreen = ({ navigation }) => {
     axiosInstance
       .post('/signin', form)
       .then(async (res) => {
+        console.log(res);
         SecureStore.setItemAsync('jwt', res.data.token);
         SecureStore.setItemAsync('id', res.data.user._id);
         dispatch(setUser(res.data.user));
@@ -62,7 +63,9 @@ const LoginScreen = ({ navigation }) => {
         dispatch(isAuthenticated('true'));
         navigation.navigate('StudentHome');
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
