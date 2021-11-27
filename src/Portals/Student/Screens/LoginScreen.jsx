@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,23 +10,23 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-} from 'react-native';
-import axiosInstance from '../../../utils/axiosInstance';
-import Buttons from '../Components/UniversalComponents/Buttons';
-import * as SecureStore from 'expo-secure-store';
-import { useDispatch } from 'react-redux';
+} from "react-native";
+import axiosInstance from "../../../utils/axiosInstance";
+import Buttons from "../Components/UniversalComponents/Buttons";
+import * as SecureStore from "expo-secure-store";
+import { useDispatch } from "react-redux";
 import {
   getToken,
   isAuthenticated,
   setID,
   setToken,
   setUser,
-} from '../../../redux/actions/authActions';
+} from "../../../redux/actions/authActions";
 
 const LoginScreen = ({ navigation }) => {
   const [form, setForm] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   // signIn = async () => {
@@ -52,15 +52,15 @@ const LoginScreen = ({ navigation }) => {
 
   const login = () => {
     axiosInstance
-      .post('/signin', form)
+      .post("/signin", form)
       .then(async (res) => {
-        SecureStore.setItemAsync('jwt', res.data.token);
-        SecureStore.setItemAsync('id', res.data.user._id);
+        SecureStore.setItemAsync("jwt", res.data.token);
+        SecureStore.setItemAsync("id", res.data.user._id);
         dispatch(setUser(res.data.user));
         dispatch(setToken(res.data.token));
         dispatch(setID(res.data.user._id));
-        dispatch(isAuthenticated('true'));
-        navigation.navigate('StudentHome');
+        dispatch(isAuthenticated("true"));
+        navigation.navigate("StudentHome");
       })
       .catch((err) => {});
   };
@@ -70,7 +70,7 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.container}>
         <Image
           style={{ width: 150, height: 150, marginTop: 20, marginBottom: 30 }}
-          source={require('../../../../assets/UniversalAssets/Logo512.png')}
+          source={require("../../../../assets/UniversalAssets/Logo512.png")}
         />
         <View style={styles.inputView}>
           <TextInput
@@ -91,11 +91,11 @@ const LoginScreen = ({ navigation }) => {
           />
         </View>
         <View style={styles.forgotview}>
-          <TouchableOpacity onPress={() => navigation.navigate('ForgotPass')}>
+          <TouchableOpacity onPress={() => navigation.navigate("ForgotPass")}>
             <Text style={styles.forgottext}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
-        <Buttons func={login} title={'Log In'} />
+        <Buttons func={login} title={"Log In"} />
         <Text style={styles.forgottext}>OR</Text>
         {/* <GoogleSigninButton
           style={{ width: 192, height: 48 }}
@@ -103,14 +103,15 @@ const LoginScreen = ({ navigation }) => {
           color={GoogleSigninButton.Color.Dark}
           onPress={_signIn}
         /> */}
-        <Buttons title={'Facebook'} />
-        <View style={{ flexDirection: 'row', marginVertical: 5 }}>
+        <Buttons title={"Google"} />
+        <Buttons title={"Facebook"} />
+        <View style={{ flexDirection: "row", marginVertical: 5 }}>
           <Text style={styles.forgottext}>New user?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
+          <TouchableOpacity onPress={() => navigation.navigate("Signin")}>
             <Text
               style={{
-                color: '#BA0913',
-                fontWeight: 'bold',
+                color: "#BA0913",
+                fontWeight: "bold",
                 marginHorizontal: 4,
               }}
             >
@@ -129,31 +130,31 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#F4F5F9',
+    alignItems: "center",
+    backgroundColor: "#F4F5F9",
   },
   inputView: {
     borderBottomWidth: 1,
-    borderColor: '#8890A6',
-    width: '90%',
+    borderColor: "#8890A6",
+    width: "90%",
     height: 55,
     marginBottom: 30,
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
   },
   TextInput: {
-    width: '100%',
+    width: "100%",
     flex: 1,
     padding: 10,
     marginLeft: 10,
-    color: '#8890A6',
+    color: "#8890A6",
     fontSize: 20,
   },
   forgotview: {
-    width: '90%',
-    alignItems: 'flex-end',
+    width: "90%",
+    alignItems: "flex-end",
   },
   forgottext: {
-    color: '#68696D',
-    textAlign: 'center',
+    color: "#68696D",
+    textAlign: "center",
   },
 });
