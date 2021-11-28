@@ -22,7 +22,7 @@ export default function LandingScreen({ navigation }) {
 
   useEffect(() => {
     if (auth.isAuth === 'true') {
-      navigation.navigate('StudentHome');
+      navigation.navigate('Student');
     }
   }, [auth?.isAuth]);
 

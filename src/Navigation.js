@@ -10,12 +10,37 @@ import ForgotPasswordEmail from './Portals/Student/Screens/ForgotPasswordEmail';
 import LoginTopBar from './Portals/Student/Components/UniversalComponents/LoginTopBar';
 import { StyleSheet, Text, View, Platform } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { getToken, getUser } from './redux/actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
-import Camera from './Portals/Student/Screens/Camera';
-import ReactNativeCamera from './Portals/Student/Screens/Camera';
+import DashBoard from './Portals/Student/Screens/DashBoard';
+import UploadedDocuments from './Portals/Student/Screens/UploadedDocuments';
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+const StudentRoute = () => {
+  return (
+    <Drawer.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        drawerPosition: 'right',
+        drawerActiveTintColor: '#BA0913',
+      }}
+    >
+      <Drawer.Screen
+        name="Home"
+        component={StudentHome}
+        options={{ header: TopComponent }}
+      />
+      <Drawer.Screen
+        name="Upload"
+        component={UploadedDocuments}
+        options={{ header: TopComponent }}
+      />
+    </Drawer.Navigator>
+  );
+};
 
 const Navigation = () => {
   const dispatch = useDispatch();
@@ -50,13 +75,8 @@ const Navigation = () => {
           options={{ header: LoginTopBar }}
         />
         <Stack.Screen
-          name="StudentHome"
-          component={StudentHome}
-          options={{ header: TopComponent }}
-        />
-        <Stack.Screen
-          name="Camera"
-          component={ReactNativeCamera}
+          name="Student"
+          component={StudentRoute}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

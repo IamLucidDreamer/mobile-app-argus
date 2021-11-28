@@ -61,7 +61,7 @@ const LoginScreen = ({ navigation }) => {
         dispatch(setToken(res.data.token));
         dispatch(setID(res.data.user._id));
         dispatch(isAuthenticated('true'));
-        navigation.navigate('StudentHome');
+        navigation.navigate('Student');
       })
       .catch((err) => {
         console.log(err);
