@@ -29,6 +29,9 @@ export default function UploadDoc({ navigation }) {
   const [selectedDoc, setSelectedDoc] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  GLOBAL.XMLHttpRequest =
+    GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
+
   useEffect(() => {
     let docOpt = [];
     docsName.forEach((element) => {
@@ -44,19 +47,21 @@ export default function UploadDoc({ navigation }) {
   const uploadDoc = () => {
     setLoading(true);
     SecureStore.getItemAsync('jwt').then((token) => {
+      console.log({
+        name: selectedDoc.name,
+        uri: selectedDoc.uri,
+        type: selectedDoc.mimeType,
+      });
       const formdata = new FormData();
-      formdata.append('name', selectedDocName);
+      formdata.append('name', 'hi');
       formdata.append('image', selectedDoc);
       axiosInstance
-        .post(
-          `/docs2/create`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        .post(`/docs2/create`, formdata, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
           },
-        )
+        })
         .then((res) => {
           console.log(res);
           setLoading(false);
@@ -71,13 +76,19 @@ export default function UploadDoc({ navigation }) {
   const reploadDoc = () => {
     setLoading(true);
     SecureStore.getItemAsync('jwt').then((token) => {
+      console.log(token);
       const formdata = new FormData();
       formdata.append('name', selectedDocName);
-      formdata.append('image', selectedDoc);
+      formdata.append('image', {
+        name: selectedDoc.name,
+        type: selectedDoc.mimeType,
+        uri: selectedDoc.uri,
+      });
       axiosInstance
         .put(`/docs2/reUpload`, formdata, {
           headers: {
             Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/formdata',
           },
         })
         .then((res) => {
@@ -90,6 +101,8 @@ export default function UploadDoc({ navigation }) {
         });
     });
   };
+
+  console.log(selectedDoc);
 
   return (
     <View style={styles.container}>

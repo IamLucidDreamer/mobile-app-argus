@@ -15,13 +15,7 @@ export default function TopComponent({ navigation }) {
           alignItems: 'center',
         }}
       >
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <FontAwesome5
-            name={'arrow-left'}
-            size={25}
-            style={{ marginLeft: 10, marginRight: 25 }}
-          />
-        </TouchableOpacity>
+        <View style={{ width: 60, height: 60 }}></View>
         <Text
           style={{
             fontSize: 22,
@@ -32,16 +26,24 @@ export default function TopComponent({ navigation }) {
         >
           ARGUS<Text style={{ color: '#707070' }}>SECURITY</Text>
         </Text>
-        <TouchableOpacity>
-          <Image
+        <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+          <View
             style={{
               width: 60,
               height: 60,
-              resizeMode: 'contain',
-              borderRadius: 25,
+              borderRadius: 100,
+              overflow: 'hidden',
             }}
-            source={require('./../../../../../assets/UniversalAssets/TestingImage.png')}
-          />
+          >
+            <Image
+              style={{
+                width: '100%',
+                height: '100%',
+                resizeMode: 'contain',
+              }}
+              source={require('./../../../../../assets/UniversalAssets/TestingImage.png')}
+            />
+          </View>
         </TouchableOpacity>
       </View>
     </View>
