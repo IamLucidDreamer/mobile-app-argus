@@ -56,7 +56,6 @@ export default function StudentHome({ navigation }) {
             fontSize: 15,
           },
           tabBarPressColor: '#ba0913',
-          tab,
         }}
       >
         <HomeTab.Screen name="DashBoard" component={DashBoard} />

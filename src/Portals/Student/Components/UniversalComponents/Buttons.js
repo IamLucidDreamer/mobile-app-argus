@@ -1,11 +1,21 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import { patchWebProps } from 'react-native-elements/dist/helpers';
 
 const Buttons = (props) => {
   return (
     <TouchableOpacity onPress={() => props.func()} style={styles.Btn}>
-      <Text style={styles.txt}>{props.title}</Text>
+      {props?.loading ? (
+        <ActivityIndicator size="large" color="white" />
+      ) : (
+        <Text style={styles.txt}>{props.title}</Text>
+      )}
     </TouchableOpacity>
   );
 };

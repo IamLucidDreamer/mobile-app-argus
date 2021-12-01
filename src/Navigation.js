@@ -20,8 +20,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   createDrawerNavigator,
   DrawerItemList,
+  DrawerItem,
 } from '@react-navigation/drawer';
-import { getToken, getUser } from './redux/actions/authActions';
+import {
+  clearStore,
+  getToken,
+  getUser,
+  setID,
+  setToken,
+} from './redux/actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
 import DashBoard from './Portals/Student/Screens/DashBoard';
 import UploadedDocuments from './Portals/Student/Screens/UploadedDocuments';
@@ -30,6 +37,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Messages from './Portals/Student/Screens/Messages';
 import Notification from './Portals/Student/Screens/Notification';
 import UploadDoc from './Portals/Student/Screens/UploadDocument';
+import { Divider } from 'react-native-elements/dist/divider/Divider';
 
 const AuthStack = createNativeStackNavigator();
 const StudentStack = createBottomTabNavigator();
@@ -166,7 +174,9 @@ const StudentRoute = () => {
   );
 };
 
-const DrawerNav = () => {
+const DrawerNav = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   return (
     <Drawer.Navigator
       initialRouteName="Home"
@@ -191,6 +201,29 @@ const DrawerNav = () => {
             />
           </View>
           <DrawerItemList {...props} />
+          <View style={{ paddingLeft: 10 }}>
+            <Divider width={1} />
+          </View>
+          <DrawerItem
+            label="Logout"
+            icon={() => (
+              <FontAwesome5
+                name="sign-out-alt"
+                size={25}
+                style={{
+                  marginBottom: 3,
+                  alignItems: 'center',
+                  color: '#ba0913',
+                }}
+              />
+            )}
+            onPress={() => {
+              dispatch(clearStore());
+              dispatch(setToken(null));
+              dispatch(setID(null));
+              navigation.navigate('LandingScreen');
+            }}
+          />
         </View>
       )}
     >
@@ -213,11 +246,7 @@ const DrawerNav = () => {
           ),
         }}
       />
-      <Drawer.Screen
-        name="Profile"
-        component={UploadDocument}
-        options={{ header: TopComponent }}
-      />
+      {/* TODO: Add other routes */}
     </Drawer.Navigator>
   );
 };
