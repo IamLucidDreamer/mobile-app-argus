@@ -22,6 +22,7 @@ import {
   setToken,
   setUser,
 } from '../../../redux/actions/authActions';
+import { Alert } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
   const [form, setForm] = useState({
@@ -39,13 +40,19 @@ const LoginScreen = ({ navigation }) => {
       .post('/signin', form)
       .then(async (res) => {
         setLoading(false);
-        SecureStore.setItemAsync('jwt', res.data.token);
-        SecureStore.setItemAsync('id', res.data.user._id);
-        dispatch(setUser(res.data.user));
-        dispatch(setToken(res.data.token));
-        dispatch(setID(res.data.user._id));
-        dispatch(isAuthenticated('true'));
-        navigation.navigate('Student');
+        if (res?.data?.user?.blocked) {
+          Alert.alert('Alert', 'You have been blocked contact the admin!!!!', [
+            { text: 'OK' },
+          ]);
+        } else {
+          SecureStore.setItemAsync('jwt', res.data.token);
+          SecureStore.setItemAsync('id', res.data.user._id);
+          dispatch(setUser(res.data.user));
+          dispatch(setToken(res.data.token));
+          dispatch(setID(res.data.user._id));
+          dispatch(isAuthenticated('true'));
+          navigation.navigate('Student');
+        }
       })
       .catch((err) => {
         setLoading(false);

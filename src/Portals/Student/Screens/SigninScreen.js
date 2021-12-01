@@ -69,7 +69,6 @@ const SigninScreen = ({ navigation }) => {
         .post(`/signup`, values)
         .then(() => {
           setLoading(false);
-
           axiosInstance.post('/signin', values).then((res) => {
             SecureStore.setItemAsync('jwt', res.data.token);
             SecureStore.setItemAsync('id', res.data.user._id);
@@ -146,7 +145,7 @@ const SigninScreen = ({ navigation }) => {
             alignItems: 'center',
           }}
         >
-          <Buttons loading={loading} func={handleSubmit} title={'Sign Up'} />
+          <Buttons loading={loa} func={handleSubmit} title={'Sign Up'} />
         </View>
         <Text style={styles.forgottext}>OR</Text>
         <Buttons title={'Google'} />
