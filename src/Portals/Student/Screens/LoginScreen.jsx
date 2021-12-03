@@ -22,6 +22,7 @@ import {
   setToken,
   setUser,
 } from '../../../redux/actions/authActions';
+import { Alert } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
   const [form, setForm] = useState({
@@ -29,48 +30,38 @@ const LoginScreen = ({ navigation }) => {
     password: '',
   });
 
-  // signIn = async () => {
-  //   try {
-  //     await GoogleSignin.hasPlayServices();
-  //     const userInfo = await GoogleSignin.signIn();
-  //     console.log(userInfo);
-  //   } catch (error) {
-  //     // if (error.code === statusCodes?.SIGN_IN_CANCELLED) {
-  //     //   // user cancelled the login flow
-  //     // } else if (error.code === statusCodes?.IN_PROGRESS) {
-  //     //   // operation (e.g. sign in) is in progress already
-  //     // } else if (error.code === statusCodes?.PLAY_SERVICES_NOT_AVAILABLE) {
-  //     //   // play services not available or outdated
-  //     // } else {
-  //     //   // some other error happened
-  //     // }
-  //     console.log(error);
-  //   }
-  // };
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
   const login = () => {
+    setLoading(true);
     axiosInstance
       .post('/signin', form)
       .then(async (res) => {
-        console.log(res);
-        SecureStore.setItemAsync('jwt', res.data.token);
-        SecureStore.setItemAsync('id', res.data.user._id);
-        dispatch(setUser(res.data.user));
-        dispatch(setToken(res.data.token));
-        dispatch(setID(res.data.user._id));
-        dispatch(isAuthenticated('true'));
-        navigation.navigate('Student');
+        setLoading(false);
+        if (res?.data?.user?.blocked) {
+          Alert.alert('Alert', 'You have been blocked contact the admin!!!!', [
+            { text: 'OK' },
+          ]);
+        } else {
+          SecureStore.setItemAsync('jwt', res.data.token);
+          SecureStore.setItemAsync('id', res.data.user._id);
+          dispatch(setUser(res.data.user));
+          dispatch(setToken(res.data.token));
+          dispatch(setID(res.data.user._id));
+          dispatch(isAuthenticated('true'));
+          navigation.navigate('Student');
+        }
       })
       .catch((err) => {
-        console.log(err);
+        setLoading(false);
       });
   };
 
   return (
     <ScrollView>
-      <View style={styles.container}>
+      <View style={[styles.container, { position: 'relative' }]}>
         <Image
           style={{ width: 150, height: 150, marginTop: 20, marginBottom: 30 }}
           source={require('../../../../assets/UniversalAssets/Logo512.png')}
@@ -98,7 +89,7 @@ const LoginScreen = ({ navigation }) => {
             <Text style={styles.forgottext}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
-        <Buttons func={login} title={'Log In'} />
+        <Buttons func={login} loading={loading} title={'Log In'} />
         <Text style={styles.forgottext}>OR</Text>
         {/* <GoogleSigninButton
           style={{ width: 192, height: 48 }}
