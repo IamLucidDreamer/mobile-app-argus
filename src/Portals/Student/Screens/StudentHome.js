@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,24 +10,27 @@ import {
   ImageBackground,
   Dimensions,
   TouchableOpacity,
-} from 'react-native';
-import { Divider } from 'react-native-elements';
-import BottomNav from '../Components/UniversalComponents/BottomNav';
-import TopComponent from '../Components/UniversalComponents/TopComponent';
-import DashBoard from './DashBoard';
-import Enroll from './Enroll';
-import Messages from './Messages';
-import MyPurchases from './MyPurchases';
-import MyTranscripts from './MyTranscripts';
-import Notification from './Notification';
-import SigninScreen from './SigninScreen';
-import UploadDoc from './UploadDocument';
-import UploadedDocuments from './UploadedDocuments';
-import { useDispatch } from 'react-redux';
-import { getToken } from '../../../redux/actions/authActions';
-import { useSelector } from 'react-redux';
-import { getDocs } from '../../../redux/actions/studentActions';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+} from "react-native";
+import { Divider } from "react-native-elements";
+import BottomNav from "../Components/UniversalComponents/BottomNav";
+import TopComponent from "../Components/UniversalComponents/TopComponent";
+import DashBoard from "./DashBoard";
+import Enroll from "./Enroll";
+import Messages from "./Messages";
+import MyPurchases from "./MyPurchases";
+import MyTranscripts from "./MyTranscripts";
+import Notification from "./Notification";
+import SigninScreen from "./SigninScreen";
+import UploadDoc from "./UploadDocument";
+import UploadedDocuments from "./UploadedDocuments";
+import { useDispatch } from "react-redux";
+import { getToken } from "../../../redux/actions/authActions";
+import { useSelector } from "react-redux";
+import { getDocs } from "../../../redux/actions/studentActions";
+import {
+  createMaterialTopTabNavigator,
+  tabBarPressColor,
+} from "@react-navigation/material-top-tabs";
 
 const HomeTab = createMaterialTopTabNavigator();
 
@@ -40,23 +43,22 @@ export default function StudentHome({ navigation }) {
   const user = useSelector((state) => state.auth.user);
 
   return (
-    <View style={{ height: '100%' }}>
+    <View style={{ height: "100%" }}>
       <HomeTab.Navigator
         initialRouteName="DashBoard"
         screenOptions={{
           tabBarScrollEnabled: true,
           tabBarBounces: false,
-          tabBarActiveTintColor: '#ba0913',
-          tabBarInactiveTintColor: 'gray',
+          tabBarActiveTintColor: "#ba0913",
+          tabBarInactiveTintColor: "gray",
           tabBarIndicatorStyle: {
-            backgroundColor: '#ba0913',
+            backgroundColor: "#ba0913",
             height: 3,
           },
           tabBarLabelStyle: {
             fontSize: 15,
           },
-          tabBarPressColor: '#ba0913',
-          tab,
+          tabBarPressColor: "#ba0913",
         }}
       >
         <HomeTab.Screen name="DashBoard" component={DashBoard} />
