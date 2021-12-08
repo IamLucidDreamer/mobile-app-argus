@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,15 +10,16 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
-} from 'react-native';
-import { Divider } from 'react-native-elements';
-import BottomNav from '../Components/UniversalComponents/BottomNav';
-import TopComponent from '../Components/UniversalComponents/TopComponent';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Buttons from '../Components/UniversalComponents/Buttons';
-import { useSelector } from 'react-redux';
-import { docsName } from '../../../utils/DocsData';
-import axiosInstance from '../../../utils/axiosInstance';
+} from "react-native";
+import { Divider } from "react-native-elements";
+import BottomNav from "../Components/UniversalComponents/BottomNav";
+import TopComponent from "../Components/UniversalComponents/TopComponent";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import Feather from "react-native-vector-icons/Feather";
+import Buttons from "../Components/UniversalComponents/Buttons";
+import { useSelector } from "react-redux";
+import { docsName } from "../../../utils/DocsData";
+import axiosInstance from "../../../utils/axiosInstance";
 
 export default function DashBoard() {
   const user = useSelector((state) => state.auth.user);
@@ -55,7 +56,7 @@ export default function DashBoard() {
           arr.push(`${element} doc disapproved upload again.`);
         }
       } else {
-        if (element !== 'Additional Doc 1' && element !== 'Additional Doc 2')
+        if (element !== "Additional Doc 1" && element !== "Additional Doc 2")
           arr.push(`Upload ${element} doc.`);
       }
     });
@@ -67,10 +68,12 @@ export default function DashBoard() {
 
   return (
     <ScrollView>
-      <View style={{ alignItems: 'center' }}>
-        <Text style={{ fontSize: 18 }}>Welcome Back,</Text>
-        <Text style={{ fontSize: 29, fontWeight: 'bold' }}>
-          {user?.name + ' ' + (user?.lastname ? user?.lastname : null)}
+      <View style={{ alignItems: "center" }}>
+        <Text style={{ fontSize: 13, marginTop: 15, color: "#3d3c41" }}>
+          Welcome Back,
+        </Text>
+        <Text style={{ fontSize: 27, fontWeight: "bold", color: "#3d3c41" }}>
+          {user?.name + " " + (user?.lastname ? user?.lastname : null)}
         </Text>
         <ScrollView
           horizontal
@@ -78,40 +81,43 @@ export default function DashBoard() {
           style={{ marginVertical: 20 }}
         >
           {options.map((options, index) => (
-            <View key={index} style={{ marginHorizontal: 17 }}>
-              <TouchableOpacity style={{ alignItems: 'center' }}>
-                <View
-                  style={{
-                    shadowColor: '#000',
-                    shadowOffset: { width: 0, height: 1 },
-                    shadowOpacity: 0.8,
-                    shadowRadius: 2,
-                    elevation: 10,
-                  }}
-                >
-                  <Image
+            <View key={index} style={{ marginHorizontal: 15 }}>
+              <TouchableOpacity style={{ alignItems: "center" }}>
+                <View style={{}}>
+                  <Feather
+                    name={options.name}
+                    size={30}
                     style={{
-                      width: 60,
-                      height: 60,
-                      resizeMode: 'contain',
+                      marginBottom: 3,
+                      alignItems: "center",
+                      color: "#ba0913",
+                      padding: 18,
+                      backgroundColor: "#fff",
+                      borderRadius: 50,
+                      shadowColor: "#000",
+                      shadowOffset: { width: 0, height: 1 },
+                      shadowOpacity: 0.8,
+                      shadowRadius: 2,
+                      elevation: 7,
                     }}
-                    source={options.img}
                   />
                 </View>
-                <Text style={{ fontSize: 16, marginTop: 5 }}>
+                <Text style={{ fontSize: 14, marginTop: 5, color: "#3d3c41" }}>
                   {options.title}
                 </Text>
               </TouchableOpacity>
             </View>
           ))}
         </ScrollView>
-
-        <View>
+        <Divider width={10} color={"#000"} />
+        <ScrollView style={{ height: 350 }}>
           <Text
             style={{
               fontSize: 16,
-              fontWeight: 'bold',
+              fontWeight: "bold",
               marginBottom: 15,
+              color: "gray",
+              textAlign: "center",
             }}
           >
             To Do
@@ -121,30 +127,53 @@ export default function DashBoard() {
               <View
                 key={index}
                 style={{
-                  width: '100%',
-                  flexDirection: 'row',
-                  backgroundColor: '#fff',
+                  width: "97%",
+                  flexDirection: "row",
+                  backgroundColor: "#fff",
                   padding: 15,
-                  alignSelf: 'center',
+                  alignSelf: "center",
+                  alignContent: "center",
                   marginBottom: 15,
                   borderRadius: 20,
-                  shadowColor: '#000',
+                  shadowColor: "#000",
                   shadowOffset: { width: 0, height: 1 },
                   shadowOpacity: 0.8,
                   shadowRadius: 4,
                   elevation: 6,
                 }}
               >
-                <Image
-                  style={{ width: 60, height: 60, resizeMode: 'contain' }}
-                  source={require('./../../../../assets/UniversalAssets/Logo256.png')}
+                <Feather
+                  name={"check-circle"}
+                  size={30}
+                  style={{
+                    marginBottom: 3,
+                    alignItems: "center",
+                    color: "#ba0913",
+                    padding: 7,
+                    backgroundColor: "#fff",
+                    borderRadius: 30,
+                    shadowColor: "#000",
+                    shadowOffset: { width: 0, height: 1 },
+                    shadowOpacity: 0.8,
+                    shadowRadius: 2,
+                    elevation: 4,
+                  }}
                 />
-                <Text style={{ margin: 10, fontSize: 15 }}>{t}</Text>
+                <Text
+                  style={{
+                    margin: 10,
+                    paddingLeft: 2,
+                    fontSize: 15,
+                    color: "#68696d",
+                    fontFamily: "Poppins-Medium",
+                  }}
+                >
+                  {t}
+                </Text>
               </View>
             );
           })}
-        </View>
-        <Buttons title="Continue Studying" />
+        </ScrollView>
       </View>
     </ScrollView>
   );
@@ -152,27 +181,23 @@ export default function DashBoard() {
 
 const options = [
   {
-    title: 'Hello World',
-    img: require('../../../../assets/UniversalAssets/Logo256.png'),
+    title: "My Training",
+    name: "award",
   },
   {
-    title: 'Hello World',
-    img: require('../../../../assets/UniversalAssets/Logo256.png'),
+    title: "Upload Documents",
+    name: "arrow-up-circle",
   },
   {
-    title: 'Hello World',
-    img: require('../../../../assets/UniversalAssets/Logo256.png'),
+    title: "My Purchases",
+    name: "book-open",
   },
   {
-    title: 'Hello World',
-    img: require('../../../../assets/UniversalAssets/Logo256.png'),
+    title: "My Transcripts",
+    name: "check-circle",
   },
   {
-    title: 'Hello World',
-    img: require('../../../../assets/UniversalAssets/Logo256.png'),
-  },
-  {
-    title: 'Hello World',
-    img: require('../../../../assets/UniversalAssets/Logo256.png'),
+    title: "My Courses",
+    name: "edit-3",
   },
 ];
