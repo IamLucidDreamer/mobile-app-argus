@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
@@ -9,12 +9,12 @@ import {
   ImageBackground,
   TouchableOpacity,
   Image,
-} from 'react-native';
-import { Divider } from 'react-native-elements/dist/divider/Divider';
-import { useSelector } from 'react-redux';
-import { docsName } from '../../../utils/DocsData';
-import BottomNav from '../Components/UniversalComponents/BottomNav';
-import TopComponent from '../Components/UniversalComponents/TopComponent';
+} from "react-native";
+import { Divider } from "react-native-elements/dist/divider/Divider";
+import { useSelector } from "react-redux";
+import { docsName } from "../../../utils/DocsData";
+import BottomNav from "../Components/UniversalComponents/BottomNav";
+import TopComponent from "../Components/UniversalComponents/TopComponent";
 
 export default function UploadedDocuments() {
   const docs = useSelector((state) => state.student.docs);
@@ -25,10 +25,10 @@ export default function UploadedDocuments() {
       <ScrollView>
         <Text
           style={{
-            alignSelf: 'flex-start',
-            color: '#2A2B2F',
+            alignSelf: "flex-start",
+            color: "#2A2B2F",
             fontSize: 20,
-            fontWeight: 'bold',
+            fontWeight: "bold",
             marginHorizontal: 25,
             marginTop: 20,
             marginBottom: 10,
@@ -44,15 +44,15 @@ export default function UploadedDocuments() {
                 doc.isApproved === null ? (
                   <View
                     style={{
-                      width: '95%',
-                      backgroundColor: '#fff',
+                      width: "95%",
+                      backgroundColor: "#fff",
                       padding: 15,
-                      alignSelf: 'center',
-                      marginVertical: 10,
+                      alignSelf: "center",
+                      marginBottom: 20,
                       borderWidth: 2,
-                      borderColor: '#EBC700',
+                      borderColor: "#EBC700",
                       borderRadius: 20,
-                      shadowColor: '#000',
+                      shadowColor: "#000",
                       shadowOffset: { width: 0, height: 1 },
                       shadowOpacity: 0.8,
                       shadowRadius: 4,
@@ -61,22 +61,22 @@ export default function UploadedDocuments() {
                   >
                     <Text
                       style={{
-                        color: '#8890A6',
+                        color: "#8890A6",
                         fontSize: 17,
                         lineHeight: 20,
                         marginVertical: 15,
-                        fontWeight: 'bold',
+                        fontWeight: "bold",
                       }}
                     >
                       {doc.name}
                     </Text>
                     <Text
                       style={{
-                        color: '#EBC700',
+                        color: "#EBC700",
                         fontSize: 17,
                         lineHeight: 20,
                         marginBottom: 15,
-                        fontWeight: 'bold',
+                        fontWeight: "bold",
                       }}
                     >
                       Pending Review
@@ -86,15 +86,15 @@ export default function UploadedDocuments() {
                   <View
                     key={index}
                     style={{
-                      width: '95%',
-                      backgroundColor: '#fff',
+                      width: "95%",
+                      backgroundColor: "#fff",
                       padding: 15,
-                      alignSelf: 'center',
-                      marginVertical: 10,
+                      alignSelf: "center",
+                      marginBottom: 20,
                       borderWidth: 2,
-                      borderColor: '#15C277',
+                      borderColor: "#15C277",
                       borderRadius: 20,
-                      shadowColor: '#000',
+                      shadowColor: "#000",
                       shadowOffset: { width: 0, height: 1 },
                       shadowOpacity: 0.8,
                       shadowRadius: 4,
@@ -103,22 +103,22 @@ export default function UploadedDocuments() {
                   >
                     <Text
                       style={{
-                        color: '#8890A6',
+                        color: "#8890A6",
                         fontSize: 17,
                         lineHeight: 20,
                         marginVertical: 15,
-                        fontWeight: 'bold',
+                        fontWeight: "bold",
                       }}
                     >
                       {docName}
                     </Text>
                     <Text
                       style={{
-                        color: '#15C277',
+                        color: "#15C277",
                         fontSize: 17,
                         lineHeight: 20,
                         marginBottom: 15,
-                        fontWeight: 'bold',
+                        fontWeight: "bold",
                       }}
                     >
                       Approved
@@ -128,15 +128,15 @@ export default function UploadedDocuments() {
                   <View
                     key={index}
                     style={{
-                      width: '95%',
-                      backgroundColor: '#fff',
+                      width: "95%",
+                      backgroundColor: "#fff",
                       padding: 15,
-                      alignSelf: 'center',
-                      marginVertical: 10,
+                      alignSelf: "center",
+                      marginBottom: 20,
                       borderWidth: 2,
-                      borderColor: '#BA0913',
+                      borderColor: "#BA0913",
                       borderRadius: 20,
-                      shadowColor: '#000',
+                      shadowColor: "#000",
                       shadowOffset: { width: 0, height: 1 },
                       shadowOpacity: 0.8,
                       shadowRadius: 4,
@@ -145,11 +145,11 @@ export default function UploadedDocuments() {
                   >
                     <Text
                       style={{
-                        color: '#8890A6',
+                        color: "#8890A6",
                         fontSize: 17,
                         lineHeight: 20,
                         marginTop: 15,
-                        fontWeight: 'bold',
+                        fontWeight: "bold",
                       }}
                     >
                       {docName}
@@ -157,7 +157,7 @@ export default function UploadedDocuments() {
 
                     <Text
                       style={{
-                        color: '#8890A6',
+                        color: "#8890A6",
                         fontSize: 17,
                         lineHeight: 20,
                         marginVertical: 15,
@@ -167,11 +167,11 @@ export default function UploadedDocuments() {
                     </Text>
                     <Text
                       style={{
-                        color: '#BA0913',
+                        color: "#BA0913",
                         fontSize: 17,
                         lineHeight: 20,
                         marginBottom: 15,
-                        fontWeight: 'bold',
+                        fontWeight: "bold",
                       }}
                     >
                       Rejected
@@ -191,6 +191,6 @@ export default function UploadedDocuments() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F4F5F9',
+    backgroundColor: "#F4F5F9",
   },
 });

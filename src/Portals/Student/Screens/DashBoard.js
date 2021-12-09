@@ -110,18 +110,19 @@ export default function DashBoard() {
           ))}
         </ScrollView>
         <Divider width={10} color={"#000"} />
+
+        <Text
+          style={{
+            fontSize: 16,
+            fontWeight: "bold",
+            marginBottom: 15,
+            color: "gray",
+            textAlign: "center",
+          }}
+        >
+          To Do
+        </Text>
         <ScrollView style={{ height: 350 }}>
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: "bold",
-              marginBottom: 15,
-              color: "gray",
-              textAlign: "center",
-            }}
-          >
-            To Do
-          </Text>
           {tasks.map((t, index) => {
             return (
               <View
