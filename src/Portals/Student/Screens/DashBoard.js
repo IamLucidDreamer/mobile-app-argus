@@ -63,8 +63,6 @@ export default function DashBoard() {
     setTasks(arr);
   }, [docs, user]);
 
-  console.log(tasks);
-
   return (
     <ScrollView>
       <View style={{ alignItems: 'center' }}>

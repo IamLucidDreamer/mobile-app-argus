@@ -18,7 +18,6 @@ import TopComponent from '../Components/UniversalComponents/TopComponent';
 
 export default function UploadedDocuments() {
   const docs = useSelector((state) => state.student.docs);
-  console.log(docs);
 
   return (
     <View style={styles.container}>

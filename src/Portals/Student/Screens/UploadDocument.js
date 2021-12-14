@@ -47,11 +47,6 @@ export default function UploadDoc({ navigation }) {
   const uploadDoc = () => {
     setLoading(true);
     SecureStore.getItemAsync('jwt').then((token) => {
-      console.log({
-        name: selectedDoc.name,
-        uri: selectedDoc.uri,
-        type: selectedDoc.mimeType,
-      });
       const formdata = new FormData();
       formdata.append('name', 'hi');
       formdata.append('image', selectedDoc);
@@ -63,11 +58,9 @@ export default function UploadDoc({ navigation }) {
           },
         })
         .then((res) => {
-          console.log(res);
           setLoading(false);
         })
         .catch((err) => {
-          console.log(err);
           setLoading(false);
         });
     });
@@ -76,7 +69,6 @@ export default function UploadDoc({ navigation }) {
   const reploadDoc = () => {
     setLoading(true);
     SecureStore.getItemAsync('jwt').then((token) => {
-      console.log(token);
       const formdata = new FormData();
       formdata.append('name', selectedDocName);
       formdata.append('image', {
@@ -92,17 +84,13 @@ export default function UploadDoc({ navigation }) {
           },
         })
         .then((res) => {
-          console.log(res);
           setLoading(false);
         })
         .catch((err) => {
-          console.log(err);
           setLoading(false);
         });
     });
   };
-
-  console.log(selectedDoc);
 
   return (
     <View style={styles.container}>

@@ -26,7 +26,11 @@ import UploadedDocuments from './UploadedDocuments';
 import { useDispatch } from 'react-redux';
 import { getToken } from '../../../redux/actions/authActions';
 import { useSelector } from 'react-redux';
-import { getDocs } from '../../../redux/actions/studentActions';
+import {
+  getAllCourses,
+  getDocs,
+  getProgress,
+} from '../../../redux/actions/studentActions';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const HomeTab = createMaterialTopTabNavigator();
@@ -35,6 +39,8 @@ export default function StudentHome({ navigation }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getDocs());
+    dispatch(getProgress());
+    dispatch(getAllCourses());
   }, []);
 
   const user = useSelector((state) => state.auth.user);
