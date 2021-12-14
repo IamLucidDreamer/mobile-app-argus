@@ -52,16 +52,20 @@ export default function StudentHome({ navigation }) {
         screenOptions={{
           tabBarScrollEnabled: true,
           tabBarBounces: false,
+          tabBarStyle: {
+            backgroundColor: '#F4F5F9',
+          },
           tabBarActiveTintColor: '#ba0913',
           tabBarInactiveTintColor: 'gray',
           tabBarIndicatorStyle: {
             backgroundColor: '#ba0913',
-            height: 3,
+            height: 4,
           },
           tabBarLabelStyle: {
-            fontSize: 15,
+            fontSize: 13,
+            fontWeight: 'bold',
           },
-          tabBarPressColor: '#ba0913',
+          tabBarPressColor: '#f4f5f9',
         }}
       >
         <HomeTab.Screen name="DashBoard" component={DashBoard} />

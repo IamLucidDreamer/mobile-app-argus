@@ -4,7 +4,7 @@
     "slug": "argus",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/UniversalAssets/Logo256.png",
+    "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/UniversalAssets/Logo1024.png",
       "resizeMode": "contain",
@@ -17,7 +17,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mattscepter.mobileapparguslatest"
     },
     "android": {
       "adaptiveIcon": {

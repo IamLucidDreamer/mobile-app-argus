@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import LoginScreen from './Portals/Student/Screens/LoginScreen';
-import SigninScreen from './Portals/Student/Screens/SigninScreen';
-import StudentHome from './Portals/Student/Screens/StudentHome';
-import UploadDocument from './Portals/Student/Screens/UploadDocument';
-import { NavigationContainer } from '@react-navigation/native';
-import TopComponent from './Portals/Student/Components/UniversalComponents/TopComponent';
-import LandingScreen from './LandingScreen';
-import ForgotPasswordEmail from './Portals/Student/Screens/ForgotPasswordEmail';
-import LoginTopBar from './Portals/Student/Components/UniversalComponents/LoginTopBar';
+import React, { useEffect } from "react";
+import LoginScreen from "./Portals/Student/Screens/LoginScreen";
+import SigninScreen from "./Portals/Student/Screens/SigninScreen";
+import StudentHome from "./Portals/Student/Screens/StudentHome";
+import UploadDocument from "./Portals/Student/Screens/UploadDocument";
+import { NavigationContainer } from "@react-navigation/native";
+import TopComponent from "./Portals/Student/Components/UniversalComponents/TopComponent";
+import LandingScreen from "./LandingScreen";
+import ForgotPasswordEmail from "./Portals/Student/Screens/ForgotPasswordEmail";
+import LoginTopBar from "./Portals/Student/Components/UniversalComponents/LoginTopBar";
 import {
   StyleSheet,
   Text,
@@ -15,47 +15,47 @@ import {
   Platform,
   TouchableOpacity,
   Image,
-} from 'react-native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+} from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   createDrawerNavigator,
   DrawerItemList,
   DrawerItem,
-} from '@react-navigation/drawer';
+} from "@react-navigation/drawer";
 import {
   clearStore,
   getToken,
   getUser,
   setID,
   setToken,
-} from './redux/actions/authActions';
-import { useDispatch, useSelector } from 'react-redux';
-import DashBoard from './Portals/Student/Screens/DashBoard';
-import UploadedDocuments from './Portals/Student/Screens/UploadedDocuments';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Messages from './Portals/Student/Screens/Messages';
-import Notification from './Portals/Student/Screens/Notification';
-import UploadDoc from './Portals/Student/Screens/UploadDocument';
-import { Divider } from 'react-native-elements/dist/divider/Divider';
+} from "./redux/actions/authActions";
+import { useDispatch, useSelector } from "react-redux";
+import DashBoard from "./Portals/Student/Screens/DashBoard";
+import UploadedDocuments from "./Portals/Student/Screens/UploadedDocuments";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import Messages from "./Portals/Student/Screens/Messages";
+import Notification from "./Portals/Student/Screens/Notification";
+import UploadDoc from "./Portals/Student/Screens/UploadDocument";
+import { Divider } from "react-native-elements/dist/divider/Divider";
 
 const AuthStack = createNativeStackNavigator();
 const StudentStack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
 const Icon = (props) => (
-  <View style={{ alignItems: 'center' }}>
+  <View style={{ alignItems: "center" }}>
     <FontAwesome5
       name={props.icon}
       size={25}
       style={{
         marginBottom: 3,
-        alignItems: 'center',
-        color: props.focused ? '#ba0913' : '#8890A6',
+        alignItems: "center",
+        color: props.focused ? "#ba0913" : "#8890A6",
       }}
     />
     <Text
-      style={{ color: props.focused ? '#ba0913' : '#8890A6', fontSize: 13 }}
+      style={{ color: props.focused ? "#ba0913" : "#8890A6", fontSize: 13 }}
     >
       {props.text}
     </Text>
@@ -67,17 +67,17 @@ const StudentRoute = () => {
     <StudentStack.Navigator
       initialRouteName="HomePage"
       screenOptions={{
-        drawerPosition: 'right',
-        drawerActiveTintColor: '#BA0913',
+        drawerPosition: "right",
+        drawerActiveTintColor: "#BA0913",
         headerShown: false,
         tabBarStyle: {
           height: 70,
-          backgroundColor: '#',
-          flexDirection: 'row',
+          backgroundColor: "#",
+          flexDirection: "row",
           padding: 10,
           paddingHorizontal: 10,
-          justifyContent: 'space-between',
-          shadowColor: '#000',
+          justifyContent: "space-between",
+          shadowColor: "#000",
           shadowOffset: { width: 0, height: 1 },
           shadowOpacity: 0.8,
           shadowRadius: 2,
@@ -114,16 +114,16 @@ const StudentRoute = () => {
           tabBarShowLabel: false,
           tabBarIcon: ({ focused }) => (
             <View
-              style={{ position: 'relative' }}
+              style={{ position: "relative" }}
               style={{
-                position: 'absolute',
+                position: "absolute",
                 height: 70,
                 width: 70,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: focused ? '#ba0913' : '#F4F5F9',
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: focused ? "#ba0913" : "#F4F5F9",
                 borderRadius: 100,
-                shadowColor: '#000',
+                shadowColor: "#000",
                 shadowOffset: { width: 0, height: 1 },
                 shadowOpacity: 0.8,
                 shadowRadius: 2,
@@ -132,12 +132,12 @@ const StudentRoute = () => {
               }}
             >
               <FontAwesome5
-                name={'home'}
+                name={"home"}
                 size={25}
                 style={{
                   marginBottom: 3,
-                  alignItems: 'center',
-                  color: focused ? '#F4F5F9' : '#ba0913',
+                  alignItems: "center",
+                  color: focused ? "#F4F5F9" : "#ba0913",
                 }}
               />
             </View>
@@ -181,15 +181,15 @@ const DrawerNav = ({ navigation }) => {
     <Drawer.Navigator
       initialRouteName="Home"
       screenOptions={{
-        drawerPosition: 'right',
-        drawerActiveTintColor: '#ba0913',
+        drawerPosition: "right",
+        drawerActiveTintColor: "#ba0913",
         drawerStyle: {
           width: 250,
         },
       }}
       drawerContent={(props) => (
         <View>
-          <View style={{ alignItems: 'center' }}>
+          <View style={{ alignItems: "center" }}>
             <Image
               style={{
                 width: 100,
@@ -197,7 +197,7 @@ const DrawerNav = ({ navigation }) => {
                 marginTop: 60,
                 marginBottom: 30,
               }}
-              source={require('../assets/UniversalAssets/Logo512.png')}
+              source={require("../assets/UniversalAssets/Logo512.png")}
             />
           </View>
           <DrawerItemList {...props} />
@@ -212,8 +212,8 @@ const DrawerNav = ({ navigation }) => {
                 size={25}
                 style={{
                   marginBottom: 3,
-                  alignItems: 'center',
-                  color: '#ba0913',
+                  alignItems: "center",
+                  color: "#ba0913",
                 }}
               />
             )}
@@ -221,7 +221,7 @@ const DrawerNav = ({ navigation }) => {
               dispatch(clearStore());
               dispatch(setToken(null));
               dispatch(setID(null));
-              navigation.navigate('LandingScreen');
+              navigation.navigate("LandingScreen");
             }}
           />
         </View>
@@ -232,15 +232,15 @@ const DrawerNav = ({ navigation }) => {
         component={StudentRoute}
         options={{
           header: TopComponent,
-          drawerLabel: 'Home',
+          drawerLabel: "Home",
           drawerIcon: () => (
             <FontAwesome5
               name="home"
               size={25}
               style={{
                 marginBottom: 3,
-                alignItems: 'center',
-                color: '#ba0913',
+                alignItems: "center",
+                color: "#ba0913",
               }}
             />
           ),
