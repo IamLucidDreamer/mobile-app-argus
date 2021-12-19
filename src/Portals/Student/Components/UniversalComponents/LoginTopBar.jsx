@@ -25,6 +25,7 @@ export default function LoginTopBar({ navigation }) {
         <Text
           style={{
             fontSize: 22,
+            fontFamily: "X",
             fontWeight: "bold",
             alignSelf: "center",
             color: "#BA0913",

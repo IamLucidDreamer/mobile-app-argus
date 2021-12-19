@@ -17,9 +17,13 @@
     "@use-expo/font": "^2.0.0",
     "axios": "^0.24.0",
     "expo": "~43.0.0",
+<<<<<<< HEAD
     "expo-camera": "^12.0.3",
     "expo-document-picker": "^10.0.3",
     "expo-secure-store": "^11.0.3",
+=======
+    "expo-app-loading": "^1.2.1",
+>>>>>>> a9f05503a91cdfbaa9996829dba74aeaf348eaeb
     "expo-status-bar": "~1.1.0",
     "formik": "^2.2.9",
     "moment": "^2.29.1",

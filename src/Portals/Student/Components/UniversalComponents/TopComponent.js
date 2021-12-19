@@ -4,7 +4,11 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 export default function TopComponent({ navigation }) {
   return (
+<<<<<<< HEAD
     <View style={{ backgroundColor: "#F4F5F9" }}>
+=======
+    <View style={{ backgroundColor: "#fff" }}>
+>>>>>>> a9f05503a91cdfbaa9996829dba74aeaf348eaeb
       <View
         style={{
           marginHorizontal: 10,
@@ -15,7 +19,13 @@ export default function TopComponent({ navigation }) {
           alignItems: "center",
         }}
       >
-        <View style={{ width: 60, height: 60 }}></View>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <FontAwesome5
+            name={"arrow-left"}
+            size={25}
+            style={{ marginLeft: 10, marginRight: 25 }}
+          />
+        </TouchableOpacity>
         <Text
           style={{
             fontSize: 22,
@@ -31,6 +41,7 @@ export default function TopComponent({ navigation }) {
             style={{
               width: 60,
               height: 60,
+<<<<<<< HEAD
               borderRadius: 100,
               overflow: "hidden",
             }}
@@ -44,6 +55,13 @@ export default function TopComponent({ navigation }) {
               source={require("./../../../../../assets/UniversalAssets/TestingImage.png")}
             />
           </View>
+=======
+              resizeMode: "contain",
+              borderRadius: 25,
+            }}
+            source={require("./../../../../../assets/UniversalAssets/TestingImage.png")}
+          />
+>>>>>>> a9f05503a91cdfbaa9996829dba74aeaf348eaeb
         </TouchableOpacity>
       </View>
     </View>
