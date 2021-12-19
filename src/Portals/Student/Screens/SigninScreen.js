@@ -1,4 +1,5 @@
-import React from "react";
+import { useFormik } from "formik";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,14 +7,86 @@ import {
   SafeAreaView,
   Platform,
   StatusBar,
+  ScrollView,
   Image,
   TextInput,
   TouchableOpacity,
-  ScrollView,
 } from "react-native";
+import axiosInstance from "../../../utils/axiosInstance";
 import Buttons from "../Components/UniversalComponents/Buttons";
+import * as SecureStore from "expo-secure-store";
+import { useDispatch } from "react-redux";
+import {
+  getToken,
+  isAuthenticated,
+  setID,
+  setToken,
+  setUser,
+} from "../../../redux/actions/authActions";
+import Error from "../Components/UniversalComponents/Error";
 
 const SigninScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
+
+  const validate = (values) => {
+    const errors = {};
+    if (!values.name) {
+      errors.name = "*Required";
+    }
+    if (!values.lastname) {
+      errors.lastname = "*Required";
+    }
+    if (!values.password) {
+      errors.password = "*Required";
+    } else if (values.password.length < 6) {
+      errors.password = "Must be atleast 6 characters";
+    }
+
+    if (!values.email) {
+      errors.email = "*Required";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = "Invalid email address";
+    }
+
+    return errors;
+  };
+
+  const { handleChange, handleSubmit, errors } = useFormik({
+    initialValues: {
+      password: "",
+      email: "",
+      name: "",
+      lastname: "",
+    },
+    validate,
+    onSubmit: (values, { resetForm }) => {
+      setLoading(true);
+      axiosInstance
+        .post(`/signup`, values)
+        .then(() => {
+          setLoading(false);
+          axiosInstance.post("/signin", values).then((res) => {
+            SecureStore.setItemAsync("jwt", res.data.token);
+            SecureStore.setItemAsync("id", res.data.user._id);
+            dispatch(setUser(res.data.user));
+            dispatch(setToken(res.data.token));
+            dispatch(setID(res.data.user._id));
+            dispatch(isAuthenticated("true"));
+            navigation.navigate("Student");
+            resetForm();
+          });
+        })
+        .catch((err) => {
+          resetForm();
+          setLoading(false);
+        });
+    },
+  });
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -24,12 +97,35 @@ const SigninScreen = ({ navigation }) => {
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
+            placeholder="Name"
+            keyboardType="default"
+            placeholderTextColor="#8890A6"
+            onChangeText={handleChange("name")}
+          />
+        </View>
+        {errors.name ? <Error error={errors.name} /> : null}
+
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Lastname"
+            keyboardType="default"
+            placeholderTextColor="#8890A6"
+            onChangeText={handleChange("lastname")}
+          />
+        </View>
+        {errors.lastname ? <Error error={errors.lastname} /> : null}
+
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
             placeholder="Email"
             keyboardType="email-address"
             placeholderTextColor="#8890A6"
-            onChangeText={(email) => setEmail(email)}
+            onChangeText={handleChange("email")}
           />
         </View>
+        {errors.email ? <Error error={errors.email} /> : null}
 
         <View style={styles.inputView}>
           <TextInput
@@ -37,14 +133,20 @@ const SigninScreen = ({ navigation }) => {
             placeholder="Password"
             placeholderTextColor="#8890A6"
             secureTextEntry={true}
-            onChangeText={(password) => setPassword(password)}
+            onChangeText={handleChange("password")}
           />
         </View>
-        <Buttons
-          navigation={navigation}
-          route={"StudentHome"}
-          title={"Sign Up"}
-        />
+        {errors.password ? <Error error={errors.password} /> : null}
+
+        <View
+          style={{
+            marginTop: 30,
+            width: "100%",
+            alignItems: "center",
+          }}
+        >
+          <Buttons loading={loa} func={handleSubmit} title={"Sign Up"} />
+        </View>
         <Text style={styles.forgottext}>OR</Text>
         <Buttons title={"Google"} />
         <Buttons title={"Facebook"} />
@@ -114,18 +216,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#F4F5F9",
   },
   inputView: {
-    borderBottomWidth: 1,
-    borderColor: "#8890A6",
-    width: "90%",
-    height: 55,
-    marginBottom: 30,
+    width: "85%",
+    height: 50,
+    marginTop: 20,
     alignItems: "flex-start",
   },
   TextInput: {
+    borderBottomWidth: 1,
+    borderColor: "#8890A6",
     width: "100%",
     flex: 1,
     padding: 10,
-    marginLeft: 10,
     color: "#8890A6",
     fontSize: 20,
   },

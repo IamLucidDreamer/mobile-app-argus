@@ -1,4 +1,5 @@
-import React from 'react';
+import { useFormik } from 'formik';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,10 +10,51 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
+import axiosInstance from '../../../utils/axiosInstance';
 import Buttons from '../Components/UniversalComponents/Buttons';
+import Error from '../Components/UniversalComponents/Error';
 
 const ForgotPasswordEmail = () => {
+  const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const validate = (values) => {
+    const errors = {};
+    if (!values.email) {
+      errors.email = '*Required';
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = 'Invalid email address';
+    }
+
+    return errors;
+  };
+
+  const { handleChange, handleSubmit, errors } = useFormik({
+    initialValues: {
+      email: '',
+    },
+    validate,
+    onSubmit: (values, { resetForm }) => {
+      setLoading(true);
+      axiosInstance
+        .post(`/forgot-password`, {
+          email: values.email?.trim(),
+          url: 'https://argus-backendzedd.herokuapp.com/api',
+        })
+        .then((res) => {
+          setSent(true);
+          setLoading(false);
+        })
+        .catch((err) => {
+          setLoading(false);
+        });
+    },
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <Image
@@ -34,24 +76,30 @@ const ForgotPasswordEmail = () => {
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
-          placeholder="Email"
+          placeholder="Enter email"
           keyboardType="email-address"
           placeholderTextColor="#8890A6"
-          onChangeText={(password) => setPassword(password)}
+          onChangeText={handleChange('email')}
         />
       </View>
-      <Buttons title={'Send OTP'} />
-      <Text
-        style={{
-          width: '90%',
-          textAlign: 'center',
-          marginVertical: 20,
-          fontSize: 15,
-          color: '#68696D',
-        }}
-      >
-        You will receive an link on your registered Email Address.
-      </Text>
+      <Error error={errors.email} />
+      <View style={{ marginTop: 30, width: '100%', alignItems: 'center' }}>
+        <Buttons func={handleSubmit} title={'Send'} />
+      </View>
+      {loading ? <ActivityIndicator size="large" color="#BA0913" /> : null}
+      {sent ? (
+        <Text
+          style={{
+            width: '90%',
+            textAlign: 'center',
+            marginVertical: 20,
+            fontSize: 20,
+            color: '#BA0913',
+          }}
+        >
+          Email with change password link has been sent to your email.
+        </Text>
+      ) : null}
     </SafeAreaView>
   );
 };
@@ -68,16 +116,14 @@ const styles = StyleSheet.create({
   inputView: {
     borderBottomWidth: 1,
     borderColor: '#8890A6',
-    width: '90%',
+    width: '85%',
     height: 55,
-    marginBottom: 30,
     alignItems: 'flex-start',
   },
   TextInput: {
     width: '100%',
     flex: 1,
     padding: 10,
-    marginLeft: 10,
     color: '#8890A6',
     fontSize: 20,
   },

@@ -58,8 +58,14 @@ const getUser = () => {
             },
           })
           .then((res) => {
-            dispatch(setUser(res.data.data));
-            dispatch(isAuthenticated('true'));
+            if (res?.data?.data?.blocked) {
+              dispatch(isAuthenticated('false'));
+              dispatch(clearStorage());
+            } else {
+              dispatch(setUser(res.data.data));
+              dispatch(isAuthenticated('true'));
+              dispatch(lastLoggedIn());
+            }
           })
           .catch((err) => {
             dispatch(isAuthenticated('false'));
@@ -69,24 +75,6 @@ const getUser = () => {
     });
   };
 };
-
-// const updateUser = (resetForm, values, activityDetails) => {
-//   return (dispatch) => {
-//     const token = JSON.parse(localStorage.getItem('jwt'));
-//     axiosInstance
-//       .put('/user/update', values, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       })
-//       .then((res) => {
-//         dispatch(getUser());
-//         dispatch(userActivity(activityDetails));
-//         resetForm();
-//       })
-//       .catch((err) => {});
-//   };
-// };
 
 // const userActivity = (activityDetails, userName) => {
 //   return (dispatch) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,11 +10,11 @@ import {
   ImageBackground,
   TouchableOpacity,
   ActivityIndicator,
-} from 'react-native';
-import { Divider } from 'react-native-elements/dist/divider/Divider';
-import axiosInstance from '../../../utils/axiosInstance';
-import BottomNav from '../Components/UniversalComponents/BottomNav';
-import TopComponent from '../Components/UniversalComponents/TopComponent';
+} from "react-native";
+import { Divider } from "react-native-elements/dist/divider/Divider";
+import axiosInstance from "../../../utils/axiosInstance";
+import BottomNav from "../Components/UniversalComponents/BottomNav";
+import TopComponent from "../Components/UniversalComponents/TopComponent";
 
 export default function Enroll() {
   const [courses, setCourses] = useState([]);
@@ -24,7 +24,7 @@ export default function Enroll() {
     if (courses.length === 0) {
       setLoading(true);
       axiosInstance
-        .get('/material/getAllCourses')
+        .get("/material/getAllCourses")
         .then((res) => {
           setLoading(false);
           setCourses(res.data.data);
@@ -40,19 +40,19 @@ export default function Enroll() {
       {loading ? (
         <ActivityIndicator size="large" color="#BA0913" />
       ) : (
-        <ScrollView>
+        <ScrollView style={{ paddingTop: 30 }}>
           {courses.map((c) => {
             return (
               <View
                 key={c?._id}
                 style={{
-                  width: '95%',
-                  backgroundColor: '#fff',
+                  width: "95%",
+                  backgroundColor: "#fff",
                   padding: 15,
-                  alignSelf: 'center',
+                  alignSelf: "center",
                   marginBottom: 30,
                   borderRadius: 20,
-                  shadowColor: '#000',
+                  shadowColor: "#000",
                   shadowOffset: { width: 0, height: 1 },
                   shadowOpacity: 0.8,
                   shadowRadius: 4,
@@ -61,11 +61,11 @@ export default function Enroll() {
               >
                 <Text
                   style={{
-                    color: '#2A2B2F',
+                    color: "#2A2B2F",
                     fontSize: 17,
-                    fontWeight: 'bold',
+                    fontWeight: "bold",
                     marginBottom: 30,
-                    fontFamily: 'Poppins-Light',
+                    fontFamily: "Poppins-Light",
                   }}
                 >
                   {c?.name} $ {c?.price} + HST
@@ -73,7 +73,7 @@ export default function Enroll() {
                 <Divider width={1} />
                 <Text
                   style={{
-                    color: '#8890A6',
+                    color: "#8890A6",
                     fontSize: 15,
                     lineHeight: 20,
                     marginVertical: 15,
@@ -83,17 +83,17 @@ export default function Enroll() {
                 </Text>
                 <TouchableOpacity
                   style={{
-                    width: '100%',
-                    backgroundColor: '#BA0913',
-                    color: '#ffffff',
+                    width: "100%",
+                    backgroundColor: "#BA0913",
+                    color: "#ffffff",
                     borderRadius: 10,
                     height: 55,
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    alignItems: "center",
+                    justifyContent: "center",
                     marginVertical: 10,
                   }}
                 >
-                  <Text style={{ color: 'white', fontSize: 18 }}>
+                  <Text style={{ color: "white", fontSize: 18 }}>
                     Register Now
                   </Text>
                 </TouchableOpacity>
@@ -109,6 +109,6 @@ export default function Enroll() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F4F5F9',
+    backgroundColor: "#F4F5F9",
   },
 });

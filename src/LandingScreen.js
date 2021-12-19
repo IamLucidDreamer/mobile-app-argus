@@ -22,15 +22,19 @@ export default function LandingScreen({ navigation }) {
 
   useEffect(() => {
     if (auth.isAuth === 'true') {
-      navigation.navigate('StudentHome');
+      navigation.navigate('Student');
     }
   }, [auth?.isAuth]);
 
   return (
     <>
       {auth.token !== null && auth.isAuth === 'loading' ? (
-        <View style={styles.container}>
-          <ActivityIndicator size="large" color="#BA0913" />
+        <View style={[styles.container, { justifyContent: 'center' }]}>
+          <ActivityIndicator
+            size="large"
+            style={{ transform: [{ scale: 2 }] }}
+            color="#BA0913"
+          />
         </View>
       ) : (
         <SafeAreaView style={styles.container}>

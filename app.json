@@ -18,7 +18,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "n"
+      "bundleIdentifier": "com.mattscepter.mobileapparguslatest"
     },
     "android": {
       "adaptiveIcon": {
