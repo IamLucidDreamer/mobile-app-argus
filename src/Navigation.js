@@ -22,6 +22,7 @@ import {
   DrawerItemList,
   DrawerItem,
 } from "@react-navigation/drawer";
+import Calendar from "./Portals/Student/Screens/Calendar";
 import {
   clearStore,
   getToken,
@@ -95,7 +96,7 @@ const StudentRoute = () => {
           ),
         }}
         name="Calender"
-        component={UploadDoc}
+        component={Calendar}
       />
       <StudentStack.Screen
         options={{
