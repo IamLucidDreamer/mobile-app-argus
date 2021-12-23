@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 import {
   View,
@@ -8,11 +7,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { patchWebProps } from 'react-native-elements/dist/helpers';
-=======
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { patchWebProps } from "react-native-elements/dist/helpers";
->>>>>>> a9f05503a91cdfbaa9996829dba74aeaf348eaeb
 
 const Buttons = (props) => {
   return (
