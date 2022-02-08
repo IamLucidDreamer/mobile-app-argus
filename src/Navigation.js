@@ -38,141 +38,13 @@ import Messages from "./Portals/Student/Screens/Messages";
 import Notification from "./Portals/Student/Screens/Notification";
 import UploadDoc from "./Portals/Student/Screens/UploadDocument";
 import { Divider } from "react-native-elements/dist/divider/Divider";
-
+import Feather from "react-native-vector-icons/Feather";
+import Calendars from "./Portals/Student/Screens/Calendars";
+import UserProfile from "./Portals/Student/Screens/UserProfile";
+import NewPassword from "./Portals/Student/Screens/NewPassword";
 const AuthStack = createNativeStackNavigator();
 const StudentStack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
-
-const Icon = (props) => (
-  <View style={{ alignItems: "center" }}>
-    <FontAwesome5
-      name={props.icon}
-      size={25}
-      style={{
-        marginBottom: 3,
-        alignItems: "center",
-        color: props.focused ? "#ba0913" : "#8890A6",
-      }}
-    />
-    <Text
-      style={{ color: props.focused ? "#ba0913" : "#8890A6", fontSize: 13 }}
-    >
-      {props.text}
-    </Text>
-  </View>
-);
-
-const StudentRoute = () => {
-  return (
-    <StudentStack.Navigator
-      initialRouteName="HomePage"
-      screenOptions={{
-        drawerPosition: "right",
-        drawerActiveTintColor: "#BA0913",
-        headerShown: false,
-        tabBarStyle: {
-          height: 70,
-          backgroundColor: "#",
-          flexDirection: "row",
-          padding: 10,
-          paddingHorizontal: 10,
-          justifyContent: "space-between",
-          shadowColor: "#000",
-          shadowOffset: { width: 0, height: 1 },
-          shadowOpacity: 0.8,
-          shadowRadius: 2,
-          elevation: 2,
-        },
-      }}
-    >
-      <StudentStack.Screen
-        options={{
-          tabBarShowLabel: false,
-          tabBarIcon: ({ focused }) => (
-            <View>
-              <Icon icon="calendar" text="Calender" focused={focused} />
-            </View>
-          ),
-        }}
-        name="Calender"
-        component={UploadDoc}
-      />
-      <StudentStack.Screen
-        options={{
-          tabBarShowLabel: false,
-          tabBarIcon: ({ focused }) => (
-            <View>
-              <Icon icon="id-badge" text="Jobs" focused={focused} />
-            </View>
-          ),
-        }}
-        name="Jobs"
-        component={Notification}
-      />
-      <StudentStack.Screen
-        options={{
-          tabBarShowLabel: false,
-          tabBarIcon: ({ focused }) => (
-            <View
-              style={{ position: "relative" }}
-              style={{
-                position: "absolute",
-                height: 70,
-                width: 70,
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: focused ? "#ba0913" : "#F4F5F9",
-                borderRadius: 100,
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 1 },
-                shadowOpacity: 0.8,
-                shadowRadius: 2,
-                elevation: 3,
-                top: -40,
-              }}
-            >
-              <FontAwesome5
-                name={"home"}
-                size={25}
-                style={{
-                  marginBottom: 3,
-                  alignItems: "center",
-                  color: focused ? "#F4F5F9" : "#ba0913",
-                }}
-              />
-            </View>
-          ),
-        }}
-        name="HomePage"
-        component={StudentHome}
-      />
-      <StudentStack.Screen
-        options={{
-          tabBarShowLabel: false,
-          tabBarIcon: ({ focused }) => (
-            <View>
-              <Icon icon="heart" text="Buy" focused={focused} />
-            </View>
-          ),
-        }}
-        name="Buy"
-        component={UploadedDocuments}
-      />
-      <StudentStack.Screen
-        options={{
-          tabBarShowLabel: false,
-          tabBarIcon: ({ focused }) => (
-            <View>
-              <Icon icon="paper-plane" text="Contact" focused={focused} />
-            </View>
-          ),
-        }}
-        name="Contact"
-        component={Messages}
-      />
-    </StudentStack.Navigator>
-  );
-};
 
 const DrawerNav = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -184,21 +56,35 @@ const DrawerNav = ({ navigation }) => {
         drawerPosition: "right",
         drawerActiveTintColor: "#ba0913",
         drawerStyle: {
-          width: 250,
+          width: "80%",
         },
       }}
       drawerContent={(props) => (
         <View>
           <View style={{ alignItems: "center" }}>
-            <Image
+            <View
               style={{
-                width: 100,
-                height: 100,
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
                 marginTop: 60,
                 marginBottom: 30,
               }}
-              source={require("../assets/UniversalAssets/Logo512.png")}
-            />
+            >
+              <Image
+                style={{
+                  width: 70,
+                  height: 70,
+                }}
+                source={require("../assets/UniversalAssets/Logo512.png")}
+              />
+              <View style={{ margin: 15 }}>
+                <Text style={{ fontWeight: "bold", fontSize: 17 }}>
+                  Name Here
+                </Text>
+                <Text>User ID Here</Text>
+              </View>
+            </View>
           </View>
           <DrawerItemList {...props} />
           <View style={{ paddingLeft: 10 }}>
@@ -207,8 +93,8 @@ const DrawerNav = ({ navigation }) => {
           <DrawerItem
             label="Logout"
             icon={() => (
-              <FontAwesome5
-                name="sign-out-alt"
+              <Feather
+                name="log-out"
                 size={25}
                 style={{
                   marginBottom: 3,
@@ -229,12 +115,12 @@ const DrawerNav = ({ navigation }) => {
     >
       <Drawer.Screen
         name="StudentHome"
-        component={StudentRoute}
+        component={DashBoard}
         options={{
           header: TopComponent,
           drawerLabel: "Home",
           drawerIcon: () => (
-            <FontAwesome5
+            <Feather
               name="home"
               size={25}
               style={{
@@ -246,7 +132,101 @@ const DrawerNav = ({ navigation }) => {
           ),
         }}
       />
-      {/* TODO: Add other routes */}
+      <Drawer.Screen
+        name="Message"
+        component={Messages}
+        options={{
+          header: TopComponent,
+          drawerLabel: "Message",
+          drawerIcon: () => (
+            <Feather
+              name="mail"
+              size={25}
+              style={{
+                marginBottom: 3,
+                alignItems: "center",
+                color: "#ba0913",
+              }}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Calender"
+        component={Calendars}
+        options={{
+          header: TopComponent,
+          drawerLabel: "Calender",
+          drawerIcon: () => (
+            <Feather
+              name="grid"
+              size={25}
+              style={{
+                marginBottom: 3,
+                alignItems: "center",
+                color: "#ba0913",
+              }}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Notification"
+        component={Notification}
+        options={{
+          header: TopComponent,
+          drawerLabel: "Notification",
+          drawerIcon: () => (
+            <Feather
+              name="bell"
+              size={25}
+              style={{
+                marginBottom: 3,
+                alignItems: "center",
+                color: "#ba0913",
+              }}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Edit Profile"
+        component={UserProfile}
+        options={{
+          header: TopComponent,
+          drawerLabel: "Profile",
+          drawerIcon: () => (
+            <Feather
+              name="user"
+              size={25}
+              style={{
+                marginBottom: 3,
+                alignItems: "center",
+                color: "#ba0913",
+              }}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Change Password"
+        component={NewPassword}
+        options={{
+          header: TopComponent,
+          drawerLabel: "Change Password",
+          drawerIcon: () => (
+            <Feather
+              name="key"
+              size={25}
+              style={{
+                marginBottom: 3,
+                alignItems: "center",
+                color: "#ba0913",
+              }}
+            />
+          ),
+        }}
+      />
     </Drawer.Navigator>
   );
 };

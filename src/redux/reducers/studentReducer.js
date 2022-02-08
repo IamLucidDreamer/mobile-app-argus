@@ -3,13 +3,15 @@ import {
   GET_ALLCOURSES,
   GET_DOCS,
   GET_PROGRESS,
-} from '../actionTypes';
+  GET_STUDENT_CLASS,
+} from "../actionTypes";
 
 const initialState = {
   docs: [],
   course: [],
   courses: [],
   progress: null,
+  studentClass: [],
 };
 
 const studentReducer = (state = initialState, action) => {
@@ -33,6 +35,11 @@ const studentReducer = (state = initialState, action) => {
       return {
         ...state,
         course: action.payload,
+      };
+    case GET_STUDENT_CLASS:
+      return {
+        ...state,
+        studentClass: action.payload,
       };
     default:
       return state;

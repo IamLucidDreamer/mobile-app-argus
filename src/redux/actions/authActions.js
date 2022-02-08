@@ -1,6 +1,6 @@
-import axiosInstance from '../../utils/axiosInstance';
-import * as SecureStore from 'expo-secure-store';
-import { IS_AUTH, SET_ID, SET_TOKEN, SET_USER } from '../actionTypes';
+import axiosInstance from "../../utils/axiosInstance";
+import * as SecureStore from "expo-secure-store";
+import { IS_AUTH, SET_ID, SET_TOKEN, SET_USER } from "../actionTypes";
 
 const setUser = (data) => ({
   type: SET_USER,
@@ -24,8 +24,8 @@ const setID = (data) => ({
 
 const clearStore = () => {
   return (dispatch) => {
-    SecureStore.deleteItemAsync('jwt').then((res) => {
-      SecureStore.deleteItemAsync('id').then((res) => {
+    SecureStore.deleteItemAsync("jwt").then((res) => {
+      SecureStore.deleteItemAsync("id").then((res) => {
         dispatch(setToken(null));
         dispatch(setID(null));
       });
@@ -35,9 +35,9 @@ const clearStore = () => {
 
 const getToken = () => {
   return (dispatch) => {
-    SecureStore.getItemAsync('jwt').then((res) => {
+    SecureStore.getItemAsync("jwt").then((res) => {
       dispatch(setToken(res));
-      SecureStore.getItemAsync('id').then((res) => {
+      SecureStore.getItemAsync("id").then((res) => {
         dispatch(setID(res));
       });
     });
@@ -46,10 +46,10 @@ const getToken = () => {
 
 const getUser = () => {
   return (dispatch) => {
-    dispatch(isAuthenticated('loading'));
-    SecureStore.getItemAsync('jwt').then((token) => {
+    dispatch(isAuthenticated("loading"));
+    SecureStore.getItemAsync("jwt").then((token) => {
       dispatch(setToken(token));
-      SecureStore.getItemAsync('id').then((id) => {
+      SecureStore.getItemAsync("id").then((id) => {
         dispatch(setID(id));
         axiosInstance
           .get(`/user/get/${id}`, {
@@ -59,16 +59,16 @@ const getUser = () => {
           })
           .then((res) => {
             if (res?.data?.data?.blocked) {
-              dispatch(isAuthenticated('false'));
-              dispatch(clearStorage());
+              dispatch(isAuthenticated("false"));
+              dispatch(clearStore());
             } else {
               dispatch(setUser(res.data.data));
-              dispatch(isAuthenticated('true'));
+              dispatch(isAuthenticated("true"));
               dispatch(lastLoggedIn());
             }
           })
           .catch((err) => {
-            dispatch(isAuthenticated('false'));
+            dispatch(isAuthenticated("false"));
             dispatch(clearStore());
           });
       });

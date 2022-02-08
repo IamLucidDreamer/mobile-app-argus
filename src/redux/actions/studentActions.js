@@ -1,11 +1,12 @@
-import axiosInstance from '../../utils/axiosInstance';
-import * as SecureStore from 'expo-secure-store';
+import axiosInstance from "../../utils/axiosInstance";
+import * as SecureStore from "expo-secure-store";
 import {
   GETUSERS_COURSE,
   GET_ALLCOURSES,
   GET_DOCS,
   GET_PROGRESS,
-} from '../actionTypes';
+  GET_STUDENT_CLASS,
+} from "../actionTypes";
 
 const setDocs = (data) => ({
   type: GET_DOCS,
@@ -27,10 +28,15 @@ const setCourse = (data) => ({
   payload: data,
 });
 
+const setStudentClass = (data) => ({
+  type: GET_STUDENT_CLASS,
+  payload: data,
+});
+
 const getAllCourses = () => {
   return (dispatch) => {
     axiosInstance
-      .get('/material/getAllCourses')
+      .get("/material/getAllCourses")
       .then((res) => {
         dispatch(setAllCourse(res?.data?.data));
       })
@@ -40,9 +46,9 @@ const getAllCourses = () => {
 
 const getProgress = (data) => {
   return (dispatch) => {
-    SecureStore.getItemAsync('jwt').then((token) => {
+    SecureStore.getItemAsync("jwt").then((token) => {
       axiosInstance
-        .get('/progress/get', {
+        .get("/progress/get", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -56,9 +62,9 @@ const getProgress = (data) => {
 
 const getUsersCourse = () => {
   return (dispatch) => {
-    SecureStore.getItemAsync('jwt').then((token) => {
+    SecureStore.getItemAsync("jwt").then((token) => {
       axiosInstance
-        .get('/material/getUsersCourses', {
+        .get("/material/getUsersCourses", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -73,7 +79,7 @@ const getUsersCourse = () => {
 
 const getDocs = () => {
   return (dispatch) => {
-    SecureStore.getItemAsync('jwt').then((token) => {
+    SecureStore.getItemAsync("jwt").then((token) => {
       axiosInstance
         .get(`/docs2/getUserDocs`, {
           headers: {
@@ -90,7 +96,7 @@ const getDocs = () => {
 
 const userActivity = (activityDetails, userName, id) => {
   return (dispatch) => {
-    SecureStore.getItemAsync('jwt').then((token) => {
+    SecureStore.getItemAsync("jwt").then((token) => {
       axiosInstance
         .post(
           `/user-activity/create/${id}`,
@@ -102,9 +108,11 @@ const userActivity = (activityDetails, userName, id) => {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          },
+          }
         )
-        .then((res) => {})
+        .then((res) => {
+          dispatch();
+        })
         .catch((err) => {});
     });
   };
@@ -112,9 +120,9 @@ const userActivity = (activityDetails, userName, id) => {
 
 const updateUser = (resetForm, values, activityDetails) => {
   return (dispatch) => {
-    SecureStore.getItemAsync('jwt').then((token) => {
+    SecureStore.getItemAsync("jwt").then((token) => {
       axiosInstance
-        .put('/user/update', values, {
+        .put("/user/update", values, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -129,7 +137,7 @@ const updateUser = (resetForm, values, activityDetails) => {
               createdBy: userName,
               activityDetails,
               createdAt: new Date(),
-            }),
+            })
           );
           resetForm();
         })
@@ -140,7 +148,7 @@ const updateUser = (resetForm, values, activityDetails) => {
 
 const lastLoggedIn = () => {
   return (dispatch) => {
-    SecureStore.getItemAsync('jwt').then((token) => {
+    SecureStore.getItemAsync("jwt").then((token) => {
       axiosInstance
         .put(
           `/user/lastLoggedIn`,
@@ -149,10 +157,29 @@ const lastLoggedIn = () => {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          },
+          }
         )
         .then((res) => {})
         .catch(() => {});
+    });
+  };
+};
+
+const getStudentClass = () => {
+  return (dispatch) => {
+    SecureStore.getItemAsync("jwt").then((token) => {
+      axiosInstance
+        .get(`/class/get-student`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          dispatch(setStudentClass(res.data.data));
+        })
+        .catch((err) => {
+          console.log({ err });
+        });
     });
   };
 };
@@ -165,4 +192,5 @@ export {
   getAllCourses,
   getProgress,
   getUsersCourse,
+  getStudentClass,
 };
