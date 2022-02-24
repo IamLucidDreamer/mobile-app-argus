@@ -6,6 +6,7 @@ import { AppLoading } from "expo";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import Navigation from "./src/Navigation";
+import Error from "./src/Portals/Student/Components/UniversalComponents/Error";
 
 export default function App() {
   const [isLoaded] = useFonts({
@@ -20,6 +21,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <SafeAreaView style={styles.container}>
+        <Error />
         <Navigation />
       </SafeAreaView>
     </Provider>

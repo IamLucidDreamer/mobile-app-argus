@@ -21,18 +21,19 @@ export default function Messages() {
   const auth = useSelector((state) => state.auth);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  console.log(auth);
   useEffect(() => {
     if (messages.length === 0) {
       setLoading(true);
       axiosInstance
-        .get(`/message/get/${auth.id}?page=1&&limit=100000`, {
+        .get(`/message/get/${auth.id}?page=1`, {
           headers: {
             Authorization: `Bearer ${auth.token}`,
           },
         })
         .then((res) => {
           setLoading(false);
+          console.log("Hello");
           setMessages(
             res.data.data.messages.sort(
               (a, b) => new Date(b.createdAt) - new Date(a.createdAt)

@@ -20,8 +20,9 @@ import Buttons from "../Components/UniversalComponents/Buttons";
 import { useSelector } from "react-redux";
 import { docsName } from "../../../utils/DocsData";
 import axiosInstance from "../../../utils/axiosInstance";
+import Navigation from "../../../Navigation";
 
-export default function DashBoard() {
+export default function DashBoard({ navigation }) {
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
   const docs = useSelector((state) => state.student.docs);
@@ -71,7 +72,7 @@ export default function DashBoard() {
           Welcome Back,
         </Text>
         <Text style={{ fontSize: 27, fontWeight: "bold", color: "#3d3c41" }}>
-          {user?.name + " " + (user?.lastname ? user?.lastname : null)}
+          {user?.name + " " + (user?.lastname !== null ? user?.lastname : "")}
         </Text>
         <ScrollView
           horizontal
@@ -80,7 +81,10 @@ export default function DashBoard() {
         >
           {options.map((options, index) => (
             <View key={index} style={{ marginHorizontal: 15 }}>
-              <TouchableOpacity style={{ alignItems: "center" }}>
+              <TouchableOpacity
+                style={{ alignItems: "center" }}
+                onPress={() => navigation.navigate()}
+              >
                 <View style={{}}>
                   <Feather
                     name={options.name}
@@ -120,16 +124,18 @@ export default function DashBoard() {
         >
           To Do
         </Text>
-        <ScrollView style={{ height: 350 }}>
+        <ScrollView>
           {tasks.map((t, index) => {
             return (
               <View
                 key={index}
                 style={{
-                  width: "97%",
+                  minWidth: 350,
+                  maxWidth: 350,
                   flexDirection: "row",
                   backgroundColor: "#fff",
                   padding: 15,
+                  marginHorizontal: 15,
                   alignSelf: "center",
                   alignContent: "center",
                   marginBottom: 15,
@@ -141,23 +147,25 @@ export default function DashBoard() {
                   elevation: 6,
                 }}
               >
-                <Feather
-                  name={"check-circle"}
-                  size={30}
-                  style={{
-                    marginBottom: 3,
-                    alignItems: "center",
-                    color: "#ba0913",
-                    padding: 7,
-                    backgroundColor: "#fff",
-                    borderRadius: 30,
-                    shadowColor: "#000",
-                    shadowOffset: { width: 0, height: 1 },
-                    shadowOpacity: 0.8,
-                    shadowRadius: 2,
-                    elevation: 4,
-                  }}
-                />
+                <View style={{ justifyContent: "center" }}>
+                  <Feather
+                    name={"check-circle"}
+                    size={30}
+                    style={{
+                      marginBottom: 3,
+                      alignItems: "center",
+                      color: "#ba0913",
+                      padding: 7,
+                      backgroundColor: "#fff",
+                      borderRadius: 30,
+                      shadowColor: "#000",
+                      shadowOffset: { width: 0, height: 1 },
+                      shadowOpacity: 0.8,
+                      shadowRadius: 2,
+                      elevation: 4,
+                    }}
+                  />
+                </View>
                 <Text
                   style={{
                     margin: 10,
@@ -182,21 +190,26 @@ const options = [
   {
     title: "My Training",
     name: "award",
+    to: "Edit profile",
   },
   {
     title: "Upload Documents",
     name: "arrow-up-circle",
+    to: "",
   },
   {
     title: "My Purchases",
     name: "book-open",
+    to: "",
   },
   {
     title: "My Transcripts",
     name: "check-circle",
+    to: "",
   },
   {
     title: "My Courses",
     name: "edit-3",
+    to: "",
   },
 ];

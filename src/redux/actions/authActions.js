@@ -26,8 +26,11 @@ const clearStore = () => {
   return (dispatch) => {
     SecureStore.deleteItemAsync("jwt").then((res) => {
       SecureStore.deleteItemAsync("id").then((res) => {
-        dispatch(setToken(null));
-        dispatch(setID(null));
+        SecureStore.deleteItemAsync("user").then((res) => {
+          dispatch(setToken(null));
+          dispatch(setID(null));
+          dispatch(setUser(null));
+        });
       });
     });
   };

@@ -28,6 +28,7 @@ import {
   getUser,
   setID,
   setToken,
+  setUser,
 } from "./redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import DashBoard from "./Portals/Student/Screens/DashBoard";
@@ -42,6 +43,9 @@ import Feather from "react-native-vector-icons/Feather";
 import Calendars from "./Portals/Student/Screens/Calendars";
 import UserProfile from "./Portals/Student/Screens/UserProfile";
 import NewPassword from "./Portals/Student/Screens/NewPassword";
+import Course from "./Portals/Student/Screens/Course";
+import isEmpty from "./utils/isEmpty";
+import * as SecureStore from "expo-secure-store";
 const AuthStack = createNativeStackNavigator();
 const StudentStack = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -105,9 +109,9 @@ const DrawerNav = ({ navigation }) => {
             )}
             onPress={() => {
               dispatch(clearStore());
+              dispatch(setUser(null));
               dispatch(setToken(null));
               dispatch(setID(null));
-              navigation.navigate("LandingScreen");
             }}
           />
         </View>
@@ -116,12 +120,32 @@ const DrawerNav = ({ navigation }) => {
       <Drawer.Screen
         name="StudentHome"
         component={DashBoard}
+        style={{ color: "#fff" }}
         options={{
           header: TopComponent,
           drawerLabel: "Home",
           drawerIcon: () => (
             <Feather
               name="home"
+              size={25}
+              style={{
+                marginBottom: 3,
+                alignItems: "center",
+                color: "#ba0913",
+              }}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Courses"
+        component={Course}
+        options={{
+          header: TopComponent,
+          drawerLabel: "Courses",
+          drawerIcon: () => (
+            <Feather
+              name="book-open"
               size={25}
               style={{
                 marginBottom: 3,
@@ -232,43 +256,42 @@ const DrawerNav = ({ navigation }) => {
 };
 
 const Navigation = () => {
-  const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    dispatch(getToken());
-    dispatch(getUser());
-  }, [dispatch]);
+  const user = useSelector((state) => state.auth.user);
+  const authenticated = useSelector((state) => state.auth.token);
 
   return (
     <NavigationContainer>
-      <AuthStack.Navigator initialRouteName="LandingScreen">
-        <AuthStack.Screen
-          name="LandingScreen"
-          component={LandingScreen}
-          options={{ headerShown: false }}
-        />
-        <AuthStack.Screen
-          name="Signin"
-          component={SigninScreen}
-          options={{ header: LoginTopBar }}
-        />
-        <AuthStack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ header: LoginTopBar }}
-        />
-        <AuthStack.Screen
-          name="ForgotPass"
-          component={ForgotPasswordEmail}
-          options={{ header: LoginTopBar }}
-        />
-        <AuthStack.Screen
-          name="Student"
-          component={DrawerNav}
-          options={{ headerShown: false }}
-        />
-      </AuthStack.Navigator>
+      {!isEmpty(user) && !isEmpty(authenticated) ? (
+        <DrawerNav />
+      ) : (
+        <AuthStack.Navigator initialRouteName="LandingScreen">
+          <AuthStack.Screen
+            name="LandingScreen"
+            component={LandingScreen}
+            options={{ headerShown: false }}
+          />
+          <AuthStack.Screen
+            name="Signin"
+            component={SigninScreen}
+            options={{ header: LoginTopBar }}
+          />
+          <AuthStack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ header: LoginTopBar }}
+          />
+          <AuthStack.Screen
+            name="ForgotPass"
+            component={ForgotPasswordEmail}
+            options={{ header: LoginTopBar }}
+          />
+          <AuthStack.Screen
+            name="Student"
+            component={DrawerNav}
+            options={{ headerShown: false }}
+          />
+        </AuthStack.Navigator>
+      )}
     </NavigationContainer>
   );
 };
