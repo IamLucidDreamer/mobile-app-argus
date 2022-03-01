@@ -11,22 +11,21 @@ import * as SecureStore from "expo-secure-store";
 import { useSelector } from "react-redux";
 import { Divider } from "react-native-elements/dist/divider/Divider";
 
-const Modules = () => {
-  const [course, setCourse] = useState([]);
+const Modules = ({ route, navigation }) => {
+  const [module, setModule] = useState([]);
+  const { courseId } = route.params;
 
   useEffect(() => {
     SecureStore.getItemAsync("jwt").then((token) => {
-      console.log(token);
       axiosInstance
-        .get("/material/getUsersCourses", {
+        .get(`/material/getCourse/${courseId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
         .then((res) => {
-          console.log(res.data);
-          setCourse(res.data.data);
-          console.log(course);
+          console.log(res.data.data.Module);
+          setModule(res.data.data.Module);
         })
         .catch((err) => {
           console.log(err);
@@ -37,11 +36,11 @@ const Modules = () => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        {course.length === 0 ? (
-          <Text>No Course Purchased Yet</Text>
+        {module.length === 0 ? (
+          <Text>No Data available</Text>
         ) : (
-          course.map((courseData, index) => {
-            console.log(courseData);
+          module.map((moduleData, index) => {
+            console.log(moduleData);
             return (
               <View
                 key={index}
@@ -67,7 +66,7 @@ const Modules = () => {
                     marginBottom: 15,
                   }}
                 >
-                  {courseData.name}
+                  {moduleData.name}
                 </Text>
                 <Divider width={1} />
                 <Text
@@ -78,7 +77,7 @@ const Modules = () => {
                     marginVertical: 15,
                   }}
                 >
-                  {courseData.description}
+                  {moduleData.description}
                 </Text>
                 <TouchableOpacity
                   style={{
@@ -91,8 +90,14 @@ const Modules = () => {
                     justifyContent: "center",
                     marginVertical: 10,
                   }}
+                  onPress={() =>
+                    navigation.navigate("Chapters", {
+                      courseId: courseId,
+                      moduleId: moduleData?._id,
+                    })
+                  }
                 >
-                  <Text style={{ color: "white", fontSize: 20 }}>Modules</Text>
+                  <Text style={{ color: "white", fontSize: 20 }}>Chapters</Text>
                 </TouchableOpacity>
               </View>
             );

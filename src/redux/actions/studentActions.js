@@ -7,6 +7,7 @@ import {
   GET_PROGRESS,
   GET_STUDENT_CLASS,
 } from "../actionTypes";
+import { errorMessage } from "./appActions";
 
 const setDocs = (data) => ({
   type: GET_DOCS,
@@ -118,7 +119,7 @@ const userActivity = (activityDetails, userName, id) => {
   };
 };
 
-const updateUser = (resetForm, values, activityDetails) => {
+const updateUser = (values, activityDetails) => {
   return (dispatch) => {
     SecureStore.getItemAsync("jwt").then((token) => {
       axiosInstance
@@ -128,20 +129,16 @@ const updateUser = (resetForm, values, activityDetails) => {
           },
         })
         .then((res) => {
-          dispatch(getUser());
-          dispatch(userActivity(activityDetails, userName, id));
           dispatch(
-            addNot({
-              userId: id,
-              userName: userName,
-              createdBy: userName,
-              activityDetails,
-              createdAt: new Date(),
+            errorMessage({
+              show: true,
+              message: "Personal Details Updated Succefully.",
             })
           );
-          resetForm();
         })
-        .catch((err) => {});
+        .catch((err) => {
+          console.log(err);
+        });
     });
   };
 };
@@ -175,6 +172,7 @@ const getStudentClass = () => {
           },
         })
         .then((res) => {
+          console.log(res.data);
           dispatch(setStudentClass(res.data.data));
         })
         .catch((err) => {

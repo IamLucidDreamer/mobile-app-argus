@@ -181,6 +181,12 @@ export default function DashBoard({ navigation }) {
             );
           })}
         </ScrollView>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Courses")}
+          style={styles.Btn}
+        >
+          <Text style={styles.txt}>Continue Studying</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -213,3 +219,20 @@ const options = [
     to: "",
   },
 ];
+
+const styles = StyleSheet.create({
+  Btn: {
+    width: "90%",
+    backgroundColor: "#BA0913",
+    color: "#ffffff",
+    borderRadius: 10,
+    height: 55,
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 10,
+  },
+  txt: {
+    color: "white",
+    fontSize: 19,
+  },
+});

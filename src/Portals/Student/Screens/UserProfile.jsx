@@ -7,8 +7,14 @@ import {
   StyleSheet,
   TextInput,
 } from "react-native";
+import { useSelector } from "react-redux";
+import BackgroundDetails from "../Components/UserprofileForms/BackgroundDetails";
+import JobPreferences from "../Components/UserprofileForms/JobPreferences";
+import PersonalDetails from "../Components/UserprofileForms/PersonalDetails";
 
 export default function UserProfile() {
+  const user = useSelector((state) => state.auth.user);
+  console.log(user);
   return (
     <ScrollView style={{ alignContent: "center" }}>
       <View style={{ alignItems: "center" }}>
@@ -23,58 +29,15 @@ export default function UserProfile() {
           <Text
             style={{ fontWeight: "bold", fontSize: 20, textAlign: "center" }}
           >
-            Name Here
+            {user?.name + " " + (user?.lastname !== null ? user?.lastname : "")}
           </Text>
           <Text style={{ fontSize: 18, textAlign: "center" }}>
-            User ID Here
+            {user.docId}{" "}
           </Text>
         </View>
-        <Text style={{ marginBottom: 10, fontSize: 19 }}>Personal Details</Text>
-        <View
-          style={{
-            width: "95%",
-            alignItems: "center",
-            backgroundColor: "#fff",
-            borderRadius: 20,
-          }}
-        >
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="First Name"
-              placeholderTextColor="#8890A6"
-              onChangeText={(password) => setForm({ ...form, password })}
-            />
-          </View>
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="Last Name"
-              placeholderTextColor="#8890A6"
-              secureTextEntry={true}
-              onChangeText={(password) => setForm({ ...form, password })}
-            />
-          </View>
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="Date Of Birth"
-              keyboardType="numeric"
-              placeholderTextColor="#8890A6"
-              secureTextEntry={true}
-              onChangeText={(password) => setForm({ ...form, password })}
-            />
-          </View>
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="Password"
-              placeholderTextColor="#8890A6"
-              secureTextEntry={true}
-              onChangeText={(password) => setForm({ ...form, password })}
-            />
-          </View>
-        </View>
+        <PersonalDetails />
+        <BackgroundDetails />
+        <JobPreferences />
       </View>
     </ScrollView>
   );

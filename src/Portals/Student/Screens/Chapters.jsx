@@ -11,21 +11,22 @@ import * as SecureStore from "expo-secure-store";
 import { useSelector } from "react-redux";
 import { Divider } from "react-native-elements/dist/divider/Divider";
 
-const Course = ({ navigation }) => {
-  const [course, setCourse] = useState([]);
+const Chapters = ({ route, navigation }) => {
+  const [chapters, setChapters] = useState([]);
+  const { courseId, moduleId } = route.params;
+  console.log(courseId, moduleId);
 
   useEffect(() => {
     SecureStore.getItemAsync("jwt").then((token) => {
       axiosInstance
-        .get("/material/getUsersCourses", {
+        .get(`/material/getModule/${courseId}/${moduleId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
         .then((res) => {
-          console.log(res.data);
-          setCourse(res.data.data);
-          console.log(course);
+          console.log(res.data.data.Chapters);
+          setChapters(res.data.data.Chapters);
         })
         .catch((err) => {
           console.log(err);
@@ -36,10 +37,11 @@ const Course = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        {course.length === 0 ? (
-          <Text>No Course Purchased Yet</Text>
+        {chapters.length === 0 ? (
+          <Text>No Data available</Text>
         ) : (
-          course.map((courseData, index) => {
+          chapters.map((chaptersData, index) => {
+            console.log(chaptersData);
             return (
               <View
                 key={index}
@@ -65,7 +67,7 @@ const Course = ({ navigation }) => {
                     marginBottom: 15,
                   }}
                 >
-                  {courseData.name}
+                  {chaptersData.name}
                 </Text>
                 <Divider width={1} />
                 <Text
@@ -76,7 +78,7 @@ const Course = ({ navigation }) => {
                     marginVertical: 15,
                   }}
                 >
-                  {courseData.description}
+                  {chaptersData.description}
                 </Text>
                 <TouchableOpacity
                   style={{
@@ -90,13 +92,15 @@ const Course = ({ navigation }) => {
                     marginVertical: 10,
                   }}
                   onPress={() => {
-                    navigation.navigate("Module", {
-                      courseId: courseData?._id,
+                    navigation.navigate("ChapterContent", {
+                      courseId: courseId,
+                      currentChapterId: chaptersData._id,
                     });
-                    console.log(courseData._id, "Hello");
                   }}
                 >
-                  <Text style={{ color: "white", fontSize: 20 }}>Modules</Text>
+                  <Text style={{ color: "white", fontSize: 20 }}>
+                    Study Material
+                  </Text>
                 </TouchableOpacity>
               </View>
             );
@@ -107,7 +111,7 @@ const Course = ({ navigation }) => {
   );
 };
 
-export default Course;
+export default Chapters;
 
 const styles = StyleSheet.create({
   container: {

@@ -46,8 +46,11 @@ import NewPassword from "./Portals/Student/Screens/NewPassword";
 import Course from "./Portals/Student/Screens/Course";
 import isEmpty from "./utils/isEmpty";
 import * as SecureStore from "expo-secure-store";
+import Modules from "./Portals/Student/Screens/Modules";
+import Chapters from "./Portals/Student/Screens/Chapters";
+import ChapterContent from ".//Portals/Student/Screens/ChapterContent";
 const AuthStack = createNativeStackNavigator();
-const StudentStack = createBottomTabNavigator();
+const StudentStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const DrawerNav = ({ navigation }) => {
@@ -139,9 +142,9 @@ const DrawerNav = ({ navigation }) => {
       />
       <Drawer.Screen
         name="Courses"
-        component={Course}
+        component={StudyMaterial}
         options={{
-          header: TopComponent,
+          headerShown: false,
           drawerLabel: "Courses",
           drawerIcon: () => (
             <Feather
@@ -255,6 +258,33 @@ const DrawerNav = ({ navigation }) => {
   );
 };
 
+const StudyMaterial = () => {
+  return (
+    <StudentStack.Navigator initialRouteName="Course">
+      <StudentStack.Screen
+        name="Course"
+        component={Course}
+        options={{ header: LoginTopBar }}
+      />
+      <StudentStack.Screen
+        name="Module"
+        component={Modules}
+        options={{ header: LoginTopBar }}
+      />
+      <StudentStack.Screen
+        name="Chapters"
+        component={Chapters}
+        options={{ header: LoginTopBar }}
+      />
+      <StudentStack.Screen
+        name="ChapterContent"
+        component={ChapterContent}
+        options={{ header: LoginTopBar }}
+      />
+    </StudentStack.Navigator>
+  );
+};
+
 const Navigation = () => {
   const user = useSelector((state) => state.auth.user);
   const authenticated = useSelector((state) => state.auth.token);
@@ -262,7 +292,9 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       {!isEmpty(user) && !isEmpty(authenticated) ? (
-        <DrawerNav />
+        <>
+          <DrawerNav />
+        </>
       ) : (
         <AuthStack.Navigator initialRouteName="LandingScreen">
           <AuthStack.Screen

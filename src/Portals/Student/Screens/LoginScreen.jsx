@@ -53,6 +53,7 @@ const LoginScreen = ({ navigation }) => {
             { text: "OK" },
           ]);
         } else {
+          console.log(res.data);
           SecureStore.setItemAsync("user", JSON.stringify(res.data.user));
           SecureStore.setItemAsync("jwt", res.data.token);
           SecureStore.setItemAsync("id", res.data.user._id);
@@ -70,8 +71,8 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView>
-      <View style={[styles.container, { position: "relative" }]}>
+    <ScrollView style={[styles.container, { position: "relative" }]}>
+      <View style={styles.container1}>
         <Image
           style={{ width: 150, height: 150, marginTop: 20, marginBottom: 30 }}
           source={require("../../../../assets/UniversalAssets/Logo512.png")}
@@ -169,8 +170,10 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
     backgroundColor: "#F4F5F9",
+  },
+  container1: {
+    alignItems: "center",
   },
   inputView: {
     flexDirection: "row",

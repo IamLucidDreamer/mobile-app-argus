@@ -37,75 +37,97 @@ export default function Calendars() {
         <Calendar
           theme={{ todayTextColor: "#ba0913", arrowColor: "#ba0913" }}
           markingType="dot"
-          markedDates={{
-            //new Date(11-01-2022).toLocaleDateString("fr-CA"):{marked: true, dotColor: '#50cebb'},
-            "2022-01-22": { marked: true, dotColor: "#000" },
-          }}
+          markedDates={studentClass.map((data, index) => {
+            console.log(data, "Hello");
+            new Date(data.date).toLocaleDateString("en-GB");
+          })}
+          enableSwipeMonths={true}
         />
       </View>
-      {studentClass.map((data, index) => {
-        return (
-          <View
-            key={index}
-            style={{
-              width: "95%",
-              backgroundColor: "#fff",
-              padding: 15,
-              alignSelf: "center",
-              marginBottom: 30,
-              borderRadius: 20,
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 1 },
-              shadowOpacity: 0.8,
-              shadowRadius: 4,
-              elevation: 8,
-            }}
-          >
-            <View style={{ flexDirection: "row" }}>
-              <View
-                style={{
-                  marginHorizontal: 1,
-                  justifyContent: "space-evenly",
-                }}
-              >
-                <Text
+      {studentClass.length === 0 ? (
+        <Text>You are not Enrolled in any class.</Text>
+      ) : (
+        studentClass.map((data, index) => {
+          return (
+            <View
+              key={index}
+              style={{
+                width: "95%",
+                backgroundColor: "#fff",
+                padding: 15,
+                alignSelf: "center",
+                marginBottom: 30,
+                borderRadius: 20,
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 1 },
+                shadowOpacity: 0.8,
+                shadowRadius: 4,
+                elevation: 8,
+              }}
+            >
+              <View style={{ flexDirection: "row" }}>
+                <View
                   style={{
-                    color: "#8890A6",
-                    fontSize: 19,
+                    marginHorizontal: 1,
+                    justifyContent: "space-evenly",
                   }}
                 >
-                  Name: {data.classname}
-                </Text>
-                <Text
-                  style={{
-                    color: "#8890A6",
-                    fontSize: 15,
-                  }}
-                >
-                  Location: {data.location}
-                </Text>
-                <Text
-                  style={{
-                    color: "#8890A6",
-                    fontSize: 15,
-                  }}
-                >
-                  Instructor: {data.instructorName}
-                </Text>
-
-                <Text
-                  style={{
-                    color: "#8890A6",
-                    fontSize: 15,
-                  }}
-                >
-                  Date: {new Date(data.date).toLocaleDateString("en-GB")}
-                </Text>
+                  <Text
+                    style={{
+                      color: "#8890A6",
+                      fontSize: 19,
+                    }}
+                  >
+                    Name: {data.classname}
+                  </Text>
+                  <Text
+                    style={{
+                      color: "#8890A6",
+                      fontSize: 15,
+                    }}
+                  >
+                    Location: {data.location}
+                  </Text>
+                  <Text
+                    style={{
+                      color: "#8890A6",
+                      fontSize: 15,
+                    }}
+                  >
+                    Instructor: {data.instructorName}
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: "#8890A6",
+                        fontSize: 15,
+                      }}
+                    >
+                      Date: {new Date(data.date).toLocaleDateString("en-GB")}
+                    </Text>
+                    <Text
+                      style={{
+                        color: "#8890A6",
+                        fontSize: 15,
+                      }}
+                    >
+                      Time:{" "}
+                      {new Date(data.date).getHours() +
+                        ":" +
+                        new Date(data.date).getMinutes()}
+                    </Text>
+                  </View>
+                </View>
               </View>
             </View>
-          </View>
-        );
-      })}
+          );
+        })
+      )}
     </ScrollView>
   );
 }

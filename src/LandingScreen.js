@@ -31,7 +31,10 @@ export default function LandingScreen({ navigation }) {
         if (!isEmpty(token)) {
           const user = JSON.parse(res);
           dispatch(setUser(user));
-          SecureStore.getItemAsync("id").then((res) => dispatch(setID(res)));
+          SecureStore.getItemAsync("id").then((res) => {
+            dispatch(setID(res));
+            console.log(res);
+          });
         }
       });
     });
