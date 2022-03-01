@@ -23,9 +23,7 @@ const Course = ({ navigation }) => {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setCourse(res.data.data);
-          console.log(course);
         })
         .catch((err) => {
           console.log(err);

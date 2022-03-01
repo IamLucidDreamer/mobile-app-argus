@@ -74,182 +74,195 @@ const SigninScreen = ({ navigation }) => {
   };
 
   return (
-    // <ScrollView>
-    //   <View style={styles.container}>
-    //     <Image
-    //       style={{ width: 150, height: 150, marginBottom: 0 }}
-    //       source={require("../../../../assets/UniversalAssets/Logo512.png")}
-    //     />
-    //     <Formik
-    //       initialValues={{ name: "", lastname: "", email: "", password: "" }}
-    //       validationSchema={SignInSchema}
-    //       onSubmit={(values) => {
-    //         const { name, lastname, email, password } = values;
-    //         console.log(values);
-    //         signIn({ name, lastname, email, password });
-    //       }}
-    //     >
-    //       {(formProps) => (
-    //         <>
-    //           <View style={styles.inputView}>
-    //             <Feather name="user" color={"#8890a6"} size={22} />
-    //             <TextInput
-    //               style={styles.TextInput}
-    //               placeholder="Name"
-    //               keyboardType="default"
-    //               placeholderTextColor="#8890A6"
-    //               onChangeText={formProps.handleChange("name")}
-    //               onBlur={formProps.handleBlur("name")}
-    //               value={formProps.values.name}
-    //             />
-    //             {formProps.errors.name && formProps.touched.name ? (
-    //               <Text style={{ color: "#8890A6" }}>
-    //                 {formProps.errors.name}
-    //               </Text>
-    //             ) : null}
-    //           </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <Image
+          style={{ width: 150, height: 150, marginBottom: 0 }}
+          source={require("../../../../assets/UniversalAssets/Logo512.png")}
+        />
+        <Formik
+          initialValues={{
+            name: "",
+            lastname: "",
+            dateOfBirth: "",
+            email: "",
+            password: "",
+          }}
+          validationSchema={SignInSchema}
+          onSubmit={(values) => {
+            const { name, lastname, dateOfBirth, email, password } = values;
+            console.log(values);
+            signIn({ name, lastname, dateOfBirth, email, password });
+          }}
+        >
+          {(formProps) => (
+            <>
+              <View style={styles.inputView}>
+                <Feather name="user" color={"#8890a6"} size={22} />
+                <TextInput
+                  style={styles.TextInput}
+                  placeholder="Name"
+                  keyboardType="default"
+                  placeholderTextColor="#8890A6"
+                  onChangeText={formProps.handleChange("name")}
+                  onBlur={formProps.handleBlur("name")}
+                  value={formProps.values.name}
+                />
+                {formProps.errors.name && formProps.touched.name ? (
+                  <Text style={{ color: "#8890A6" }}>
+                    {formProps.errors.name}
+                  </Text>
+                ) : null}
+              </View>
 
-    //           <View style={styles.inputView}>
-    //             <Feather name="users" color={"#8890a6"} size={22} />
-    //             <TextInput
-    //               style={styles.TextInput}
-    //               placeholder="Last Name"
-    //               keyboardType="default"
-    //               placeholderTextColor="#8890A6"
-    //               onChangeText={formProps.handleChange("lastname")}
-    //               onBlur={formProps.handleBlur("lastname")}
-    //               value={formProps.values.lastname}
-    //             />
-    //             {formProps.errors.lastname && formProps.touched.lastname ? (
-    //               <Text style={{ color: "#8890A6" }}>
-    //                 {formProps.errors.lastname}
-    //               </Text>
-    //             ) : null}
-    //           </View>
+              <View style={styles.inputView}>
+                <Feather name="users" color={"#8890a6"} size={22} />
+                <TextInput
+                  style={styles.TextInput}
+                  placeholder="Last Name"
+                  keyboardType="default"
+                  placeholderTextColor="#8890A6"
+                  onChangeText={formProps.handleChange("lastname")}
+                  onBlur={formProps.handleBlur("lastname")}
+                  value={formProps.values.lastname}
+                />
+                {formProps.errors.lastname && formProps.touched.lastname ? (
+                  <Text style={{ color: "#8890A6" }}>
+                    {formProps.errors.lastname}
+                  </Text>
+                ) : null}
+              </View>
 
-    //           <View style={styles.inputView}>
-    //             <Feather name="users" color={"#8890a6"} size={22} />
-    //             <TextInput
-    //               style={styles.TextInput}
-    //               placeholder="Last Name"
-    //               keyboardType="default"
-    //               placeholderTextColor="#8890A6"
-    //               onChangeText={formProps.handleChange("lastname")}
-    //               onBlur={formProps.handleBlur("lastname")}
-    //               value={formProps.values.lastname}
-    //             />
-    //             {formProps.errors.lastname && formProps.touched.lastname ? (
-    //               <Text style={{ color: "#8890A6" }}>
-    //                 {formProps.errors.lastname}
-    //               </Text>
-    //             ) : null}
-    //           </View>
+              <View style={styles.inputView}>
+                <Feather name="users" color={"#8890a6"} size={22} />
+                <TouchableOpacity onPress={() => setOpen(true)}>
+                  <Text style={styles.TextInput}>Enter Date of Birth</Text>
+                </TouchableOpacity>
+                <DatePicker
+                  modal
+                  open={open}
+                  date={date}
+                  onConfirm={(date) => {
+                    setOpen(false);
+                    setDate(date);
+                    formProps.handleChange("dateOfBirth");
+                  }}
+                  onCancel={() => {
+                    setOpen(false);
+                  }}
+                />
+                {formProps.errors.dateOfBirth &&
+                formProps.touched.dateOfBirth ? (
+                  <Text style={{ color: "#8890A6" }}>
+                    {formProps.errors.dateOfBirth}
+                  </Text>
+                ) : null}
+              </View>
 
-    //           <View style={styles.inputView}>
-    //             <Feather name="mail" color={"#8890a6"} size={22} />
-    //             <TextInput
-    //               style={styles.TextInput}
-    //               placeholder="Email"
-    //               keyboardType="email-address"
-    //               placeholderTextColor="#8890A6"
-    //               onChangeText={formProps.handleChange("email")}
-    //               onBlur={formProps.handleBlur("email")}
-    //               value={formProps.values.email}
-    //             />
-    //             {formProps.errors.email && formProps.touched.email ? (
-    //               <Text style={{ color: "#8890A6" }}>
-    //                 {formProps.errors.email}
-    //               </Text>
-    //             ) : null}
-    //           </View>
+              <View style={styles.inputView}>
+                <Feather name="mail" color={"#8890a6"} size={22} />
+                <TextInput
+                  style={styles.TextInput}
+                  placeholder="Email"
+                  keyboardType="email-address"
+                  placeholderTextColor="#8890A6"
+                  onChangeText={formProps.handleChange("email")}
+                  onBlur={formProps.handleBlur("email")}
+                  value={formProps.values.email}
+                />
+                {formProps.errors.email && formProps.touched.email ? (
+                  <Text style={{ color: "#8890A6" }}>
+                    {formProps.errors.email}
+                  </Text>
+                ) : null}
+              </View>
 
-    //           <View style={styles.inputView}>
-    //             <Feather name="key" color={"#8890a6"} size={22} />
-    //             <TextInput
-    //               style={styles.TextInput}
-    //               placeholder="Password"
-    //               placeholderTextColor="#8890A6"
-    //               secureTextEntry={true}
-    //               onChangeText={formProps.handleChange("password")}
-    //               onBlur={formProps.handleBlur("password")}
-    //               value={formProps.values.password}
-    //             />
-    //             {formProps.errors.password && formProps.touched.password ? (
-    //               <Text style={{ color: "#8890A6" }}>
-    //                 {formProps.errors.password}
-    //               </Text>
-    //             ) : null}
-    //           </View>
-    //           <TouchableOpacity
-    //             onPress={formProps.handleSubmit}
-    //             style={styles.Btn}
-    //           >
-    //             {loading ? (
-    //               <ActivityIndicator size="large" color="white" />
-    //             ) : (
-    //               <Text style={styles.txt}>Sign Up</Text>
-    //             )}
-    //           </TouchableOpacity>
-    //           <View style={{ flexDirection: "row", marginVertical: 7 }}>
-    //             <Text style={styles.forgottext}>Existing user?</Text>
-    //             <TouchableOpacity
-    //               onPress={() => navigation.navigate("Loginin")}
-    //             >
-    //               <Text
-    //                 style={{
-    //                   color: "#BA0913",
-    //                   fontWeight: "bold",
-    //                   paddingHorizontal: 4,
-    //                 }}
-    //               >
-    //                 Log In
-    //               </Text>
-    //             </TouchableOpacity>
-    //             <Text style={styles.forgottext}>here.</Text>
-    //           </View>
-    //           <View
-    //             style={{
-    //               marginTop: "auto",
-    //               flexDirection: "row",
-    //               marginVertical: 8,
-    //               flexWrap: "wrap",
-    //               width: "90%",
-    //               justifyContent: "center",
-    //             }}
-    //           >
-    //             <Text style={styles.forgottext}>
-    //               By creating an account, you agree to our
-    //             </Text>
-    //             <TouchableOpacity>
-    //               <Text
-    //                 style={{
-    //                   color: "#BA0913",
-    //                   fontWeight: "bold",
-    //                   paddingHorizontal: 4,
-    //                 }}
-    //               >
-    //                 Terms of Service
-    //               </Text>
-    //             </TouchableOpacity>
-    //             <Text style={styles.forgottext}>and</Text>
-    //             <TouchableOpacity>
-    //               <Text
-    //                 style={{
-    //                   color: "#BA0913",
-    //                   fontWeight: "bold",
-    //                   paddingHorizontal: 4,
-    //                 }}
-    //               >
-    //                 Privacy Policy
-    //               </Text>
-    //             </TouchableOpacity>
-    //           </View>
-    //         </>
-    //       )}
-    //     </Formik>
-    //   </View>
-    // </ScrollView>
-    <DatePicker date={date} onDateChange={setDate} />
+              <View style={styles.inputView}>
+                <Feather name="key" color={"#8890a6"} size={22} />
+                <TextInput
+                  style={styles.TextInput}
+                  placeholder="Password"
+                  placeholderTextColor="#8890A6"
+                  secureTextEntry={true}
+                  onChangeText={formProps.handleChange("password")}
+                  onBlur={formProps.handleBlur("password")}
+                  value={formProps.values.password}
+                />
+                {formProps.errors.password && formProps.touched.password ? (
+                  <Text style={{ color: "#8890A6" }}>
+                    {formProps.errors.password}
+                  </Text>
+                ) : null}
+              </View>
+              <TouchableOpacity
+                onPress={formProps.handleSubmit}
+                style={styles.Btn}
+              >
+                {loading ? (
+                  <ActivityIndicator size="large" color="white" />
+                ) : (
+                  <Text style={styles.txt}>Sign Up</Text>
+                )}
+              </TouchableOpacity>
+              <View style={{ flexDirection: "row", marginVertical: 7 }}>
+                <Text style={styles.forgottext}>Existing user?</Text>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Loginin")}
+                >
+                  <Text
+                    style={{
+                      color: "#BA0913",
+                      fontWeight: "bold",
+                      paddingHorizontal: 4,
+                    }}
+                  >
+                    Log In
+                  </Text>
+                </TouchableOpacity>
+                <Text style={styles.forgottext}>here.</Text>
+              </View>
+              <View
+                style={{
+                  marginTop: "auto",
+                  flexDirection: "row",
+                  marginVertical: 8,
+                  flexWrap: "wrap",
+                  width: "90%",
+                  justifyContent: "center",
+                }}
+              >
+                <Text style={styles.forgottext}>
+                  By creating an account, you agree to our
+                </Text>
+                <TouchableOpacity>
+                  <Text
+                    style={{
+                      color: "#BA0913",
+                      fontWeight: "bold",
+                      paddingHorizontal: 4,
+                    }}
+                  >
+                    Terms of Service
+                  </Text>
+                </TouchableOpacity>
+                <Text style={styles.forgottext}>and</Text>
+                <TouchableOpacity>
+                  <Text
+                    style={{
+                      color: "#BA0913",
+                      fontWeight: "bold",
+                      paddingHorizontal: 4,
+                    }}
+                  >
+                    Privacy Policy
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </>
+          )}
+        </Formik>
+      </View>
+    </ScrollView>
   );
 };
 

@@ -21,6 +21,7 @@ import { useSelector } from "react-redux";
 import { docsName } from "../../../utils/DocsData";
 import axiosInstance from "../../../utils/axiosInstance";
 import Navigation from "../../../Navigation";
+import StudentHome from "./StudentHome";
 
 export default function DashBoard({ navigation }) {
   const user = useSelector((state) => state.auth.user);
@@ -112,75 +113,80 @@ export default function DashBoard({ navigation }) {
           ))}
         </ScrollView>
         <Divider width={10} color={"#000"} />
-
-        <Text
-          style={{
-            fontSize: 16,
-            fontWeight: "bold",
-            marginBottom: 15,
-            color: "gray",
-            textAlign: "center",
-          }}
-        >
-          To Do
-        </Text>
-        <ScrollView>
-          {tasks.map((t, index) => {
-            return (
-              <View
-                key={index}
-                style={{
-                  minWidth: 350,
-                  maxWidth: 350,
-                  flexDirection: "row",
-                  backgroundColor: "#fff",
-                  padding: 15,
-                  marginHorizontal: 15,
-                  alignSelf: "center",
-                  alignContent: "center",
-                  marginBottom: 15,
-                  borderRadius: 20,
-                  shadowColor: "#000",
-                  shadowOffset: { width: 0, height: 1 },
-                  shadowOpacity: 0.8,
-                  shadowRadius: 4,
-                  elevation: 6,
-                }}
-              >
-                <View style={{ justifyContent: "center" }}>
-                  <Feather
-                    name={"check-circle"}
-                    size={30}
-                    style={{
-                      marginBottom: 3,
-                      alignItems: "center",
-                      color: "#ba0913",
-                      padding: 7,
-                      backgroundColor: "#fff",
-                      borderRadius: 30,
-                      shadowColor: "#000",
-                      shadowOffset: { width: 0, height: 1 },
-                      shadowOpacity: 0.8,
-                      shadowRadius: 2,
-                      elevation: 4,
-                    }}
-                  />
-                </View>
-                <Text
-                  style={{
-                    margin: 10,
-                    paddingLeft: 2,
-                    fontSize: 15,
-                    color: "#68696d",
-                    fontFamily: "Poppins-Medium",
-                  }}
-                >
-                  {t}
-                </Text>
-              </View>
-            );
-          })}
-        </ScrollView>
+        {tasks.length === 0 ? null : (
+          <>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                marginBottom: 15,
+                color: "gray",
+                textAlign: "center",
+              }}
+            >
+              To Do
+            </Text>
+            <ScrollView>
+              {tasks.map((t, index) => {
+                {
+                  return index < 3 ? (
+                    <View
+                      key={index}
+                      style={{
+                        minWidth: 350,
+                        maxWidth: 350,
+                        flexDirection: "row",
+                        backgroundColor: "#fff",
+                        padding: 15,
+                        marginHorizontal: 15,
+                        alignSelf: "center",
+                        alignContent: "center",
+                        marginBottom: 15,
+                        borderRadius: 20,
+                        shadowColor: "#000",
+                        shadowOffset: { width: 0, height: 1 },
+                        shadowOpacity: 0.8,
+                        shadowRadius: 4,
+                        elevation: 6,
+                      }}
+                    >
+                      <View style={{ justifyContent: "center" }}>
+                        <Feather
+                          name={"check-circle"}
+                          size={30}
+                          style={{
+                            marginBottom: 3,
+                            alignItems: "center",
+                            color: "#ba0913",
+                            padding: 7,
+                            backgroundColor: "#fff",
+                            borderRadius: 30,
+                            shadowColor: "#000",
+                            shadowOffset: { width: 0, height: 1 },
+                            shadowOpacity: 0.8,
+                            shadowRadius: 2,
+                            elevation: 4,
+                          }}
+                        />
+                      </View>
+                      <Text
+                        style={{
+                          margin: 10,
+                          paddingLeft: 2,
+                          fontSize: 15,
+                          color: "#68696d",
+                          fontFamily: "Poppins-Medium",
+                        }}
+                      >
+                        {t}
+                      </Text>
+                    </View>
+                  ) : null;
+                }
+              })}
+            </ScrollView>
+          </>
+        )}
         <TouchableOpacity
           onPress={() => navigation.navigate("Courses")}
           style={styles.Btn}

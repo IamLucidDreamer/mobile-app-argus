@@ -122,7 +122,7 @@ const DrawerNav = ({ navigation }) => {
     >
       <Drawer.Screen
         name="StudentHome"
-        component={DashBoard}
+        component={StudentHome}
         style={{ color: "#fff" }}
         options={{
           header: TopComponent,

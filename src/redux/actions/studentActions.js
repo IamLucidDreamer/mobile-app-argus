@@ -73,7 +73,10 @@ const getUsersCourse = () => {
         .then((res) => {
           dispatch(setCourse(res.data.data));
         })
-        .catch((err) => {});
+        .catch((err) => {
+          console.log("Hello12");
+          console.log(err);
+        });
     });
   };
 };

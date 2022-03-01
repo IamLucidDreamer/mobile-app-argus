@@ -41,10 +41,10 @@ export default function Enroll() {
         <ActivityIndicator size="large" color="#BA0913" />
       ) : (
         <ScrollView style={{ paddingTop: 30 }}>
-          {courses.map((c) => {
+          {courses.map((c, index) => {
             return (
               <View
-                key={c?._id}
+                key={index}
                 style={{
                   width: "95%",
                   backgroundColor: "#fff",
