@@ -4,7 +4,7 @@
     "slug": "argus",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon.jpg",
     "splash": {
       "image": "./assets/UniversalAssets/Logo1024.png",
       "resizeMode": "contain",
@@ -18,14 +18,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.mattscepter.mobileapparguslatest"
+      "bundleIdentifier": "com.argussecurityservices.mobileappargus"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/UniversalAssets/Logo256.png",
         "backgroundColor": "#F4F5F9"
       },
-      "package": "com.mattscepter.mobileapparguslatest"
+      "package": "com.argussecurityservices.mobileappargus"
     },
     "web": {
       "favicon": "./assets/favicon.png"
