@@ -1467,10 +1467,16 @@
     sudo-prompt "^9.0.0"
     wcwidth "^1.0.1"
 
-"@react-native-picker/picker@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.3.0.tgz#b86a4d3cedd21441ac2d071204d0c46abe246934"
-  integrity sha512-bdpo8T0Bye0TN+xUIMMgmkFk8jYLxHq1GuBeO9fsLMtElGE9iIDQRe5wbIRIih2w+Iw/t6c8nNCROWEFkjj6Sg==
+"@react-native-community/datetimepicker@react-native-community/datetimepicker":
+  version "5.1.0"
+  resolved "https://codeload.github.com/react-native-community/datetimepicker/tar.gz/2e4d3daf33bbe9c29a6cc01d5019f3bd537517dc"
+  dependencies:
+    invariant "^2.2.4"
+
+"@react-native-picker/picker@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.1.0.tgz#1ef22d4e9b2e555d44b43453f51a46d8631f3182"
+  integrity sha512-iJ/QaDrBMBaW6cFuQyR3DXzcn2h7c5O7mGgmNLCBQHTTtLNBZR+Sxogy6YleFPeToNdysG5mTTkXqBmlWHMQqg==
 
 "@react-native/assets@1.0.0":
   version "1.0.0"
@@ -2872,10 +2878,12 @@ expo-secure-store@^11.0.3:
   dependencies:
     expo-modules-core "~0.4.4"
 
-expo-speech@^10.1.1:
-  version "10.1.1"
-  resolved "https://registry.yarnpkg.com/expo-speech/-/expo-speech-10.1.1.tgz#fc4a820fd1bd6203c388837ab3947e24242c3615"
-  integrity sha512-tovcfD3Qi5WvY91d+N+dMVDMz+GwW/c9ze/Ct3cZQLBJQubqlVtlDqb/cDD2Uwuwb+zjAH3N6NfAFSgCdhqwAQ==
+expo-speech@~10.0.3:
+  version "10.0.3"
+  resolved "https://registry.yarnpkg.com/expo-speech/-/expo-speech-10.0.3.tgz#27b721b7fadfc64c588b3396848413c40b1bae23"
+  integrity sha512-56D2Ks4b4/2tqKVRXuW+9AwdAJRryA3/wwlkaEHXAWTmGq8QL2IIGl7dBt6jHWX1LmF02i3RJNA/1J06kN9jRw==
+  dependencies:
+    expo-modules-core "~0.4.4"
 
 expo-splash-screen@~0.13.5:
   version "0.13.5"
@@ -5018,11 +5026,6 @@ react-fast-compare@^2.0.1:
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-2.0.4.tgz"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
-react-freeze@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/react-freeze/-/react-freeze-1.0.0.tgz"
-  integrity sha512-yQaiOqDmoKqks56LN9MTgY06O0qQHgV4FUrikH357DydArSZHQhl0BJFqGKIZoTqi8JizF9Dxhuk1FIZD6qCaw==
-
 react-is@^16.13.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
@@ -5063,11 +5066,6 @@ react-native-codegen@^0.0.6:
     flow-parser "^0.121.0"
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
-
-react-native-date-picker@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-4.2.0.tgz#c47521112f15b9d68333602373d112fc84257d97"
-  integrity sha512-IfbK7Eh5By8rdjiu/pvqLF8NkFX9pVsY7Vn6+MkLSiFcLIGFd7NaENRJKl75/xNZuY5CkIiRVksS9abEl/II8g==
 
 react-native-document-picker@^7.1.1:
   version "7.1.1"
@@ -5113,10 +5111,10 @@ react-native-multiple-select@^0.5.7:
   dependencies:
     prop-types "^15.7.2"
 
-react-native-pager-view@^5.4.9:
-  version "5.4.9"
-  resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-5.4.9.tgz#c0d40847cfeda5a4e729b53271b0ee0fedff3eb5"
-  integrity sha512-D6tzxpwMGdl6CXgtskGWhKRc5cJakCazESRGt7PkqnpyiH3N35ft1KmR82pCSQetAFlytFiToeu3a/dG5CELvA==
+react-native-pager-view@5.4.6:
+  version "5.4.6"
+  resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-5.4.6.tgz#21d16b67136301875da1355dc9d442a4aafab1c7"
+  integrity sha512-yZiG65xlOeC8LOCNF0N8Cdc+MDQGWJnOpsmlHAndWXQhuVPjj4/KnS556BeTddcQ2EqJu/DjL7o8j0hpB+nkVg==
 
 react-native-ratings@8.0.4:
   version "8.0.4"
@@ -5140,12 +5138,11 @@ react-native-safe-area-context@^3.3.2:
   resolved "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-3.3.2.tgz"
   integrity sha512-yOwiiPJ1rk+/nfK13eafbpW6sKW0jOnsRem2C1LPJjM3tfTof6hlvV5eWHATye3XOpu2cJ7N+HdkUvUDGwFD2Q==
 
-react-native-screens@^3.9.0:
-  version "3.9.0"
-  resolved "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.9.0.tgz"
-  integrity sha512-TP/kASLQ/2iGCz4/n9CHeveKC9urzbfYXFH+1TfBnqaBwjIszhVuadiIOQ0qWKdSs6qnBR2xPTp9U18sNoc34A==
+react-native-screens@~3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-3.8.0.tgz#4ec84c55a7b4a4aa9405c812978ca2ba5c0242a4"
+  integrity sha512-lHrnB/elAoMJKv8O12U6BLgeup4lB6ZKJHEOVuG/D72nv/OE9wUusbou6YCB5tp3YbaSpHflPnkFmHA/vCejpw==
   dependencies:
-    react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
 react-native-size-matters@^0.3.1:

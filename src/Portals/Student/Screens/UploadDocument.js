@@ -49,8 +49,12 @@ export default function UploadDoc({ navigation }) {
     SecureStore.getItemAsync("jwt").then((token) => {
       const formdata = new FormData();
       console.log(formdata, "Before");
-      formdata.append("name", "hi");
-      formdata.append("image", selectedDoc);
+      formdata.append("name", selectedDocName);
+      formdata.append("image", {
+        name: selectedDoc.name,
+        type: selectedDoc.mimeType,
+        uri: selectedDoc.uri,
+      });
       console.log(formdata, "After");
       axiosInstance
         .post(`/docs2/upload`, formdata, {
@@ -60,6 +64,7 @@ export default function UploadDoc({ navigation }) {
           },
         })
         .then((res) => {
+          console.log(res.data);
           setLoading(false);
           console.log("then Called");
         })

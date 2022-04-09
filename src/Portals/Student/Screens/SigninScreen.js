@@ -28,19 +28,20 @@ import {
 import { Formik } from "formik";
 import * as Yup from "yup";
 import Feather from "react-native-vector-icons/Feather";
-import DatePicker from "react-native-date-picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { errorMessage } from "../../../redux/actions/appActions";
 
 const SigninScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(false);
   const [date, setDate] = useState(new Date());
 
   const SignInSchema = Yup.object().shape({
     name: Yup.string().required("Required"),
     lastname: Yup.string().required("Required"),
+    dateOfBirth: Yup.string().required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),
     password: Yup.string()
       .min(6, "Too Short!")
@@ -135,22 +136,26 @@ const SigninScreen = ({ navigation }) => {
 
               <View style={styles.inputView}>
                 <Feather name="users" color={"#8890a6"} size={22} />
-                <TouchableOpacity onPress={() => setOpen(true)}>
-                  <Text style={styles.TextInput}>Enter Date of Birth</Text>
-                </TouchableOpacity>
-                <DatePicker
-                  modal
-                  open={open}
-                  date={date}
-                  onConfirm={(date) => {
-                    setOpen(false);
-                    setDate(date);
-                    formProps.handleChange("dateOfBirth");
-                  }}
-                  onCancel={() => {
-                    setOpen(false);
-                  }}
-                />
+                <View style={styles.inputField}>
+                  <TouchableOpacity
+                    style={styles.textInput}
+                    onPress={() => setShow(true)}
+                  >
+                    <Text>Enter your Date of Birth</Text>
+                  </TouchableOpacity>
+                  {show && (
+                    <DateTimePicker
+                      value={date}
+                      onChange={(value) => {
+                        console.log("hellp");
+                        console.log(value);
+                        formProps.handleChange("dateOfBirth");
+                        console.log(formProps.values.dateOfBirth, "Hello");
+                      }}
+                      onBlur={formProps.handleBlur("dateOfBirth")}
+                    />
+                  )}
+                </View>
                 {formProps.errors.dateOfBirth &&
                 formProps.touched.dateOfBirth ? (
                   <Text style={{ color: "#8890A6" }}>
